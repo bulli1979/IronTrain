@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">Iron Train</string>
+    <string name="action_settings">Settings</string>
+    <string name="ironTrain">Iron Train</string>
+    <string name="checkForUpdates">Updates Suchen</string>
+    <string name="createPlan">Plan erstellen</string>
+    <string name="train">trainieren</string>
+    <string name="name">Name </string>
+    <string name="description">Beschreibung</string>
+    <string name="save">speichern</string>
+    <string name="addExercice">hinzufügen</string>
+    <string name="addExerciceDay">Trainingstag hinzufügen</string>
+    <string name="cancel">abbrechen</string>
+</resources>
