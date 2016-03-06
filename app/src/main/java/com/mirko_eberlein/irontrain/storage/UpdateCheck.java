@@ -20,12 +20,12 @@ public class UpdateCheck extends AsyncTask<String, Void, JSONArray> {
 
     private static final String LOG_TAG = UpdateCheck.class.getSimpleName();
     private Exception exception;
+    private final String updatePath = "http://mirko-eberlein.de/fitnessplan.json";
     public JSONArray doInBackground(String[] params){
         HttpURLConnection urlConnection = null;
         JSONArray json = null;
         try {
-            String path = "http://mirko-eberlein.de/fitnessplan.json";
-            URL url = new URL(path);
+            URL url = new URL(updatePath);
             urlConnection = (HttpURLConnection) url.openConnection();
             InputStream in = new BufferedInputStream(urlConnection.getInputStream());
             json = readStream(in);

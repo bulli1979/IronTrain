@@ -11,6 +11,14 @@ public class Plan {
     private String description;
     private Date createdon;
 
+    public Plan(){}
+    public Plan(String id,String name,String description,Date createdon){
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.createdon = createdon;
+    }
+
     public String getId() {
         return id;
     }

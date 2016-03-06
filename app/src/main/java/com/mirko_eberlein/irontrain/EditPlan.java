@@ -1,26 +1,36 @@
 package com.mirko_eberlein.irontrain;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 
 import com.mirko_eberlein.irontrain.business.Plan;
+import com.mirko_eberlein.irontrain.storage.DAOPlan;
 
 import java.util.UUID;
 
 /**
  * Created by Ebi on 16.02.2016.
  */
-public class NewPlan extends AppCompatActivity {
+public class EditPlan extends AppCompatActivity {
     private Plan plan;
     private static final String LOG_TAG = Home.class.getSimpleName();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_createplan);
-        plan = new Plan();
-        plan.setId(UUID.randomUUID().toString());
+        Intent i = getIntent();
+        // Receiving the Data
+        String planid = i.getStringExtra("plan");
+        if("".equals(planid)){
+            plan = new Plan();
+            plan.setId(UUID.randomUUID().toString());
+        }else{
+            DAOPlan.getPlanById(this.getBaseContext(),planid);
+
+        }
 
     }
 

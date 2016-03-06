@@ -27,10 +27,10 @@ public class DBUpdateProcess {
 
     public void updateExercices(JSONArray arr,View v){
         database = DBHelper.getInstance(v.getContext()).getWritableDatabase();
-        String[] suchspalten = new String[]{"importnumber"};
-        Cursor exercices = database.query("Exercice", suchspalten, null, null, null, null, null);
+        String[] searchColumns = new String[]{"importnumber"};
+        Cursor exercices = database.query("Exercice", searchColumns, null, null, null, null, null);
         importExercices(exercices, arr);
-        exercices = database.query("Exercice",suchspalten,null,null,null,null,null);
+        exercices = database.query("Exercice",searchColumns,null,null,null,null,null);
     }
     private void importExercices(Cursor exercices,JSONArray arr) {
         try {

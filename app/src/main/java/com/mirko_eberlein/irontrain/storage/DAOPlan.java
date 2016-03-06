@@ -1,0 +1,66 @@
+package com.mirko_eberlein.irontrain.storage;
+
+import android.content.ContentValues;
+import android.content.Context;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
+import android.view.View;
+
+import com.mirko_eberlein.irontrain.business.Plan;
+import com.mirko_eberlein.irontrain.tools.Tools;
+
+import java.util.Date;
+import java.util.UUID;
+
+/**
+ * Created by Ebi on 06.03.2016.
+ */
+public class DAOPlan {
+    private static final String LOG_TAG = DAOPlan.class.getSimpleName();
+    private static SQLiteDatabase database;
+
+    public static Plan getPlanById(Context context,String id){
+        database = DBHelper.getInstance(context).getWritableDatabase();
+        Cursor planc = database.query(DBHelper.TABLE_PLAN, null,DBHelper.COLUMN_ID+"="+id, null, null, null, null);
+        planc.close();
+        database.close();
+        return cursorToPlan(planc);
+
+    }
+
+
+    private static Plan cursorToPlan(Cursor pc){
+        String id = pc.getString(pc.getColumnIndex(DBHelper.COLUMN_ID));
+        String name = pc.getString(pc.getColumnIndex(DBHelper.COLUMN_ID));
+        String description = pc.getString(pc.getColumnIndex(DBHelper.COLUMN_ID));
+        String createdOnString = pc.getString(pc.getColumnIndex(DBHelper.COLUMN_ID));
+        Date createdon = Tools.stringToDate(createdOnString);
+        return new Plan(id,name,description,createdon);
+    }
+
+    public static void saveOrUpdatePlan (Plan plan,Context context){
+        database = DBHelper.getInstance(context).getWritableDatabase();
+        if(plan.getId()!=null){
+            String whereClauses = DBHelper.COLUMN_ID+"="+plan.getId();
+            database.update(DBHelper.TABLE_PLAN,getDBValues(plan),whereClauses,null);
+            Log.d(LOG_TAG,"update Plan " + plan.getName());
+        }else{
+            plan.setId(UUID.randomUUID().toString());
+            database.insert(DBHelper.TABLE_PLAN, null, getDBValues(plan));
+            Log.d(LOG_TAG, "erstelle Plan " + plan.getName());
+        }
+        database.close();
+    }
+
+    private static ContentValues getDBValues(Plan plan){
+        ContentValues cv = new ContentValues();
+        cv.put(DBHelper.COLUMN_NAME,plan.getName());
+        cv.put(DBHelper.COLUMN_DESCRIPTION, plan.getDescription());
+        cv.put(DBHelper.COLUMN_CREATEDON,Tools.dateToString(plan.getCreatedon()));
+        cv.put(DBHelper.COLUMN_ID,plan.getId());
+        return cv;
+    }
+
+
+}

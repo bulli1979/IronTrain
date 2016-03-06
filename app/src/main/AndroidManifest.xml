@@ -19,7 +19,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".NewPlan"
+            android:name=".EditPlan"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>

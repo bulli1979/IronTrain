@@ -2,12 +2,11 @@ package com.mirko_eberlein.irontrain.action;
 
 import android.content.Intent;
 import android.os.AsyncTask;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 
-import com.mirko_eberlein.irontrain.NewPlan;
+import com.mirko_eberlein.irontrain.EditPlan;
 import com.mirko_eberlein.irontrain.R;
 import com.mirko_eberlein.irontrain.business.Plan;
 import com.mirko_eberlein.irontrain.storage.DBUpdateProcess;
@@ -51,9 +50,10 @@ public class OCListener {
             @Override
             public void onClick(View v){
                 try {
-                    Intent nextScreen = new Intent(v.getContext(), NewPlan.class);
+                    Intent nextScreen = new Intent(v.getContext(), EditPlan.class);
                     v.getContext().startActivity(nextScreen);
                 }catch(Exception e){
+
                     Log.d(LOG_TAG,"Error in getNewPlanListener " + e );
                 }
             }
@@ -67,8 +67,10 @@ public class OCListener {
             public void onClick(View v){
                 try {
                     //TODO: new Activity
-                    Intent nextScreen = new Intent(v.getContext(), NewPlan.class);
+                    Intent nextScreen = new Intent(v.getContext(), EditPlan.class);
+                    nextScreen.putExtra("plan","");
                     v.getContext().startActivity(nextScreen);
+
                 }catch(Exception e){
                     Log.d(LOG_TAG,"Error in getNewPlanListener " + e );
                 }
