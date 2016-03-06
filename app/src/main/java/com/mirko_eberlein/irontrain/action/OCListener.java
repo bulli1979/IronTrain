@@ -7,12 +7,16 @@ import android.view.View;
 import android.widget.EditText;
 
 import com.mirko_eberlein.irontrain.EditPlan;
+import com.mirko_eberlein.irontrain.PlanListActivity;
 import com.mirko_eberlein.irontrain.R;
 import com.mirko_eberlein.irontrain.business.Plan;
+import com.mirko_eberlein.irontrain.storage.DAOPlan;
 import com.mirko_eberlein.irontrain.storage.DBUpdateProcess;
 import com.mirko_eberlein.irontrain.storage.UpdateCheck;
 
 import org.json.JSONArray;
+
+import java.util.Date;
 
 /**
  * Created by Ebi on 16.02.2016.
@@ -46,7 +50,7 @@ public class OCListener {
     }
 
     public static View.OnClickListener getNewPlanListener(){
-        View.OnClickListener oclBtnNewPlan = new View.OnClickListener(){
+        View.OnClickListener oclGtoNewPlan = new View.OnClickListener(){
             @Override
             public void onClick(View v){
                 try {
@@ -58,7 +62,23 @@ public class OCListener {
                 }
             }
         };
-        return oclBtnNewPlan;
+        return oclGtoNewPlan;
+    }
+
+    public static View.OnClickListener getPlanListListener(){
+        View.OnClickListener oclGtoPlanList = new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                try {
+                    Intent nextScreen = new Intent(v.getContext(), PlanListActivity.class);
+                    v.getContext().startActivity(nextScreen);
+                }catch(Exception e){
+
+                    Log.d(LOG_TAG,"Error in oclGtoPlanList " + e );
+                }
+            }
+        };
+        return oclGtoPlanList;
     }
 
     public static View.OnClickListener getPlanDayListener(){
@@ -72,23 +92,34 @@ public class OCListener {
                     v.getContext().startActivity(nextScreen);
 
                 }catch(Exception e){
-                    Log.d(LOG_TAG,"Error in getNewPlanListener " + e );
+                    Log.d(LOG_TAG,"Error in getNewPlanDayListener " + e );
                 }
             }
         };
         return oclBtnNewPlanDay;
     }
 
-    public static View.OnClickListener getPlanSaveListener(Plan p){
-        final Plan plan = p;
+    public static View.OnClickListener getPlanSaveListener(){
         View.OnClickListener oclBtnNewPlanSave = new View.OnClickListener(){
             @Override
             public void onClick(View v){
                 try {
+                    Log.d(LOG_TAG,"H1");
                     EditText name = (EditText) v.findViewById(R.id.planname);
+                    if(name==null) {
+                        Log.d(LOG_TAG, "H2");
+                    }
                     EditText description = (EditText) v.findViewById(R.id.plandescription);
-                    plan.setName(name.getText().toString());
-                    plan.setDescription(description.getText().toString());
+                    Log.d(LOG_TAG,"H3");
+                    Plan plan = (Plan) v.getTag();
+                    plan.setName(name.getEditableText().toString());
+                    Log.d(LOG_TAG, "H5");
+                    plan.setDescription(description.getEditableText().toString());
+                    Log.d(LOG_TAG, "H6");
+                    plan.setCreatedon(new Date());
+                    Log.d(LOG_TAG, "H7");
+                    DAOPlan.saveOrUpdatePlan(plan, v.getContext());
+                    Log.d(LOG_TAG, "H8");
                 }catch(Exception e){
                     Log.d(LOG_TAG,"Error in getNewPlanListener " + e );
                 }

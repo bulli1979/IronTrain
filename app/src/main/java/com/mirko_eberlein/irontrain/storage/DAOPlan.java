@@ -10,7 +10,9 @@ import android.view.View;
 import com.mirko_eberlein.irontrain.business.Plan;
 import com.mirko_eberlein.irontrain.tools.Tools;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.UUID;
 
 /**
@@ -23,12 +25,41 @@ public class DAOPlan {
     public static Plan getPlanById(Context context,String id){
         database = DBHelper.getInstance(context).getWritableDatabase();
         Cursor planc = database.query(DBHelper.TABLE_PLAN, null,DBHelper.COLUMN_ID+"="+id, null, null, null, null);
+        Plan plan = cursorToPlan(planc);
         planc.close();
         database.close();
-        return cursorToPlan(planc);
-
+        return plan;
     }
 
+    public static void saveOrUpdatePlan (Plan plan,Context context){
+        try {
+            database = DBHelper.getInstance(context).getWritableDatabase();
+            if (plan.getId() != null) {
+                String whereClauses = DBHelper.COLUMN_ID + "=" + plan.getId();
+                database.update(DBHelper.TABLE_PLAN, getDBValues(plan), whereClauses, null);
+                Log.d(LOG_TAG, "update Plan " + plan.getName());
+            } else {
+                plan.setId(UUID.randomUUID().toString());
+                database.insert(DBHelper.TABLE_PLAN, null, getDBValues(plan));
+                Log.d(LOG_TAG, "erstelle Plan " + plan.getName());
+            }
+            database.close();
+        }catch(Exception e){
+            Log.d(LOG_TAG,"Fehler in saveOrUpdatePlan");
+        }
+    }
+
+    public static List<Plan> getAllPlans(Context context){
+        database = DBHelper.getInstance(context).getWritableDatabase();
+        Cursor planc = database.query(DBHelper.TABLE_PLAN, null,null, null, null, null, null);
+        List<Plan> planList = new ArrayList<Plan>();
+        while (planc.moveToNext()) {
+            planList.add(cursorToPlan(planc));
+        }
+        planc.close();
+        database.close();
+        return planList;
+    }
 
     private static Plan cursorToPlan(Cursor pc){
         String id = pc.getString(pc.getColumnIndex(DBHelper.COLUMN_ID));
@@ -39,19 +70,7 @@ public class DAOPlan {
         return new Plan(id,name,description,createdon);
     }
 
-    public static void saveOrUpdatePlan (Plan plan,Context context){
-        database = DBHelper.getInstance(context).getWritableDatabase();
-        if(plan.getId()!=null){
-            String whereClauses = DBHelper.COLUMN_ID+"="+plan.getId();
-            database.update(DBHelper.TABLE_PLAN,getDBValues(plan),whereClauses,null);
-            Log.d(LOG_TAG,"update Plan " + plan.getName());
-        }else{
-            plan.setId(UUID.randomUUID().toString());
-            database.insert(DBHelper.TABLE_PLAN, null, getDBValues(plan));
-            Log.d(LOG_TAG, "erstelle Plan " + plan.getName());
-        }
-        database.close();
-    }
+
 
     private static ContentValues getDBValues(Plan plan){
         ContentValues cv = new ContentValues();
@@ -61,6 +80,7 @@ public class DAOPlan {
         cv.put(DBHelper.COLUMN_ID,plan.getId());
         return cv;
     }
+
 
 
 }

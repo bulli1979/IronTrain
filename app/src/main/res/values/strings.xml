@@ -11,4 +11,7 @@
     <string name="addExercice">hinzufügen</string>
     <string name="addExerciceDay">Trainingstag hinzufügen</string>
     <string name="cancel">abbrechen</string>
+    <string name="title_activity_plan_list">PlanListActivity</string>
+    <string name="goToPlans">zu den Plänen</string>
+    <string name="noItemsFound">- Die Liste ist leer -</string>
 </resources>

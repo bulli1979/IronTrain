@@ -5,7 +5,9 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Button;
 
+import com.mirko_eberlein.irontrain.action.OCListener;
 import com.mirko_eberlein.irontrain.business.Plan;
 import com.mirko_eberlein.irontrain.storage.DAOPlan;
 
@@ -17,22 +19,30 @@ import java.util.UUID;
 public class EditPlan extends AppCompatActivity {
     private Plan plan;
     private static final String LOG_TAG = Home.class.getSimpleName();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_createplan);
         Intent i = getIntent();
         // Receiving the Data
-        String planid = i.getStringExtra("plan");
-        if("".equals(planid)){
+        if(!i.hasExtra("plan")){
             plan = new Plan();
             plan.setId(UUID.randomUUID().toString());
         }else{
-            DAOPlan.getPlanById(this.getBaseContext(),planid);
+            plan = DAOPlan.getPlanById(this.getBaseContext(),i.getStringExtra("plan"));
 
         }
 
+        Button saveButton = (Button) findViewById(R.id.savePlan);
+        saveButton.setTag(plan);
+        saveButton.setOnClickListener(OCListener.getPlanSaveListener());
     }
+
+
+
+
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
