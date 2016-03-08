@@ -99,33 +99,4 @@ public class OCListener {
         return oclBtnNewPlanDay;
     }
 
-    public static View.OnClickListener getPlanSaveListener(){
-        View.OnClickListener oclBtnNewPlanSave = new View.OnClickListener(){
-            @Override
-            public void onClick(View v){
-                try {
-                    Log.d(LOG_TAG,"H1");
-                    EditText name = (EditText) v.findViewById(R.id.planname);
-                    if(name==null) {
-                        Log.d(LOG_TAG, "H2");
-                    }
-                    EditText description = (EditText) v.findViewById(R.id.plandescription);
-                    Log.d(LOG_TAG,"H3");
-                    Plan plan = (Plan) v.getTag();
-                    plan.setName(name.getEditableText().toString());
-                    Log.d(LOG_TAG, "H5");
-                    plan.setDescription(description.getEditableText().toString());
-                    Log.d(LOG_TAG, "H6");
-                    plan.setCreatedon(new Date());
-                    Log.d(LOG_TAG, "H7");
-                    DAOPlan.saveOrUpdatePlan(plan, v.getContext());
-                    Log.d(LOG_TAG, "H8");
-                }catch(Exception e){
-                    Log.d(LOG_TAG,"Error in getNewPlanListener " + e );
-                }
-            }
-        };
-        return oclBtnNewPlanSave;
-    }
-
 }

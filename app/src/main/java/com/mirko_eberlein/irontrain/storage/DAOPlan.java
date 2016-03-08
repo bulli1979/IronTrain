@@ -35,17 +35,19 @@ public class DAOPlan {
         try {
             database = DBHelper.getInstance(context).getWritableDatabase();
             if (plan.getId() != null) {
+                Log.d(LOG_TAG,"Id is not null " + plan.getId());
                 String whereClauses = DBHelper.COLUMN_ID + "=" + plan.getId();
                 database.update(DBHelper.TABLE_PLAN, getDBValues(plan), whereClauses, null);
                 Log.d(LOG_TAG, "update Plan " + plan.getName());
             } else {
+                Log.d(LOG_TAG,"Id is null " + plan.getId());
                 plan.setId(UUID.randomUUID().toString());
                 database.insert(DBHelper.TABLE_PLAN, null, getDBValues(plan));
                 Log.d(LOG_TAG, "erstelle Plan " + plan.getName());
             }
             database.close();
         }catch(Exception e){
-            Log.d(LOG_TAG,"Fehler in saveOrUpdatePlan");
+            Log.d(LOG_TAG,"Fehler in saveOrUpdatePlan " + e.getMessage());
         }
     }
 

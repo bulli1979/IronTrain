@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"
         android:text="@string/name"/>
 
-    <EditText android:id="@+id/planname"
+    <EditText android:id="@+id/planName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/colorSoftGrey"/>
@@ -21,7 +21,7 @@
         android:layout_height="wrap_content"
         android:text="@string/description"/>
 
-    <EditText android:id="@+id/plandescription"
+    <EditText android:id="@+id/planDescription"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/colorSoftGrey"/>
