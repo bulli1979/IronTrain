@@ -10,25 +10,23 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-import com.mirko_eberlein.irontrain.action.OCListener;
 import com.mirko_eberlein.irontrain.business.Plan;
 import com.mirko_eberlein.irontrain.storage.DAOPlan;
 
 import java.util.Date;
-import java.util.UUID;
 
 /**
  * Created by Ebi on 16.02.2016.
  */
-public class EditPlan extends AppCompatActivity {
+public class EditPlanActivity extends AppCompatActivity {
     private Plan plan;
-    private static final String LOG_TAG = Home.class.getSimpleName();
+    private static final String LOG_TAG = HomeActivity.class.getSimpleName();
     private EditText name;
     EditText description;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_createplan);
+        setContentView(R.layout.activity_edit_plan);
         Intent i = getIntent();
         // Receiving the Data
         if(!i.hasExtra("plan")){
@@ -60,7 +58,7 @@ public class EditPlan extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
+        // automatically handle clicks on the HomeActivity/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 

@@ -8,10 +8,11 @@
     <string name="name">Name </string>
     <string name="description">Beschreibung</string>
     <string name="save">speichern</string>
-    <string name="addExercice">hinzufügen</string>
+    <string name="addExercice">Übung hinzufügen</string>
     <string name="addExerciceDay">Trainingstag hinzufügen</string>
     <string name="cancel">abbrechen</string>
     <string name="title_activity_plan_list">PlanListActivity</string>
     <string name="goToPlans">zu den Plänen</string>
     <string name="noItemsFound">- Die Liste ist leer -</string>
+    <string name="title_activity_edit_plan_day">EditPlanDayActivity</string>
 </resources>
