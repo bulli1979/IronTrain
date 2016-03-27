@@ -15,4 +15,7 @@
     <string name="goToPlans">zu den Plänen</string>
     <string name="noItemsFound">- Die Liste ist leer -</string>
     <string name="title_activity_edit_plan_day">EditPlanDayActivity</string>
+    <string name="updateUrl">http://mirko-eberlein.de/fitnessplan.json</string>
+    <string name="saveMessage">speichern erfolgreich</string>
+    <string name="title_activity_stats">StatsActivity</string>
 </resources>

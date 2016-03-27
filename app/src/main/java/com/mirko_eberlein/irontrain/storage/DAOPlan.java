@@ -24,7 +24,8 @@ public class DAOPlan {
 
     public static Plan getPlanById(Context context,String id){
         database = DBHelper.getInstance(context).getWritableDatabase();
-        Cursor planc = database.query(DBHelper.TABLE_PLAN, null,DBHelper.COLUMN_ID+"="+id, null, null, null, null);
+        Cursor planc = database.query(DBHelper.TABLE_PLAN, null,DBHelper.COLUMN_ID+"='"+id+"'", null, null, null, null);
+        planc.moveToFirst();
         Plan plan = cursorToPlan(planc);
         planc.close();
         database.close();
@@ -36,7 +37,7 @@ public class DAOPlan {
             database = DBHelper.getInstance(context).getWritableDatabase();
             if (plan.getId() != null) {
                 Log.d(LOG_TAG,"Id is not null " + plan.getId());
-                String whereClauses = DBHelper.COLUMN_ID + "=" + plan.getId();
+                String whereClauses = DBHelper.COLUMN_ID + "='" + plan.getId()+"'";
                 database.update(DBHelper.TABLE_PLAN, getDBValues(plan), whereClauses, null);
                 Log.d(LOG_TAG, "update Plan " + plan.getName());
             } else {
@@ -66,6 +67,7 @@ public class DAOPlan {
     }
 
     private static Plan cursorToPlan(Cursor pc){
+        Log.d(LOG_TAG, "Here " + pc.getCount());
         String id = pc.getString(pc.getColumnIndex(DBHelper.COLUMN_ID));
         String name = pc.getString(pc.getColumnIndex(DBHelper.COLUMN_NAME));
         String description = pc.getString(pc.getColumnIndex(DBHelper.COLUMN_DESCRIPTION));

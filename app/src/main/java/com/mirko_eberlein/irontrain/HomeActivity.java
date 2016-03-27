@@ -18,6 +18,8 @@ public class HomeActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        //onCreateOptionsMenu(Menu)
         setContentView(R.layout.activity_home);
         initialize();
     }

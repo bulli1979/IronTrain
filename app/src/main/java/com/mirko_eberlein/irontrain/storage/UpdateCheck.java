@@ -2,6 +2,8 @@ package com.mirko_eberlein.irontrain.storage;
 import android.os.AsyncTask;
 import android.util.Log;
 
+import com.mirko_eberlein.irontrain.R;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -20,7 +22,8 @@ public class UpdateCheck extends AsyncTask<String, Void, JSONArray> {
 
     private static final String LOG_TAG = UpdateCheck.class.getSimpleName();
     private Exception exception;
-    private final String updatePath = "http://mirko-eberlein.de/fitnessplan.json";
+
+    private final String updatePath ="http://mirko-eberlein.de/fitnessplan.json"; // R.string.updateUrl; //
     public JSONArray doInBackground(String[] params){
         HttpURLConnection urlConnection = null;
         JSONArray json = null;
