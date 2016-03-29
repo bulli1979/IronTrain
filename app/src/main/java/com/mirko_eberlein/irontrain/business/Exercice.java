@@ -1,7 +1,4 @@
 package com.mirko_eberlein.irontrain.business;
-
-import java.util.Date;
-
 /**
  * Created by Ebi on 16.02.2016.
  */
@@ -11,9 +8,6 @@ public class Exercice {
     private String description;
     private String language;
     private int importnumber;
-
-    public Exercice(){};
-
     private Exercice(Builder builder){
         this.id = builder.id;
         this.name = builder.name;
@@ -25,7 +19,7 @@ public class Exercice {
     public static class Builder{
         private String id,name,description,language;
         private int importnumber;
-        public Builder(){};
+        public Builder(){}
 
         public Builder id(String id){
             this.id = id;
@@ -46,7 +40,7 @@ public class Exercice {
         }
 
         public Builder importNumber(int importnumber){
-            this.importnumber =importnumber;
+            this.importnumber = importnumber;
             return this;
         }
 
