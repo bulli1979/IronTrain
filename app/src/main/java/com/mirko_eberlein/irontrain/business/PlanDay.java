@@ -10,7 +10,49 @@ public class PlanDay {
     private String name;
     private String description;
     private String plan;
-    private Date d;
+    private Date createdOn;
+
+    private PlanDay(Builder builder){
+        this.id = builder.id;
+        this.name = builder.name;
+        this.description = builder.description;
+        this.plan = builder.plan;
+        this.createdOn = builder.createdOn;
+    }
+
+    public static class Builder{
+        private String id,name,description,plan;
+        private Date createdOn;
+        public Builder(){};
+
+        public Builder id(String id){
+            this.id = id;
+            return this;
+        }
+        public Builder name(String name){
+            this.name = name;
+            return this;
+        }
+        public Builder description(String description){
+            this.description = description;
+            return this;
+        }
+
+        public Builder plan(String plan){
+            this.plan = plan;
+            return this;
+        }
+        public Builder createdOn(Date cretedOn){
+            this.createdOn =createdOn;
+            return this;
+        }
+
+        public PlanDay build(){
+            return new PlanDay(this);
+        }
+
+    }
+
     //comment
     public String getName() {
         return name;
@@ -43,4 +85,6 @@ public class PlanDay {
     public void setPlan(String plan) {
         this.plan = plan;
     }
+
+    public Date getCreatedOn(){return createdOn;}
 }
