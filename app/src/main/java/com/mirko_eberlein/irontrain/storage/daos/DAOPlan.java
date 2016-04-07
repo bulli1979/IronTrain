@@ -1,13 +1,13 @@
-package com.mirko_eberlein.irontrain.storage;
+package com.mirko_eberlein.irontrain.storage.daos;
 
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
-import android.view.View;
 
 import com.mirko_eberlein.irontrain.business.Plan;
+import com.mirko_eberlein.irontrain.storage.DBHelper;
 import com.mirko_eberlein.irontrain.tools.Tools;
 
 import java.util.ArrayList;

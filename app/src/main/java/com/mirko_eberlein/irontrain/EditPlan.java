@@ -10,12 +10,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-import com.mirko_eberlein.irontrain.action.OCListener;
 import com.mirko_eberlein.irontrain.business.Plan;
-import com.mirko_eberlein.irontrain.storage.DAOPlan;
+import com.mirko_eberlein.irontrain.storage.daos.DAOPlan;
 
 import java.util.Date;
-import java.util.UUID;
 
 /**
  * Created by Ebi on 16.02.2016.

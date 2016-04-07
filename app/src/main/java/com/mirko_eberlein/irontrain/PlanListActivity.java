@@ -3,19 +3,16 @@ package com.mirko_eberlein.irontrain;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TableRow.LayoutParams;
 import android.widget.TextView;
 
-import java.util.Date;
 import java.util.List;
 import com.mirko_eberlein.irontrain.action.OCListener;
 import com.mirko_eberlein.irontrain.business.Plan;
-import com.mirko_eberlein.irontrain.storage.DAOPlan;
+import com.mirko_eberlein.irontrain.storage.daos.DAOPlan;
 
 public class PlanListActivity extends AppCompatActivity {
     private Button newPlanButton;

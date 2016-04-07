@@ -4,19 +4,13 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.util.Log;
 import android.view.View;
-import android.widget.EditText;
 
 import com.mirko_eberlein.irontrain.EditPlan;
 import com.mirko_eberlein.irontrain.PlanListActivity;
-import com.mirko_eberlein.irontrain.R;
-import com.mirko_eberlein.irontrain.business.Plan;
-import com.mirko_eberlein.irontrain.storage.DAOPlan;
 import com.mirko_eberlein.irontrain.storage.DBUpdateProcess;
 import com.mirko_eberlein.irontrain.storage.UpdateCheck;
 
 import org.json.JSONArray;
-
-import java.util.Date;
 
 /**
  * Created by Ebi on 16.02.2016.

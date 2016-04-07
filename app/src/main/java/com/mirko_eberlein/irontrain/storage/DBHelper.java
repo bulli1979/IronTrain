@@ -31,6 +31,12 @@ public class DBHelper extends SQLiteOpenHelper {
     public static final String COLUMN_REPEATS = "repeats";
     public static final String COLUMN_SETCOUNT = "setCount";
     public static final String TABLE_PLAN = "Plan";
+    public static final String TABLE_PLANDAY = "PlanDay";
+    public static final String TABLE_EXERCICE = "Exercice";
+    public static final String TABLE_PLANDAY_EXERCICE = "PlanDayExercice";
+    public static final String TABLE_TRAIN = "Train";
+    public static final String TABLE_TRAINEXERCICE = "TrainExercice";
+    public static final String TABLE_TRAINSET = "TrainSet";
     public DBHelper(Context context) {
         super(context, DATENBANK_NAME, null, DATENBANK_VERSION);
         Log.d(LOG_TAG, "DBHelper hat die Datenbank " + getDatabaseName() + "erstellt");
@@ -41,13 +47,13 @@ public class DBHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         Log.d(LOG_TAG, "Erstelle Datenbank");
-        db.execSQL("CREATE TABLE if not exists `Exercice`(`" + COLUMN_ID + "` TEXT,`" + COLUMN_NAME + "` TEXT,`" + COLUMN_DESCRIPTION + "` TEXT,`" + COLUMN_IMPORTNUMBER + "` INTEGER ,PRIMARY KEY("+COLUMN_ID+"));");
+        db.execSQL("CREATE TABLE if not exists `" + TABLE_EXERCICE + "`(`" + COLUMN_ID + "` TEXT,`" + COLUMN_NAME + "` TEXT,`" + COLUMN_DESCRIPTION + "` TEXT,`" + COLUMN_IMPORTNUMBER + "` INTEGER ,PRIMARY KEY("+COLUMN_ID+"));");
         db.execSQL("CREATE TABLE if not exists `" + TABLE_PLAN + "` (`" + COLUMN_ID + "` TEXT,`" + COLUMN_NAME + "` TEXT,`" + COLUMN_DESCRIPTION + "` TEXT,`" + COLUMN_CREATEDON + "` TEXT,PRIMARY KEY("+COLUMN_ID+"));");
-        db.execSQL("CREATE TABLE if not exists `PlanDay` (`" + COLUMN_ID + "` TEXT,`" + COLUMN_NAME + "` TEXT,`" + COLUMN_DESCRIPTION + "` TEXT,`"+COLUMN_PLAN+"` TEXT,PRIMARY KEY("+COLUMN_ID+"));");
-        db.execSQL("CREATE TABLE if not exists `PlanDayExercice` (`" + COLUMN_ID + "` INTEGER PRIMARY KEY AUTOINCREMENT,`" + COLUMN_PLANDAY + "` TEXT,`" + COLUMN_EXERCICE + "` TEXT,`" + COLUMN_SETCOUNT + "` INTEGER);");
-        db.execSQL("CREATE TABLE if not exists `Train` (`"+COLUMN_ID+"` INTEGER PRIMARY KEY AUTOINCREMENT,`"+COLUMN_DATE+"` TEXT,`"+COLUMN_PLANDAY+"` TEXT);");
-        db.execSQL("CREATE TABLE if not exists `TrainExercice` (`" + COLUMN_ID + "` INTEGER PRIMARY KEY AUTOINCREMENT,`" + COLUMN_PLANDAYEXERCICE + "` INTEGER,`" + COLUMN_TRAIN + "` TEXT);");
-        db.execSQL("CREATE TABLE `TrainSet` (`" + COLUMN_ID + "` INTEGER PRIMARY KEY AUTOINCREMENT,`" + COLUMN_TRAINEXERCICE + "` INTEGER,`" + COLUMN_SETNR + "` INTEGER,`" + COLUMN_WEIGHT + "` NUMERIC,`" + COLUMN_REPEATS + "` NUMERIC);");
+        db.execSQL("CREATE TABLE if not exists `" + TABLE_PLANDAY + "` (`" + COLUMN_ID + "` TEXT,`" + COLUMN_NAME + "` TEXT,`" + COLUMN_DESCRIPTION + "` TEXT,`"+COLUMN_PLAN+"` TEXT,PRIMARY KEY("+COLUMN_ID+"));");
+        db.execSQL("CREATE TABLE if not exists `" + TABLE_PLANDAY_EXERCICE + "` (`" + COLUMN_ID + "` INTEGER PRIMARY KEY AUTOINCREMENT,`" + COLUMN_PLANDAY + "` TEXT,`" + COLUMN_EXERCICE + "` TEXT,`" + COLUMN_SETCOUNT + "` INTEGER);");
+        db.execSQL("CREATE TABLE if not exists `" + TABLE_TRAIN + "` (`"+COLUMN_ID+"` INTEGER PRIMARY KEY AUTOINCREMENT,`"+COLUMN_DATE+"` TEXT,`"+COLUMN_PLANDAY+"` TEXT);");
+        db.execSQL("CREATE TABLE if not exists `"+ TABLE_TRAINEXERCICE + "` (`" + COLUMN_ID + "` INTEGER PRIMARY KEY AUTOINCREMENT,`" + COLUMN_PLANDAYEXERCICE + "` INTEGER,`" + COLUMN_TRAIN + "` TEXT);");
+        db.execSQL("CREATE TABLE `" + TABLE_TRAINSET + "` (`" + COLUMN_ID + "` INTEGER PRIMARY KEY AUTOINCREMENT,`" + COLUMN_TRAINEXERCICE + "` INTEGER,`" + COLUMN_SETNR + "` INTEGER,`" + COLUMN_WEIGHT + "` NUMERIC,`" + COLUMN_REPEATS + "` NUMERIC);");
     }
 
     @Override
