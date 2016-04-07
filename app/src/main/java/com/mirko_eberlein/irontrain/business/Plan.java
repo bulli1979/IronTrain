@@ -9,15 +9,46 @@ public class Plan {
     private String id;
     private String name;
     private String description;
-    private Date createdon;
+    private Date createdOn;
 
     public Plan(){}
-    public Plan(String id,String name,String description,Date createdon){
-        this.id = id;
-        this.name = name;
-        this.description = description;
-        this.createdon = createdon;
+    public Plan(Builder builder){
+        this.id = builder.id;
+        this.name = builder.name;
+        this.description = builder.description;
+        this.createdOn = builder.createdOn;
     }
+
+    public static class Builder{
+        private String id,name,description;
+        private Date createdOn;
+        public Builder(){};
+
+        public Builder id(String id){
+            this.id = id;
+            return this;
+        }
+        public Builder name(String name){
+            this.name = name;
+            return this;
+        }
+        public Builder description(String description){
+            this.description = description;
+            return this;
+        }
+
+
+        public Builder createdOn(Date cretedOn){
+            this.createdOn =createdOn;
+            return this;
+        }
+
+        public Plan build(){
+            return new Plan(this);
+        }
+
+    }
+
 
     public String getId() {
         return id;
@@ -43,11 +74,11 @@ public class Plan {
         this.description = description;
     }
 
-    public Date getCreatedon() {
-        return createdon;
+    public Date getCreatedOn() {
+        return createdOn;
     }
 
-    public void setCreatedon(Date createdon) {
-        this.createdon = createdon;
+    public void setCreatedon(Date createdOn) {
+        this.createdOn = createdOn;
     }
 }

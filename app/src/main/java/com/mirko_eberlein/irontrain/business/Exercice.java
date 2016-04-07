@@ -1,5 +1,4 @@
 package com.mirko_eberlein.irontrain.business;
-
 /**
  * Created by Ebi on 16.02.2016.
  */
@@ -9,6 +8,48 @@ public class Exercice {
     private String description;
     private String language;
     private int importnumber;
+    private Exercice(Builder builder){
+        this.id = builder.id;
+        this.name = builder.name;
+        this.description = builder.description;
+        this.language = builder.language;
+        this.importnumber = builder.importnumber;
+    }
+
+    public static class Builder{
+        private String id,name,description,language;
+        private int importnumber;
+        public Builder(){}
+
+        public Builder id(String id){
+            this.id = id;
+            return this;
+        }
+        public Builder name(String name){
+            this.name = name;
+            return this;
+        }
+        public Builder description(String description){
+            this.description = description;
+            return this;
+        }
+
+        public Builder language(String language){
+            this.language = language;
+            return this;
+        }
+
+        public Builder importNumber(int importnumber){
+            this.importnumber = importnumber;
+            return this;
+        }
+
+        public Exercice build(){
+            return new Exercice(this);
+        }
+
+    }
+
     public String getId() {
         return id;
     }

@@ -43,9 +43,16 @@ public class PlanListActivity extends AppCompatActivity {
     private void buildTable(List<Plan> planList,TableLayout table) {
 
         // outer for loop
-
+        //TODO build a Adapter
+        int count=1;
         for (Plan plan : planList) {
             TableRow row = new TableRow(table.getContext());
+            row.setTag(plan);
+            if(count % 2 == 0){
+
+            }
+
+            row.setOnClickListener(OCListener.getEditPlanListener());
             TextView tv = new TextView(table.getContext());
             tv.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT,
                     LayoutParams.WRAP_CONTENT));
@@ -57,4 +64,6 @@ public class PlanListActivity extends AppCompatActivity {
             table.addView(row);
         }
     }
+
+
 }
