@@ -5,7 +5,7 @@ import android.os.AsyncTask;
 import android.util.Log;
 import android.view.View;
 
-import com.mirko_eberlein.irontrain.EditPlan;
+import com.mirko_eberlein.irontrain.EditPlanActivity;
 import com.mirko_eberlein.irontrain.PlanListActivity;
 import com.mirko_eberlein.irontrain.storage.DBUpdateProcess;
 import com.mirko_eberlein.irontrain.storage.UpdateCheck;
@@ -48,7 +48,7 @@ public class OCListener {
             @Override
             public void onClick(View v){
                 try {
-                    Intent nextScreen = new Intent(v.getContext(), EditPlan.class);
+                    Intent nextScreen = new Intent(v.getContext(), EditPlanActivity.class);
                     v.getContext().startActivity(nextScreen);
                 }catch(Exception e){
 
@@ -81,7 +81,7 @@ public class OCListener {
             public void onClick(View v){
                 try {
                     //TODO: new Activity
-                    Intent nextScreen = new Intent(v.getContext(), EditPlan.class);
+                    Intent nextScreen = new Intent(v.getContext(), EditPlanActivity.class);
                     nextScreen.putExtra("plan","");
                     v.getContext().startActivity(nextScreen);
 
