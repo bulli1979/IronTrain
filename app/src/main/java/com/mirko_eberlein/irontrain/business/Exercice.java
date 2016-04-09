@@ -15,7 +15,6 @@ public class Exercice {
         this.language = builder.language;
         this.importnumber = builder.importnumber;
     }
-
     public static class Builder{
         private String id,name,description,language;
         private int importnumber;
@@ -84,9 +83,5 @@ public class Exercice {
 
     public int getImportnumber() {
         return importnumber;
-    }
-
-    public void setImportnumber(int importnumber) {
-        this.importnumber = importnumber;
     }
 }

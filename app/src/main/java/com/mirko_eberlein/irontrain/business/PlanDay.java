@@ -42,8 +42,8 @@ public class PlanDay {
             this.plan = plan;
             return this;
         }
-        public Builder createdOn(Date cretedOn){
-            this.createdOn =createdOn;
+        public Builder createdOn(Date createdOn){
+            this.createdOn = createdOn;
             return this;
         }
 

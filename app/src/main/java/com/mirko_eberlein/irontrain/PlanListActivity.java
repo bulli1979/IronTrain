@@ -52,7 +52,7 @@ public class PlanListActivity extends AppCompatActivity {
 
             }
 
-            row.setOnClickListener(OCListener.getEditPlanListener());
+            //row.setOnClickListener(OCListener.get getEditPlanListener());
             TextView tv = new TextView(table.getContext());
             tv.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT,
                     LayoutParams.WRAP_CONTENT));

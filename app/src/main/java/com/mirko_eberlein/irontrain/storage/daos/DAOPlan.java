@@ -67,7 +67,6 @@ public class DAOPlan {
     }
 
     private static Plan cursorToPlan(Cursor pc){
-        Log.d(LOG_TAG, "Here " + pc.getCount());
         String id = pc.getString(pc.getColumnIndex(DBHelper.COLUMN_ID));
         String name = pc.getString(pc.getColumnIndex(DBHelper.COLUMN_NAME));
         String description = pc.getString(pc.getColumnIndex(DBHelper.COLUMN_DESCRIPTION));

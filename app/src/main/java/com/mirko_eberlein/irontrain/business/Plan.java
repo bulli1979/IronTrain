@@ -12,7 +12,7 @@ public class Plan {
     private Date createdOn;
 
     public Plan(){}
-    public Plan(Builder builder){
+    private Plan(Builder builder){
         this.id = builder.id;
         this.name = builder.name;
         this.description = builder.description;
