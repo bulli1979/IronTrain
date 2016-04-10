@@ -12,10 +12,12 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.mirko_eberlein.irontrain.action.OCListener;
 import com.mirko_eberlein.irontrain.business.Plan;
 import com.mirko_eberlein.irontrain.storage.daos.DAOPlan;
 
 import java.util.Date;
+import java.util.UUID;
 
 /**
  * Created by Ebi on 16.02.2016.
@@ -46,12 +48,16 @@ public class EditPlanActivity extends AppCompatActivity {
         }
         saveButton.setTag(plan);
         saveButton.setOnClickListener(onSaveListener);
-    }
 
 
+        Button cancelButton = (Button) findViewById(R.id.cancelEditPlan);
+        cancelButton.setOnClickListener(OCListener.getPlanListListener());
 
+        Button newPlanDayButton = (Button) findViewById(R.id.addPlanDay);
+        newPlanDayButton.setTag(plan);
+        newPlanDayButton.setOnClickListener(OCListener.getNewPlanDayListener());
 
-
+}
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -88,10 +94,15 @@ public class EditPlanActivity extends AppCompatActivity {
                 Log.d(LOG_TAG, name.getEditableText().toString());
                 plan.setName(name.getEditableText().toString());
                 plan.setDescription(description.getText().toString());
-                if(plan.getId()!=null) {
+                if(plan.getId()==null) {
+                    plan.setId(UUID.randomUUID().toString());
                     plan.setCreatedon(new Date());
+                    DAOPlan.newPlan(plan, v.getContext());
+                }else{
+                    DAOPlan.updatePlan(plan,v.getContext());
                 }
-                DAOPlan.saveOrUpdatePlan(plan, v.getContext());
+
+
                 Log.d(LOG_TAG,"Plan gespeichert");
                 Toast toast = Toast.makeText(getApplicationContext(),getResources().getString(R.string.saveMessage),Toast.LENGTH_LONG);
                 toast.setGravity(Gravity.BOTTOM, 0, 10);

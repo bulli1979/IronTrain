@@ -32,27 +32,29 @@ public class DAOPlan {
         return plan;
     }
 
-    public static void saveOrUpdatePlan (Plan plan,Context context){
+
+    public static void newPlan (Plan plan,Context context){
         try {
             database = DBHelper.getInstance(context).getWritableDatabase();
-            if (plan.getId() != null) {
-                Log.d(LOG_TAG,"Id is not null " + plan.getId());
-                String whereClauses = DBHelper.COLUMN_ID + "='" + plan.getId()+"'";
-                database.update(DBHelper.TABLE_PLAN, getDBValues(plan), whereClauses, null);
-                Log.d(LOG_TAG, "update Plan " + plan.getName());
-            } else {
-                Log.d(LOG_TAG, "Id is null " + plan.getId());
-                plan.setId(UUID.randomUUID().toString());
-                ContentValues cv = getDBValues(plan);
-                Log.d(LOG_TAG,"name:" + cv.get("name"));
-                database.insert(DBHelper.TABLE_PLAN, null, cv);
-                Log.d(LOG_TAG, "erstelle Plan " + plan.getName());
-            }
+            ContentValues cv = getDBValues(plan);
+            database.insert(DBHelper.TABLE_PLAN, null, cv);
+            Log.d(LOG_TAG, "erstelle Plan " + plan.getName());
             database.close();
         }catch(Exception e){
-            Log.d(LOG_TAG,"Fehler in saveOrUpdatePlan " + e.getMessage());
+            Log.e(LOG_TAG,"Error in newPlan ",e);
         }
     }
+
+    public static void updatePlan (Plan plan,Context context){
+        try{
+            ContentValues cv = getDBValues(plan);
+            database.insert(DBHelper.TABLE_PLAN, null, cv);
+            database.close();
+        }catch(Exception e){
+            Log.e(LOG_TAG,"Error in updatePlan ",e);
+        }
+    }
+
 
     public static List<Plan> getAllPlans(Context context){
         database = DBHelper.getInstance(context).getWritableDatabase();

@@ -3,6 +3,7 @@ package com.mirko_eberlein.irontrain;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.TableLayout;
 import android.widget.TableRow;
@@ -49,9 +50,8 @@ public class PlanListActivity extends AppCompatActivity {
             TableRow row = new TableRow(table.getContext());
             row.setTag(plan);
             if(count % 2 == 0){
-
+                //TODO change color here is there is a final style
             }
-
             //row.setOnClickListener(OCListener.get getEditPlanListener());
             TextView tv = new TextView(table.getContext());
             tv.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT,
@@ -62,8 +62,7 @@ public class PlanListActivity extends AppCompatActivity {
             tv.setText("Plan " + plan.getName());
             row.addView(tv);
             table.addView(row);
+            row.setOnClickListener(OCListener.getOpenPlanListener());
         }
     }
-
-
 }

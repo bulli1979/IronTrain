@@ -6,7 +6,10 @@ import android.util.Log;
 import android.view.View;
 
 import com.mirko_eberlein.irontrain.EditPlanActivity;
+import com.mirko_eberlein.irontrain.EditPlanDayActivity;
 import com.mirko_eberlein.irontrain.PlanListActivity;
+import com.mirko_eberlein.irontrain.business.Plan;
+import com.mirko_eberlein.irontrain.business.PlanDay;
 import com.mirko_eberlein.irontrain.storage.DBUpdateProcess;
 import com.mirko_eberlein.irontrain.storage.UpdateCheck;
 
@@ -26,7 +29,7 @@ public class OCListener {
     }
 
     public static View.OnClickListener getUpdateListener(){
-        View.OnClickListener oclBtnUpdate = new View.OnClickListener() {
+        View.OnClickListener listener = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 try {
@@ -40,7 +43,26 @@ public class OCListener {
                 }
             }
         };
-        return oclBtnUpdate;
+        return listener;
+    }
+
+    public static View.OnClickListener getOpenPlanListener(){
+        View.OnClickListener listener = new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                try {
+                    Plan plan = (Plan) v.getTag();
+                    Intent nextScreen = new Intent(v.getContext(), EditPlanActivity.class);
+                    nextScreen.putExtra("plan", plan.getId());
+                    v.getContext().startActivity(nextScreen);
+                }catch(Exception e){
+                    Intent nextScreen = new Intent(v.getContext(), EditPlanActivity.class);
+                    v.getContext().startActivity(nextScreen);
+                    Log.d(LOG_TAG,"Error in getNewPlanListener " + e );
+                }
+            }
+        };
+        return listener;
     }
 
     public static View.OnClickListener getNewPlanListener(){
@@ -59,8 +81,46 @@ public class OCListener {
         return oclGtoNewPlan;
     }
 
+
+    public static View.OnClickListener getOpenPlanDayListener(){
+        View.OnClickListener listener = new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                try {
+                    PlanDay planDay = (PlanDay) v.getTag();
+                    Intent nextScreen = new Intent(v.getContext(), EditPlanDayActivity.class);
+                    nextScreen.putExtra("planDay", planDay.getId());
+                    v.getContext().startActivity(nextScreen);
+                }catch(Exception e){
+
+                    Log.d(LOG_TAG,"Error in getNewPlanListener " + e );
+                }
+            }
+        };
+        return listener;
+    }
+
+    public static View.OnClickListener getNewPlanDayListener(){
+        View.OnClickListener listener = new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                try {
+                    Plan plan = (Plan) v.getTag();
+                    Intent nextScreen = new Intent(v.getContext(), EditPlanDayActivity.class);
+                    nextScreen.putExtra("plan",plan.getId());
+                    v.getContext().startActivity(nextScreen);
+                }catch(Exception e){
+
+                    Log.d(LOG_TAG,"Error in getNewPlanListener " + e );
+                }
+            }
+        };
+        return listener;
+    }
+
+
     public static View.OnClickListener getPlanListListener(){
-        View.OnClickListener oclGtoPlanList = new View.OnClickListener(){
+        View.OnClickListener listener = new View.OnClickListener(){
             @Override
             public void onClick(View v){
                 try {
@@ -72,11 +132,11 @@ public class OCListener {
                 }
             }
         };
-        return oclGtoPlanList;
+        return listener;
     }
 
     public static View.OnClickListener getPlanDayListener(){
-        View.OnClickListener oclBtnNewPlanDay = new View.OnClickListener(){
+        View.OnClickListener listener = new View.OnClickListener(){
             @Override
             public void onClick(View v){
                 try {
@@ -90,7 +150,7 @@ public class OCListener {
                 }
             }
         };
-        return oclBtnNewPlanDay;
+        return listener;
     }
 
 }
