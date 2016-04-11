@@ -36,7 +36,7 @@ public class UpdateCheck extends AsyncTask<String, Void, JSONArray> {
             Log.d(LOG_TAG, "Error in Update Prozess" + e);
             exception = e;
         }
-        finally {
+        if(urlConnection != null) {
             urlConnection.disconnect();
         }
         return json;
