@@ -18,4 +18,5 @@
     <string name="updateUrl">http://mirko-eberlein.de/fitnessplan.json</string>
     <string name="saveMessage">speichern erfolgreich</string>
     <string name="title_activity_stats">StatsActivity</string>
+    <string name="stats">Statistik</string>
 </resources>
