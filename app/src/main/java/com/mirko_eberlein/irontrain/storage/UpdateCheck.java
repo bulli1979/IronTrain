@@ -24,6 +24,7 @@ public class UpdateCheck extends AsyncTask<String, Void, JSONArray> {
     private Exception exception;
 
     private final String updatePath ="http://mirko-eberlein.de/fitnessplan.json"; // R.string.updateUrl; //
+
     public JSONArray doInBackground(String[] params){
         HttpURLConnection urlConnection = null;
         JSONArray json = null;
