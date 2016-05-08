@@ -46,22 +46,25 @@ public class DAOPlanDayExercice {
     }
 
 
-    public static void saveOrUpdatePlanDayExercice (PlanDayExercice planDayExercice,Context context){
+    public static void updatePlanDayExercice (PlanDayExercice planDayExercice,Context context){
         try {
             database = DBHelper.getInstance(context).getWritableDatabase();
-            if (planDayExercice.getId() != null) {
-                String whereClauses = DBHelper.COLUMN_ID + "='" + planDayExercice.getId()+"'";
-                database.update(DBHelper.TABLE_PLAN, getDBValues(planDayExercice), whereClauses, null);
-            } else {
-                planDayExercice.setId(UUID.randomUUID().toString());
-                ContentValues cv = getDBValues(planDayExercice);
-                database.insert(DBHelper.TABLE_PLAN, null, cv);
-            }
+            String whereClauses = DBHelper.COLUMN_ID + "='" + planDayExercice.getId()+"'";
+            database.update(DBHelper.TABLE_PLAN, getDBValues(planDayExercice), whereClauses, null);
             database.close();
         }catch(Exception e){
             Log.d(LOG_TAG,"Fehler in saveOrUpdatePlan " + e.getMessage());
         }
     }
+
+    public static void newPlanDayExercice(PlanDayExercice planDayExercice,Context context){
+        database = DBHelper.getInstance(context).getWritableDatabase();
+        ContentValues cv = getDBValues(planDayExercice);
+        database.insert(DBHelper.TABLE_PLAN, null, cv);
+        database.close();
+    }
+
+
 
 
 

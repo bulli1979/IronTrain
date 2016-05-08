@@ -8,16 +8,17 @@ public class PlanDayExercice {
     private String planDay;
     private String exercice;
     private int setCount;
-
+    private int repeat;
     private PlanDayExercice(Builder builder){
         this.id = builder.id;
         this.planDay = builder.planDay;
         this.exercice = builder.exercice;
         this.setCount = builder.setCount;
+        this.repeat = builder.repeat;
     }
 
     public static class Builder{
-        private int setCount;
+        private int setCount,repeat;
         private String id,planDay,exercice;
 
         public Builder(){}
@@ -36,6 +37,10 @@ public class PlanDayExercice {
         }
         public Builder setCount(int setCount){
             this.setCount = setCount;
+            return this;
+        }
+        public Builder setRepeatr(int repeat){
+            this.repeat = repeat;
             return this;
         }
         public PlanDayExercice build(){
@@ -73,5 +78,13 @@ public class PlanDayExercice {
 
     public void setSetCount(int setCount) {
         this.setCount = setCount;
+    }
+
+    public int getRepeat() {
+        return repeat;
+    }
+
+    public void setRepeat(int repeat) {
+        this.repeat = repeat;
     }
 }

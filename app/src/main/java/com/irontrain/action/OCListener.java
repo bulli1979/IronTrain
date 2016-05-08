@@ -5,7 +5,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 
-import com.irontrain.EditExerciceActivity;
+import com.irontrain.EditPlanDayExerciceActivity;
 import com.irontrain.EditPlanActivity;
 import com.irontrain.EditPlanDayActivity;
 import com.irontrain.R;
@@ -161,7 +161,7 @@ public class OCListener {
             public void onClick(View v){
                 try {
                     PlanDay planDay = (PlanDay) v.getTag();
-                    Intent nextScreen = new Intent(v.getContext(), EditExerciceActivity.class);
+                    Intent nextScreen = new Intent(v.getContext(), EditPlanDayExerciceActivity.class);
                     nextScreen.putExtra("planDay", planDay.getId());
                     v.getContext().startActivity(nextScreen);
                 }catch(Exception e){
