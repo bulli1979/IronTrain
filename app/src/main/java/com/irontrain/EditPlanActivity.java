@@ -19,6 +19,7 @@ import com.irontrain.adapter.PlanDayAdapter;
 import com.irontrain.business.Plan;
 import com.irontrain.business.PlanDay;
 import com.irontrain.storage.daos.DAOPlan;
+import com.irontrain.tools.Tools;
 
 import java.util.Date;
 import java.util.List;
@@ -122,12 +123,8 @@ public class EditPlanActivity extends AppCompatActivity {
                 }else{
                     DAOPlan.updatePlan(plan,v.getContext());
                 }
-
-
                 Log.d(LOG_TAG,"Plan gespeichert");
-                Toast toast = Toast.makeText(getApplicationContext(),getResources().getString(R.string.saveMessage),Toast.LENGTH_LONG);
-                toast.setGravity(Gravity.BOTTOM, 0, 10);
-                toast.show();
+                Tools.showToast(getApplicationContext(),getResources().getString(R.string.saveMessage));
             } catch (Exception e) {
                 Log.d(LOG_TAG, "Error in onSaveListener " + e);
             }

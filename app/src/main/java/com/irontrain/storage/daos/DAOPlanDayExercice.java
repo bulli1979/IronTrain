@@ -65,11 +65,11 @@ public class DAOPlanDayExercice {
 
 
 
-    private static PlanDayExercice cursorToPlanDayExercice(Cursor planDayCursorc){
-        String id = planDayCursorc.getString(planDayCursorc.getColumnIndex(DBHelper.COLUMN_ID));
-        int setCount = planDayCursorc.getInt(planDayCursorc.getColumnIndex(DBHelper.COLUMN_SETCOUNT));
-        String exercice = planDayCursorc.getString(planDayCursorc.getColumnIndex(DBHelper.COLUMN_EXERCICE));
-        String planDay = planDayCursorc.getString(planDayCursorc.getColumnIndex(DBHelper.COLUMN_PLANDAY));
+    private static PlanDayExercice cursorToPlanDayExercice(Cursor planDayCursor){
+        String id = planDayCursor.getString(planDayCursor.getColumnIndex(DBHelper.COLUMN_ID));
+        int setCount = planDayCursor.getInt(planDayCursor.getColumnIndex(DBHelper.COLUMN_SETCOUNT));
+        String exercice = planDayCursor.getString(planDayCursor.getColumnIndex(DBHelper.COLUMN_EXERCICE));
+        String planDay = planDayCursor.getString(planDayCursor.getColumnIndex(DBHelper.COLUMN_PLANDAY));
 
         return new PlanDayExercice.Builder().id(id).planDay(planDay).exercice(exercice).setCount(setCount).build();
     }

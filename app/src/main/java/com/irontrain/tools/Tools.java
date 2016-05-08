@@ -1,6 +1,11 @@
 package com.irontrain.tools;
 
+import android.content.Context;
 import android.util.Log;
+import android.view.Gravity;
+import android.widget.Toast;
+
+import com.irontrain.R;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -24,6 +29,10 @@ public class Tools {
         return formater.format(d);
     }
 
-
+    public static void showToast(Context context, String message){
+        Toast toast = Toast.makeText(context,message,Toast.LENGTH_LONG);
+        toast.setGravity(Gravity.BOTTOM, 0, 10);
+        toast.show();
+    }
 
 }

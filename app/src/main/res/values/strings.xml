@@ -19,4 +19,7 @@
     <string name="saveMessage">speichern erfolgreich</string>
     <string name="title_activity_stats">StatsActivity</string>
     <string name="stats">Statistik</string>
+    <string name="updateMessages">Übungen wurden importiert</string>
+    <string name="countSet">Sätze</string>
+    <string name="countWHD">Wiederholungen</string>
 </resources>

@@ -1,12 +1,11 @@
 package com.irontrain.storage;
 
-import android.content.ContentValues;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
+import android.content.Context;
 import android.util.Log;
 import android.view.View;
 
 import com.irontrain.business.Exercice;
+import com.irontrain.storage.daos.DAOExercice;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -17,44 +16,42 @@ import java.util.UUID;
 
 /**
  * Created by Ebi on 16.02.2016.
+ * Class handle Importet Json and update all Exercices who dosend exist
+ *
  */
 public class DBUpdateProcess {
-    private List<Exercice> existingList;
     private List<Integer> ids;
     private static final String LOG_TAG = DBUpdateProcess.class.getSimpleName();
-    private SQLiteDatabase database;
 
-
-    public void updateExercices(JSONArray arr,View v){
-        database = DBHelper.getInstance(v.getContext()).getWritableDatabase();
-        String[] searchColumns = new String[]{"importnumber"};
-        Cursor exercices = database.query("Exercice", searchColumns, null, null, null, null, null);
-        importExercices(exercices, arr);
-        exercices = database.query("Exercice",searchColumns,null,null,null,null,null);
+    public int updateExercices(JSONArray arr,View v){
+        Context context = v.getContext();
+        List<Exercice> exercices = DAOExercice.getAllExercices(context);
+        return importExercices(exercices, arr,context);
     }
-    private void importExercices(Cursor exercices,JSONArray arr) {
+    private int importExercices(List<Exercice> exercices,JSONArray jsonArray,Context context) {
+        int count = 0;
         try {
 
             ids = new ArrayList<>();
-            int count = 1;
-            while (exercices.moveToNext()) {
-                ids.add(exercices.getInt(0));
+            for (Exercice e : exercices) {
+                if(e.getImportnumber() >0) {
+                    ids.add(e.getImportnumber());
+                }
             }
 
-            for (int i = 0; i < arr.length(); i++) {
-                JSONObject obj = arr.getJSONObject(i);
+            for (int i = 0; i < jsonArray.length(); i++) {
+                JSONObject obj = jsonArray.getJSONObject(i);
                 if(!ids.contains(obj.getInt("importnumber"))) {
-                    ContentValues values = new ContentValues();
-                    values.put("id", UUID.randomUUID().toString());
-                    values.put("name", (String) obj.getJSONArray("name").getString(0));
-                    values.put("description", obj.getJSONArray("description").getString(0));
-                    values.put("importnumber",obj.getInt("importnumber"));
-                    database.insert("Exercice", null, values);
+
+                    Exercice exercice = new Exercice.Builder().id(UUID.randomUUID().toString()).name((String) obj.getJSONArray("name").getString(0))
+                            .description( obj.getJSONArray("description").getString(0)).importNumber(obj.getInt("importnumber")).build();
+                    DAOExercice.createExercice(exercice,context);
+                    count++;
                 }
             }
         }catch(Exception e){
             Log.d(LOG_TAG,"Error in importExercices " + e);
         }
-
+        return count;
     }
 }

@@ -8,6 +8,8 @@ public class Exercice {
     private String description;
     private String language;
     private int importnumber;
+
+    public Exercice(){}
     private Exercice(Builder builder){
         this.id = builder.id;
         this.name = builder.name;

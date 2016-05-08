@@ -5,8 +5,11 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 import com.irontrain.business.Exercice;
+import com.irontrain.business.Plan;
 import com.irontrain.storage.DBHelper;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 /**
@@ -21,23 +24,17 @@ public class DAOExercice {
         database = DBHelper.getInstance(context).getWritableDatabase();
         Cursor exerciceCursor = database.query(DBHelper.TABLE_EXERCICE, null,DBHelper.COLUMN_ID+"='"+id+"'", null, null, null, null);
         exerciceCursor.moveToFirst();
-        Exercice exercice = cursorToPlanDay(exerciceCursor);
+        Exercice exercice = cursorToExercice(exerciceCursor);
         exerciceCursor.close();
         database.close();
         return exercice;
     }
 
-    public static void saveOrUpdateExercice (Exercice exercice,Context context){
+    public static void updateExercice (Exercice exercice,Context context){
         try {
             database = DBHelper.getInstance(context).getWritableDatabase();
-            if (exercice.getId() != null) {
-                String whereClauses = DBHelper.COLUMN_ID + "='" + exercice.getId()+"'";
-                database.update(DBHelper.TABLE_EXERCICE, getDBValues(exercice), whereClauses, null);
-            } else {
-                exercice.setId(UUID.randomUUID().toString());
-                ContentValues cv = getDBValues(exercice);
-                database.insert(DBHelper.TABLE_EXERCICE, null, cv);
-            }
+            String whereClauses = DBHelper.COLUMN_ID + "='" + exercice.getId()+"'";
+            database.update(DBHelper.TABLE_EXERCICE, getDBValues(exercice), whereClauses, null);
             database.close();
         }catch(Exception e){
             Log.d(LOG_TAG,"Fehler in saveOrUpdateExercice " + e.getMessage());
@@ -45,8 +42,31 @@ public class DAOExercice {
     }
 
 
+    public static void createExercice (Exercice exercice,Context context){
+        try {
+            database = DBHelper.getInstance(context).getWritableDatabase();
+            ContentValues cv = getDBValues(exercice);
+            database.insert(DBHelper.TABLE_EXERCICE, null, cv);
+            database.close();
+        }catch(Exception e){
+            Log.d(LOG_TAG,"Fehler in saveOrUpdateExercice " + e.getMessage());
+        }
+    }
 
-    private static Exercice cursorToPlanDay(Cursor exerciceCursor){
+
+    public static List<Exercice> getAllExercices(Context context){
+        database = DBHelper.getInstance(context).getWritableDatabase();
+        Cursor exercicec = database.query(DBHelper.TABLE_EXERCICE, null,null, null, null, null, null);
+        List<Exercice> exerciceList = new ArrayList<Exercice>();
+        while (exercicec.moveToNext()) {
+            exerciceList.add(cursorToExercice(exercicec));
+        }
+        exercicec.close();
+        database.close();
+        return exerciceList;
+    }
+
+    private static Exercice cursorToExercice(Cursor exerciceCursor){
         String id = exerciceCursor.getString(exerciceCursor.getColumnIndex(DBHelper.COLUMN_ID));
         String name = exerciceCursor.getString(exerciceCursor.getColumnIndex(DBHelper.COLUMN_NAME));
         String description = exerciceCursor.getString(exerciceCursor.getColumnIndex(DBHelper.COLUMN_DESCRIPTION));

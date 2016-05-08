@@ -4,14 +4,13 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
-
+import com.irontrain.action.OCListener;
 import com.irontrain.storage.daos.DAOPlanDay;
 import com.irontrain.business.PlanDay;
+import com.irontrain.tools.Tools;
 
 import java.util.UUID;
 
@@ -32,10 +31,13 @@ public class EditPlanDayActivity extends AppCompatActivity {
             planDay = new PlanDay.Builder().plan(i.getExtras().getString("plan")).build();
         }else{
             String id = i.getExtras().getString("planDay");
+
             planDay = DAOPlanDay.getPlanDayById(getApplicationContext(),id);
         }
         Button saveButton = (Button)findViewById(R.id.savePlanDay);
-
+        Button addExerciceButton = (Button) findViewById(R.id.addExercice);
+        addExerciceButton.setTag(planDay);
+        addExerciceButton.setOnClickListener(OCListener.getNewExerciceListener());
         name = (EditText) findViewById(R.id.planDayName);
         description = (EditText) findViewById(R.id.planDayDescription);
         if(planDay.getId()!=null){
@@ -70,9 +72,7 @@ public class EditPlanDayActivity extends AppCompatActivity {
             }
             Log.d(LOG_TAG,"PlanDay gespeichert");
             if(showMessage) {
-                Toast toast = Toast.makeText(getApplicationContext(), getResources().getString(R.string.saveMessage), Toast.LENGTH_LONG);
-                toast.setGravity(Gravity.BOTTOM, 0, 10);
-                toast.show();
+                Tools.showToast(getApplicationContext(),getString(R.string.saveMessage));
             }
         } catch (Exception e) {
             Log.d(LOG_TAG, "Error in savePlanDay " + e);

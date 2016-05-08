@@ -5,7 +5,7 @@
     <color name="colorAccent">#FF4081</color>
     <color name="colorSoftGrey">#CCCCCC</color>
     <color name="colorWhite">#FFFFFF</color>
-    <color name="cellback">#1240AB</color>
+    <color name="cellback">#3F51B5</color>
     <color name="cellbackpress">#06266F</color>
     <color name="darkGrey">#333333</color>
 </resources>

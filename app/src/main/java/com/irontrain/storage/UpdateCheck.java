@@ -15,13 +15,15 @@ import java.net.URL;
 
 /**
  * Created by Ebi on 16.02.2016.
+ * holt Daten in json Format von externen Server
  */
 public class UpdateCheck extends AsyncTask<String, Void, JSONArray> {
 
     private static final String LOG_TAG = UpdateCheck.class.getSimpleName();
     private Exception exception;
-
     private final String updatePath ="http://mirko-eberlein.de/fitnessplan.json"; // R.string.updateUrl; //
+
+    @Override
     public JSONArray doInBackground(String[] params){
         HttpURLConnection urlConnection = null;
         JSONArray json = null;

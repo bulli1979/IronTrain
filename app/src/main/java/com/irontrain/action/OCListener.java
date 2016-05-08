@@ -1,23 +1,24 @@
 package com.irontrain.action;
-
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 
+import com.irontrain.EditExerciceActivity;
 import com.irontrain.EditPlanActivity;
 import com.irontrain.EditPlanDayActivity;
+import com.irontrain.R;
 import com.irontrain.business.Plan;
 import com.irontrain.business.PlanDay;
 import com.irontrain.storage.DBUpdateProcess;
 import com.irontrain.PlanListActivity;
 import com.irontrain.storage.UpdateCheck;
+import com.irontrain.tools.Tools;
 
 import org.json.JSONArray;
 
 import java.util.List;
-
 /**
  * Created by Ebi on 16.02.2016.
  */
@@ -39,8 +40,8 @@ public class OCListener {
                     AsyncTask asyncTask = new UpdateCheck().execute("");
                     JSONArray arr = (JSONArray) asyncTask.get();
                     DBUpdateProcess updater = new DBUpdateProcess();
-                    updater.updateExercices(arr,v);
-
+                    int count = updater.updateExercices(arr,v);
+                    Tools.showToast(v.getContext(),count + " " + v.getContext().getResources().getString(R.string.updateMessages));
                 }catch(Exception e){
                     Log.d(LOG_TAG,"Error in getUpdateListener " + e );
                 }
@@ -68,7 +69,6 @@ public class OCListener {
         return listener;
     }
 
-
     public static View.OnClickListener getNewPlanListener(){
         View.OnClickListener oclGtoNewPlan = new View.OnClickListener(){
             @Override
@@ -84,7 +84,6 @@ public class OCListener {
         };
         return oclGtoNewPlan;
     }
-
 
     public static  AdapterView.OnItemClickListener getOpenPlanDayListener(){
         AdapterView.OnItemClickListener listener = new  AdapterView.OnItemClickListener(){
@@ -104,6 +103,23 @@ public class OCListener {
         return listener;
     }
 
+    public static View.OnClickListener getOpenPlanDayDirectListener(){
+                View.OnClickListener goToPlanDay =  new View.OnClickListener(){
+                    @Override
+                    public void onClick(View v){
+                try {
+                    String planDay = (String) v.getTag();
+                    Log.d(LOG_TAG,"im listener " + planDay);
+                    Intent nextScreen = new Intent(v.getContext(), EditPlanDayActivity.class);
+                    nextScreen.putExtra("planDay", planDay);
+                    v.getContext().startActivity(nextScreen);
+                }catch(Exception e){
+                    Log.d(LOG_TAG,"Error in getNewPlanListener " + e );
+                }
+            }
+        };
+        return goToPlanDay;
+    }
 
     public static View.OnClickListener getNewPlanDayListener(){
         View.OnClickListener listener = new View.OnClickListener(){
@@ -123,7 +139,6 @@ public class OCListener {
         return listener;
     }
 
-
     public static View.OnClickListener getPlanListListener(){
         View.OnClickListener listener = new View.OnClickListener(){
             @Override
@@ -134,6 +149,23 @@ public class OCListener {
                 }catch(Exception e){
 
                     Log.d(LOG_TAG,"Error in oclGtoPlanList " + e );
+                }
+            }
+        };
+        return listener;
+    }
+
+    public static View.OnClickListener getNewExerciceListener(){
+        View.OnClickListener listener = new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                try {
+                    PlanDay planDay = (PlanDay) v.getTag();
+                    Intent nextScreen = new Intent(v.getContext(), EditExerciceActivity.class);
+                    nextScreen.putExtra("planDay", planDay.getId());
+                    v.getContext().startActivity(nextScreen);
+                }catch(Exception e){
+                    Log.d(LOG_TAG,"Error in getNewPlanListener " + e );
                 }
             }
         };
