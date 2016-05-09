@@ -8,4 +8,10 @@
     <color name="cellback">#3F51B5</color>
     <color name="cellbackpress">#06266F</color>
     <color name="darkGrey">#333333</color>
+    <color name="listPressStart">#fb9d23</color>
+    <color name="listPressEnd">#ffc579</color>
+    <color name="listFocusStart">#f5c98c</color>
+    <color name="listFocusEnd">#f7ddb8</color>
+    <color name="listBackground">#fb9d23</color>
+    <color name="black">#000000</color>
 </resources>

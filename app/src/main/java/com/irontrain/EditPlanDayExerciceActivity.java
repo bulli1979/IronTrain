@@ -42,8 +42,6 @@ public class EditPlanDayExerciceActivity extends AppCompatActivity {
         planDay = exercice.getPlanDay();
         setContentView(R.layout.activity_edit_exercice);
 
-
-
         List<Exercice> exerciceList = DAOExercice.getAllExercices(getApplicationContext());
         Log.d(LOG_TAG,"List exlist " + exerciceList.size());
         initExerciceAutoComplete(exerciceList);
@@ -52,7 +50,6 @@ public class EditPlanDayExerciceActivity extends AppCompatActivity {
         Log.d(LOG_TAG,"planDayId " + planDay );
         cancelButton.setTag(planDay);
         cancelButton.setOnClickListener(OCListener.getOpenPlanDayDirectListener());
-
 
     }
 

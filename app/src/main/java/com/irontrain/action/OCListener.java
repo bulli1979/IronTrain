@@ -50,18 +50,17 @@ public class OCListener {
         return listener;
     }
 
-    public static View.OnClickListener getOpenPlanListener(){
-        View.OnClickListener listener = new View.OnClickListener(){
+    public static AdapterView.OnItemClickListener getOpenPlanListener(){
+        AdapterView.OnItemClickListener listener =  new  AdapterView.OnItemClickListener(){
             @Override
-            public void onClick(View v){
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id){
                 try {
-                    Plan plan = (Plan) v.getTag();
-                    Intent nextScreen = new Intent(v.getContext(), EditPlanActivity.class);
+                    List<Plan> planDayList = (List<Plan>)parent.getTag();
+                    Plan plan = planDayList.get(position);
+                    Intent nextScreen = new Intent(view.getContext(), EditPlanActivity.class);
                     nextScreen.putExtra("plan", plan.getId());
-                    v.getContext().startActivity(nextScreen);
+                    view.getContext().startActivity(nextScreen);
                 }catch(Exception e){
-                    Intent nextScreen = new Intent(v.getContext(), EditPlanActivity.class);
-                    v.getContext().startActivity(nextScreen);
                     Log.d(LOG_TAG,"Error in getNewPlanListener " + e );
                 }
             }
