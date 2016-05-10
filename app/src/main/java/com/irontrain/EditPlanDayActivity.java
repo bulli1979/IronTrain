@@ -4,14 +4,21 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.util.StringBuilderPrinter;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
+
 import com.irontrain.action.OCListener;
+import com.irontrain.adapter.PlanDayExerciceAdapter;
+import com.irontrain.business.PlanDayExercice;
 import com.irontrain.storage.daos.DAOPlanDay;
 import com.irontrain.business.PlanDay;
+import com.irontrain.storage.daos.DAOPlanDayExercice;
 import com.irontrain.tools.Tools;
 
+import java.util.List;
 import java.util.UUID;
 
 public class EditPlanDayActivity extends AppCompatActivity {
@@ -34,6 +41,11 @@ public class EditPlanDayActivity extends AppCompatActivity {
 
             planDay = DAOPlanDay.getPlanDayById(getApplicationContext(),id);
         }
+
+        Button cancelButton = (Button) findViewById(R.id.cancelPlanDay);
+        cancelButton.setTag(planDay.getPlan());
+        cancelButton.setOnClickListener(OCListener.getPlanListListener());
+
         Button saveButton = (Button)findViewById(R.id.savePlanDay);
         Button addExerciceButton = (Button) findViewById(R.id.addExercice);
         addExerciceButton.setTag(planDay);
@@ -46,8 +58,21 @@ public class EditPlanDayActivity extends AppCompatActivity {
         }
         saveButton.setTag(planDay);
         saveButton.setOnClickListener(onSaveListener);
+        if(null != planDay.getId()) {
+            List<PlanDayExercice> planDayExercices = DAOPlanDayExercice.getAllPlanDayExercicesByPlanDay(getApplicationContext(), planDay.getId());
+            initPlanDayExerciceList(planDayExercices);
+        }
+
     }
 
+    private void initPlanDayExerciceList(List<PlanDayExercice> planDayExerciceList){
+        PlanDayExerciceAdapter adapter = new PlanDayExerciceAdapter(this,
+                R.layout.custom_planday_list_item, planDayExerciceList);
+        ListView listView = (ListView)findViewById(R.id.planDayExercices);
+        listView.setAdapter(adapter);
+        listView.setTag(planDayExerciceList);
+        listView.setOnItemClickListener(OCListener.getOpenPlanDayExerciceListener());
+    }
 
     private View.OnClickListener onSaveListener = new View.OnClickListener() {
         @Override

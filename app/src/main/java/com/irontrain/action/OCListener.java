@@ -11,6 +11,7 @@ import com.irontrain.EditPlanDayActivity;
 import com.irontrain.R;
 import com.irontrain.business.Plan;
 import com.irontrain.business.PlanDay;
+import com.irontrain.business.PlanDayExercice;
 import com.irontrain.storage.DBUpdateProcess;
 import com.irontrain.PlanListActivity;
 import com.irontrain.storage.UpdateCheck;
@@ -21,6 +22,8 @@ import org.json.JSONArray;
 import java.util.List;
 /**
  * Created by Ebi on 16.02.2016.
+ * Klasse stellt alle OCL Listener bereit.
+ * Speichern wird in der jeweiligen Activity gehandelt.
  */
 public class OCListener {
     private static OCListener ourInstance = new OCListener();
@@ -67,6 +70,43 @@ public class OCListener {
         };
         return listener;
     }
+
+    public static AdapterView.OnItemClickListener getOpenPlanDayExerciceListener(){
+        AdapterView.OnItemClickListener listener =  new  AdapterView.OnItemClickListener(){
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id){
+                try {
+                    List<PlanDayExercice> planDayExerciceList = (List<PlanDayExercice>)parent.getTag();
+                    PlanDayExercice planDayExercice = planDayExerciceList.get(position);
+                    Intent nextScreen = new Intent(view.getContext(), EditPlanDayExerciceActivity.class);
+                    nextScreen.putExtra("planDayExercice", planDayExercice.getId());
+                    view.getContext().startActivity(nextScreen);
+                }catch(Exception e){
+                    Log.d(LOG_TAG,"Error in getNewPlanListener " + e );
+                }
+            }
+        };
+        return listener;
+    }
+
+    public static View.OnClickListener getOpenPlanDirectListener(){
+        View.OnClickListener listener = new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                try {
+                    String plan = (String) v.getTag();
+                    Intent nextScreen = new Intent(v.getContext(), EditPlanActivity.class);
+                    nextScreen.putExtra("plan",plan);
+                    v.getContext().startActivity(nextScreen);
+                }catch(Exception e){
+
+                    Log.d(LOG_TAG,"Error in getNewPlanListener " + e );
+                }
+            }
+        };
+        return listener;
+    }
+
 
     public static View.OnClickListener getNewPlanListener(){
         View.OnClickListener oclGtoNewPlan = new View.OnClickListener(){

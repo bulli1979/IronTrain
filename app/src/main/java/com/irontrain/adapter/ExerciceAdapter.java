@@ -5,19 +5,25 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.TextView;
 
 import com.irontrain.R;
 import com.irontrain.business.Exercice;
-import com.irontrain.business.PlanDay;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by Ebi on 24.04.2016.
  */
 
-public class ExerciceAdapter extends ArrayAdapter<Exercice> {
+public class ExerciceAdapter extends ArrayAdapter<Exercice> implements Filterable{
+    private List<Exercice> items;
+    private List<Exercice> allItems;
+    private List<Exercice> suggestItems;
+    private int viewResourceId;
 
     private static class ViewHolder {
         private TextView itemView;
@@ -25,8 +31,26 @@ public class ExerciceAdapter extends ArrayAdapter<Exercice> {
 
     public ExerciceAdapter(Context context, int textViewResourceId, List<Exercice> items) {
         super(context, textViewResourceId, items);
+        this.items = items;
+        this.allItems = (List<Exercice>)getListClone();
+        this.suggestItems = new ArrayList<Exercice>();
+        this.viewResourceId = textViewResourceId;
     }
 
+    public List<Exercice> getListClone(){
+        List<Exercice> allList = new ArrayList<Exercice>();
+        for(Exercice e: items){
+            allList.add(e);
+        }
+        return  allList;
+    }
+
+    @Override
+    public int getCount(){
+        return items.size();
+    }
+
+    @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         ViewHolder viewHolder;
         if (convertView == null) {
@@ -50,4 +74,47 @@ public class ExerciceAdapter extends ArrayAdapter<Exercice> {
 
         return convertView;
     }
+
+    @Override
+    public Filter getFilter() {
+        return nameFilter;
+    }
+
+    Filter nameFilter = new Filter() {
+        @Override
+        public String convertResultToString(Object resultValue) {
+            String str = ((Exercice)(resultValue)).getName();
+            return str;
+        }
+        @Override
+        protected FilterResults performFiltering(CharSequence constraint) {
+            if(constraint != null) {
+                suggestItems.clear();
+                for (Exercice exercice : allItems) {
+                    if(exercice.getName().toLowerCase().startsWith(constraint.toString().toLowerCase())){
+                        suggestItems.add(exercice);
+                    }
+                }
+                FilterResults filterResults = new FilterResults();
+                filterResults.values = suggestItems;
+                filterResults.count = suggestItems.size();
+                return filterResults;
+            } else {
+                return new FilterResults();
+            }
+        }
+        @Override
+        protected void publishResults(CharSequence constraint, FilterResults results) {
+            ArrayList<Exercice> filteredList = (ArrayList<Exercice>) results.values;
+            if(results != null && results.count > 0) {
+                clear();
+                for (Exercice e : filteredList) {
+                    add(e);
+                }
+                notifyDataSetChanged();
+            }
+        }
+    };
+
+
 }

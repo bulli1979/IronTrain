@@ -112,7 +112,6 @@ public class EditPlanActivity extends AppCompatActivity {
         public void onClick(final View v) {
             try {
                 Plan plan = (Plan) v.getTag();
-                Log.d(LOG_TAG, "Planname: "+ name.getText().toString());
                 Log.d(LOG_TAG, "Planbeschreibung: "+name.getEditableText().toString());
                 plan.setName(name.getEditableText().toString());
                 plan.setDescription(description.getText().toString());

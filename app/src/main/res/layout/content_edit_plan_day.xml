@@ -43,7 +43,7 @@
     <Button android:id="@+id/savePlanDay"
         android:text="@string/save"
         style="@style/buttonStyle"/>
-    <Button android:id="@+id/cancel"
+    <Button android:id="@+id/cancelPlanDay"
         android:text="@string/cancel"
         style="@style/buttonStyle"  />
     </LinearLayout>
@@ -55,7 +55,7 @@
         style="@style/buttonStyle"
         android:text="@string/addExercice"/>
     </LinearLayout>
-    <ListView android:id="@+id/trainingExercice"
+    <ListView android:id="@+id/planDayExercices"
         android:listSelector="@drawable/list_selector"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

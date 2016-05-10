@@ -9,7 +9,8 @@
         <Button android:id="@+id/createPlan"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/createPlan"/>
+            android:text="@string/createPlan"
+            style="@style/buttonStyle"/>
     </LinearLayout>
 
     <LinearLayout
