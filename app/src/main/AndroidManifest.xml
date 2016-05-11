@@ -36,8 +36,9 @@
             android:theme="@style/AppTheme" />
         <activity
             android:name=".StatsActivity"
-            android:theme="@style/AppTheme"></activity>
-        <activity android:name=".EditPlanDayExerciceActivity"></activity>
+            android:theme="@style/AppTheme" />
+        <activity android:name=".EditPlanDayExerciceActivity" />
+        <activity android:name=".TrainActivity"></activity>
     </application>
 
 </manifest>

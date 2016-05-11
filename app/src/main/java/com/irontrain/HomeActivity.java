@@ -13,6 +13,7 @@ import com.irontrain.storage.DBHelper;
 public class HomeActivity extends AppCompatActivity {
     private Button updateButton;
     private Button planListButton;
+    private Button trainButton;
     private static final String LOG_TAG = HomeActivity.class.getSimpleName();
     private DBHelper helper;
     @Override
@@ -27,9 +28,10 @@ public class HomeActivity extends AppCompatActivity {
     public void initialize(){
         updateButton = (Button) findViewById(R.id.updateButton);
         planListButton = (Button) findViewById(R.id.planListButton);
-        Log.d(LOG_TAG,"APP initialized");
+        trainButton = (Button) findViewById(R.id.trainButton);
         updateButton.setOnClickListener(OCListener.getUpdateListener());
         planListButton.setOnClickListener(OCListener.getPlanListListener());
+        trainButton.setOnClickListener(OCListener.openTrainListener());
     }
 
 

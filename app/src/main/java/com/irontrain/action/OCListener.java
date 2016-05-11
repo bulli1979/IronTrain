@@ -9,6 +9,7 @@ import com.irontrain.EditPlanDayExerciceActivity;
 import com.irontrain.EditPlanActivity;
 import com.irontrain.EditPlanDayActivity;
 import com.irontrain.R;
+import com.irontrain.TrainActivity;
 import com.irontrain.business.Plan;
 import com.irontrain.business.PlanDay;
 import com.irontrain.business.PlanDayExercice;
@@ -148,7 +149,6 @@ public class OCListener {
                     public void onClick(View v){
                 try {
                     String planDay = (String) v.getTag();
-                    Log.d(LOG_TAG,"im listener " + planDay);
                     Intent nextScreen = new Intent(v.getContext(), EditPlanDayActivity.class);
                     nextScreen.putExtra("planDay", planDay);
                     v.getContext().startActivity(nextScreen);
@@ -210,4 +210,16 @@ public class OCListener {
         };
         return listener;
     }
+
+    public static View.OnClickListener openTrainListener(){
+        View.OnClickListener listener = new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent nextScreen = new Intent(view.getContext(), TrainActivity.class);
+                view.getContext().startActivity(nextScreen);
+            }
+        };
+        return listener;
+    }
+
 }
