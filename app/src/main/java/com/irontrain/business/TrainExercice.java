@@ -1,5 +1,7 @@
 package com.irontrain.business;
 
+import java.util.List;
+
 /**
  * Created by Farbricio on 07.04.2016.
  */
@@ -7,6 +9,7 @@ public class TrainExercice {
     private String id;
     private String planDayExercice;
     private String train;
+    private List<TrainSet> trainSetList;
 
     private TrainExercice(Builder builder){
         this.id = builder.id;
@@ -55,5 +58,13 @@ public class TrainExercice {
 
     public void setTrain(String train) {
         this.train = train;
+    }
+
+    public List<TrainSet> getTrainSetList() {
+        return trainSetList;
+    }
+
+    public void setTrainSetList(List<TrainSet> trainSetList) {
+        this.trainSetList = trainSetList;
     }
 }

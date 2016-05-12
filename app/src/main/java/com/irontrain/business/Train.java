@@ -1,6 +1,7 @@
 package com.irontrain.business;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by Ebi on 07.04.2016.
@@ -9,6 +10,7 @@ public class Train {
     private String id;
     private String planDay;
     private Date date;
+    private List<TrainExercice> trainExerciceList;
 
     private Train(Builder builder){
         this.id = builder.id;
@@ -59,5 +61,13 @@ public class Train {
 
     public void setDate(Date date) {
         this.date = date;
+    }
+
+    public List<TrainExercice> getTrainExerciceList() {
+        return trainExerciceList;
+    }
+
+    public void setTrainExerciceList(List<TrainExercice> trainExerciceList) {
+        this.trainExerciceList = trainExerciceList;
     }
 }

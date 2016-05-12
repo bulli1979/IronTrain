@@ -3,6 +3,11 @@
     package="com.irontrain">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+
+    <meta-data
+        android:name="com.google.maps.v2.API_KEY"
+        android:value="gkey" />
 
     <application
         android:allowBackup="true"
@@ -38,7 +43,11 @@
             android:name=".StatsActivity"
             android:theme="@style/AppTheme" />
         <activity android:name=".EditPlanDayExerciceActivity" />
-        <activity android:name=".TrainActivity"></activity>
+        <activity android:name=".TrainActivity" />
+        <activity
+            android:name=".DoTrainActivity"
+            android:label="@string/title_activity_do_train"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

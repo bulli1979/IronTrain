@@ -1,7 +1,15 @@
 package com.irontrain;
 
+import android.Manifest;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
+import android.provider.Settings;
+import android.support.v4.content.ContextCompat;
+import android.support.v4.content.PermissionChecker;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -26,7 +34,8 @@ public class TrainActivity extends AppCompatActivity {
     private List<Plan> planList;
     private List<PlanDay> planDayList;
     private static final String LOG_TAG = TrainActivity.class.getSimpleName();
-
+    private LocationListener locationListener;
+    LocationManager lm;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,7 +52,35 @@ public class TrainActivity extends AppCompatActivity {
         }
         Button startTrain = (Button)findViewById(R.id.startTrain);
         startTrain.setOnClickListener(starTrainListener);
+        lm = (LocationManager) getSystemService(getApplicationContext().LOCATION_SERVICE);
+
+        locationListener = new LocationListener() {
+            @Override
+            public void onLocationChanged(Location location) {
+                Log.d(LOG_TAG,"LogChanged " + location.getLatitude() + " : " + location.getLongitude());
+            }
+
+            @Override
+            public void onStatusChanged(String provider, int status, Bundle extras) {
+
+            }
+
+            @Override
+            public void onProviderEnabled(String provider) {
+
+            }
+
+            @Override
+            public void onProviderDisabled(String provider) {
+                Intent internt = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+                startActivity(internt);
+            }
+        };
+
+
     }
+
+
 
 
     private void initPlanSpinner(){
@@ -82,6 +119,16 @@ public class TrainActivity extends AppCompatActivity {
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         Log.d(LOG_TAG,"ja");
+                        int geo =  ContextCompat.checkSelfPermission(v.getContext(),Manifest.permission.ACCESS_FINE_LOCATION);
+                        if (geo == PermissionChecker.PERMISSION_GRANTED){
+                            lm.requestLocationUpdates(LocationManager.GPS_PROVIDER, 5000, 0, locationListener);
+                            Location loc = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+                            if(loc != null) {
+                                //TODO save here the last location
+                                Log.d(LOG_TAG, "Lat : " + loc.getLatitude() + " " + loc.getLongitude());
+                            }
+                        }
+
                         dialog.dismiss();
                     }
             });
@@ -96,7 +143,6 @@ public class TrainActivity extends AppCompatActivity {
             alertDialog.show();
         }
     };
-
 
 
 

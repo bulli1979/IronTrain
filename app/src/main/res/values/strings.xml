@@ -23,4 +23,5 @@
     <string name="countSet">Sätze</string>
     <string name="countWHD">Wiederholungen</string>
     <string name="startTrain">Training starten</string>
+    <string name="title_activity_do_train">DoTrainActivity</string>
 </resources>

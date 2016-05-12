@@ -9,6 +9,8 @@ import android.util.Log;
 import com.irontrain.business.TrainSet;
 import com.irontrain.storage.DBHelper;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 /**
@@ -23,7 +25,7 @@ public class DAOTrainSet {
         database = DBHelper.getInstance(context).getWritableDatabase();
         Cursor cursor = database.query(DBHelper.TABLE_TRAINSET, null,DBHelper.COLUMN_ID+"='"+id+"'", null, null, null, null);
         cursor.moveToFirst();
-        TrainSet trainSet = cursorToPlanDay(cursor);
+        TrainSet trainSet = cursorToTrainSet(cursor);
         cursor.close();
         database.close();
         return trainSet;
@@ -46,9 +48,18 @@ public class DAOTrainSet {
         }
     }
 
+    public static List<TrainSet> getTrainSetForTrainExercice(Context context, String trainExerciceId){
+        database = DBHelper.getInstance(context).getWritableDatabase();
+        String whereClauses = DBHelper.COLUMN_TRAINEXERCICE + "='" + trainExerciceId +"'";
+        Cursor trainSetCursor = database.query(DBHelper.TABLE_TRAINSET, null,whereClauses, null, null, null, null);
+        List<TrainSet> trainSetList = new ArrayList<TrainSet>();
+        while (trainSetCursor.moveToNext()) {
+            trainSetList.add(cursorToTrainSet(trainSetCursor));
+        }
+        return trainSetList;
+    }
 
-
-    private static TrainSet cursorToPlanDay(Cursor exerciceCursor){
+    private static TrainSet cursorToTrainSet(Cursor exerciceCursor){
         String id = exerciceCursor.getString(exerciceCursor.getColumnIndex(DBHelper.COLUMN_ID));
         float repeat = exerciceCursor.getFloat(exerciceCursor.getColumnIndex(DBHelper.COLUMN_REPEATS));
         float weight = exerciceCursor.getFloat(exerciceCursor.getColumnIndex(DBHelper.COLUMN_WEIGHT));

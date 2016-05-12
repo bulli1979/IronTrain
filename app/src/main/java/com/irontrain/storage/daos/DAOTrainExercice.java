@@ -7,6 +7,9 @@ import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 import com.irontrain.business.TrainExercice;
 import com.irontrain.storage.DBHelper;
+
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 /**
@@ -20,7 +23,7 @@ public class DAOTrainExercice {
         database = DBHelper.getInstance(context).getWritableDatabase();
         Cursor trainExerciceCursor = database.query(DBHelper.TABLE_TRAIN, null,DBHelper.COLUMN_ID+"='"+id+"'", null, null, null, null);
         trainExerciceCursor.moveToFirst();
-        TrainExercice trainExercice = cursorToPlanDay(trainExerciceCursor);
+        TrainExercice trainExercice = cursorToTrainExercice(trainExerciceCursor);
         trainExerciceCursor.close();
         database.close();
         return trainExercice;
@@ -31,11 +34,11 @@ public class DAOTrainExercice {
             database = DBHelper.getInstance(context).getWritableDatabase();
             if (trainExercice.getId() != null) {
                 String whereClauses = DBHelper.COLUMN_ID + "='" + trainExercice.getId()+"'";
-                database.update(DBHelper.TABLE_TRAIN, getDBValues(trainExercice), whereClauses, null);
+                database.update(DBHelper.TABLE_TRAINEXERCICE, getDBValues(trainExercice), whereClauses, null);
             } else {
                 trainExercice.setId(UUID.randomUUID().toString());
                 ContentValues cv = getDBValues(trainExercice);
-                database.insert(DBHelper.TABLE_TRAIN, null, cv);
+                database.insert(DBHelper.TABLE_TRAINEXERCICE, null, cv);
             }
             database.close();
         }catch(Exception e){
@@ -43,9 +46,20 @@ public class DAOTrainExercice {
         }
     }
 
+    public static List<TrainExercice> getTrainExercicesForTrain(Context context,String trainId){
+        database = DBHelper.getInstance(context).getWritableDatabase();
+        String whereClauses = DBHelper.COLUMN_TRAIN + "='" + trainId +"'";
+        Cursor trainExerciceCursor = database.query(DBHelper.TABLE_TRAINEXERCICE, null,whereClauses, null, null, null, null);
+        List<TrainExercice> trainExerciceList = new ArrayList<TrainExercice>();
+        while (trainExerciceCursor.moveToNext()) {
+            trainExerciceList.add(cursorToTrainExercice(trainExerciceCursor));
+        }
+        return trainExerciceList;
+    }
 
 
-    private static TrainExercice cursorToPlanDay(Cursor trainExerciceCursor){
+
+    private static TrainExercice cursorToTrainExercice(Cursor trainExerciceCursor){
         String id = trainExerciceCursor.getString(trainExerciceCursor.getColumnIndex(DBHelper.COLUMN_ID));
         String planDayExercice = trainExerciceCursor.getString(trainExerciceCursor.getColumnIndex(DBHelper.COLUMN_PLANDAYEXERCICE));
         String train = trainExerciceCursor.getString(trainExerciceCursor.getColumnIndex(DBHelper.COLUMN_TRAIN));
