@@ -40,7 +40,9 @@ public class DoTrainActivity extends AppCompatActivity {
     }
 
     private void createTrainFromPlanDay(String planDayId){
-        //TODO here weiter
+
+
+
     }
 
     private void fillTrain(){
@@ -51,7 +53,4 @@ public class DoTrainActivity extends AppCompatActivity {
         }
         train.setTrainExerciceList(trainExerciceList);
     }
-
-
-
 }

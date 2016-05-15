@@ -40,13 +40,12 @@ public class TrainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_train);
-
         planList = DAOPlan.getAllPlans(getApplicationContext());
         planSpinner = (Spinner)findViewById(R.id.plan);
         planDaySpinner = (Spinner) findViewById(R.id.planDay);
         initPlanSpinner();
         try {
-            planSpinner.setOnItemSelectedListener(planSpinerClick);
+            planSpinner.setOnItemSelectedListener(planSpinerSelect);
         }catch (Exception e){
             Log.d(LOG_TAG,"Error " + e.toString());
         }
@@ -90,7 +89,7 @@ public class TrainActivity extends AppCompatActivity {
     }
 
 
-    private  AdapterView.OnItemSelectedListener planSpinerClick =  new  AdapterView.OnItemSelectedListener(){
+    private  AdapterView.OnItemSelectedListener planSpinerSelect =  new  AdapterView.OnItemSelectedListener(){
         @Override
         public void onItemSelected(AdapterView<?> arg0, View view,
                                    int arg2, long arg3) {
@@ -104,7 +103,6 @@ public class TrainActivity extends AppCompatActivity {
 
         @Override
         public void onNothingSelected(AdapterView<?> arg0) {
-            // TODO Auto-generated method stub
 
         }
     };
@@ -118,33 +116,45 @@ public class TrainActivity extends AppCompatActivity {
             alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "Ja",
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
-                        Log.d(LOG_TAG,"ja");
-                        int geo =  ContextCompat.checkSelfPermission(v.getContext(),Manifest.permission.ACCESS_FINE_LOCATION);
-                        if (geo == PermissionChecker.PERMISSION_GRANTED){
-                            lm.requestLocationUpdates(LocationManager.GPS_PROVIDER, 5000, 0, locationListener);
-                            Location loc = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-                            if(loc != null) {
-                                //TODO save here the last location
-                                Log.d(LOG_TAG, "Lat : " + loc.getLatitude() + " " + loc.getLongitude());
+                        LocationManager locationManager = (LocationManager) getSystemService(getApplicationContext().LOCATION_SERVICE);
+                        // get the last know location from your location manager.
+                        int permission = checkCallingOrSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION);
+                        Log.d(LOG_TAG," permission " + permission);
+                        if(permission == PermissionChecker.PERMISSION_GRANTED)
+                            dialog.dismiss();
+                            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 5000, 0, locationListener);
+                            Location location= locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+                            String lon = "";
+                            String lat = "";
+                            if(location != null) {
+                                // now get the lat/lon from the location and write it down for the next Intent
+                                lon = Double.toString(location.getLongitude());
+                                lat = Double.toString(location.getLatitude());
                             }
-                        }
+                        doNext(lat,lon,v);
 
-                        dialog.dismiss();
                     }
             });
-            alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE,"Nein",
-                new DialogInterface.OnClickListener(){
-                    public void onClick(DialogInterface dialog, int which) {
-                        Log.d(LOG_TAG,"nein");
-                        dialog.dismiss();
+            alertDialog.show();            alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE,"Nein",
+                    new DialogInterface.OnClickListener(){
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                            doNext("","",v);
+                        }
                     }
-                }
             );
-            alertDialog.show();
+
         }
     };
 
-
+    private void doNext(String lat,String lon,View v){
+        Intent nextScreen = new Intent(getApplicationContext(), DoTrainActivity.class);
+        nextScreen.putExtra("lat",lat);
+        nextScreen.putExtra("lon",lon);
+        PlanDay planDay = (PlanDay) planDaySpinner.getSelectedItem();
+        nextScreen.putExtra("planDay",planDay.getId());
+        v.getContext().startActivity(nextScreen);
+    }
 
 
 }
