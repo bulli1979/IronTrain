@@ -9,16 +9,22 @@ public class TrainExercice {
     private String id;
     private String planDayExercice;
     private String train;
+    private String exerciceTitle;
+    private String exerciceDescription;
     private List<TrainSet> trainSetList;
 
     private TrainExercice(Builder builder){
         this.id = builder.id;
         this.planDayExercice = builder.planDayExercice;
         this.train = builder.train;
+        this.exerciceDescription = builder.exerciceDescription;
+        this.exerciceTitle = builder.exerciceTitle;
     }
 
     public static class Builder{
         private String id,planDayExercice,train;
+        private String exerciceTitle;
+        private String exerciceDescription;
         public Builder id(String id){
             this.id = id;
             return this;
@@ -31,7 +37,14 @@ public class TrainExercice {
             this.train = train;
             return this;
         }
-
+        public Builder exerciceTitle(String exerciceTitle){
+            this.exerciceTitle = exerciceTitle;
+            return this;
+        }
+        public Builder exerciceDescription(String exerciceDescription){
+            this.exerciceDescription = exerciceDescription;
+            return this;
+        }
         public TrainExercice build(){
             return new TrainExercice(this);
         }
@@ -66,5 +79,12 @@ public class TrainExercice {
 
     public void setTrainSetList(List<TrainSet> trainSetList) {
         this.trainSetList = trainSetList;
+    }
+
+    public String getExerciceDescription() {
+        return exerciceDescription;
+    }
+    public String getExerciceTitle() {
+        return exerciceTitle;
     }
 }

@@ -24,4 +24,6 @@
     <string name="countWHD">Wiederholungen</string>
     <string name="startTrain">Training starten</string>
     <string name="title_activity_do_train">DoTrainActivity</string>
+    <string name="weight">Gewicht</string>
+    <string name="finish">Abschliessen</string>
 </resources>

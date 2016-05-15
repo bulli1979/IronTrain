@@ -30,24 +30,31 @@ public class DAOTrain {
         return train;
     }
 
-    public static void saveOrUpdateTrain (Train train,Context context){
+    public static void updateTrain (Train train,Context context){
         try {
             database = DBHelper.getInstance(context).getWritableDatabase();
             if (train.getId() != null) {
                 String whereClauses = DBHelper.COLUMN_ID + "='" + train.getId()+"'";
                 database.update(DBHelper.TABLE_TRAIN, getDBValues(train), whereClauses, null);
             } else {
-                train.setId(UUID.randomUUID().toString());
-                ContentValues cv = getDBValues(train);
-                database.insert(DBHelper.TABLE_TRAIN, null, cv);
+
             }
             database.close();
         }catch(Exception e){
-            Log.d(LOG_TAG,"Fehler in saveOrUpdateTrain " + e.getMessage());
+            Log.d(LOG_TAG,"Fehler in updateTrain " + e.getMessage());
         }
     }
 
-
+    public static void createTrain(Train train,Context context){
+        try {
+            database = DBHelper.getInstance(context).getWritableDatabase();
+            ContentValues cv = getDBValues(train);
+            database.insert(DBHelper.TABLE_TRAIN, null, cv);
+            database.close();
+        }catch(Exception e){
+            Log.d(LOG_TAG,"Fehler in createTrain " + e.getMessage());
+        }
+    }
 
     private static Train cursorToPlanDay(Cursor trainCursor){
         String id = trainCursor.getString(trainCursor.getColumnIndex(DBHelper.COLUMN_ID));

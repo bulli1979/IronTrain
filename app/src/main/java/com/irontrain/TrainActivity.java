@@ -135,7 +135,7 @@ public class TrainActivity extends AppCompatActivity {
 
                     }
             });
-            alertDialog.show();            alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE,"Nein",
+            alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE,"Nein",
                     new DialogInterface.OnClickListener(){
                         public void onClick(DialogInterface dialog, int which) {
                             dialog.dismiss();
@@ -143,6 +143,8 @@ public class TrainActivity extends AppCompatActivity {
                         }
                     }
             );
+            alertDialog.show();
+
 
         }
     };
