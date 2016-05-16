@@ -29,17 +29,22 @@ public class DAOTrainExercice {
         return trainExercice;
     }
 
-    public static void saveOrUpdateTrainExercice (TrainExercice trainExercice,Context context){
+    public static void updateTrainExercice (TrainExercice trainExercice,Context context){
         try {
             database = DBHelper.getInstance(context).getWritableDatabase();
-            if (trainExercice.getId() != null) {
-                String whereClauses = DBHelper.COLUMN_ID + "='" + trainExercice.getId()+"'";
-                database.update(DBHelper.TABLE_TRAINEXERCICE, getDBValues(trainExercice), whereClauses, null);
-            } else {
-                trainExercice.setId(UUID.randomUUID().toString());
-                ContentValues cv = getDBValues(trainExercice);
-                database.insert(DBHelper.TABLE_TRAINEXERCICE, null, cv);
-            }
+            String whereClauses = DBHelper.COLUMN_ID + "='" + trainExercice.getId()+"'";
+            database.update(DBHelper.TABLE_TRAINEXERCICE, getDBValues(trainExercice), whereClauses, null);
+            database.close();
+        }catch(Exception e){
+            Log.d(LOG_TAG,"Fehler in saveOrUpdateTrainExercice " + e.getMessage());
+        }
+    }
+
+    public static void createTrainExercice (TrainExercice trainExercice,Context context){
+        try {
+            database = DBHelper.getInstance(context).getWritableDatabase();
+            ContentValues cv = getDBValues(trainExercice);
+            database.insert(DBHelper.TABLE_TRAINEXERCICE, null, cv);
             database.close();
         }catch(Exception e){
             Log.d(LOG_TAG,"Fehler in saveOrUpdateTrainExercice " + e.getMessage());

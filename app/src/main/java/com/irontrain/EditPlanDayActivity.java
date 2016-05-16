@@ -84,8 +84,6 @@ public class EditPlanDayActivity extends AppCompatActivity {
     private void savePlanDay(View v,boolean showMessage){
         try {
             PlanDay planDay = (PlanDay) v.getTag();
-            Log.d(LOG_TAG, name.getText().toString());
-            Log.d(LOG_TAG, name.getEditableText().toString());
             planDay.setName(name.getEditableText().toString());
             planDay.setDescription(description.getText().toString());
             if(null == planDay.getId()) {

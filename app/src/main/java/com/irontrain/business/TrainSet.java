@@ -6,9 +6,8 @@ package com.irontrain.business;
 public class TrainSet {
     private String id;
     private String trainExercice;
-    private int setNr;
+    private int setNr,repeat;
     private float weight;
-    private float repeat;
 
     private TrainSet(Builder builder){
         this.id = builder.id;
@@ -21,8 +20,8 @@ public class TrainSet {
 
     public static class Builder{
         private String id,trainExercice;
-        private int setNr;
-        private float weight,repeat;
+        private int setNr,repeat;
+        private float weight;
         public Builder id(String id){
             this.id = id;
             return this;
@@ -39,7 +38,7 @@ public class TrainSet {
             this.weight = weight;
             return this;
         }
-        public Builder repeat(float repeat){
+        public Builder repeat(int repeat){
             this.repeat = repeat;
             return this;
         }
@@ -80,11 +79,11 @@ public class TrainSet {
         this.weight = weight;
     }
 
-    public float getRepeat() {
+    public int getRepeat() {
         return repeat;
     }
 
-    public void setRepeat(float repeat) {
+    public void setRepeat(int repeat) {
         this.repeat = repeat;
     }
 }

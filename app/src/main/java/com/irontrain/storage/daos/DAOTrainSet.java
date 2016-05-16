@@ -31,23 +31,26 @@ public class DAOTrainSet {
         return trainSet;
     }
 
-    public static void saveOrUpdateTrainSet (TrainSet exercice,Context context){
+    public static void updateTrainSet (TrainSet trainSet,Context context){
         try {
             database = DBHelper.getInstance(context).getWritableDatabase();
-            if (exercice.getId() != null) {
-                String whereClauses = DBHelper.COLUMN_ID + "='" + exercice.getId()+"'";
-                database.update(DBHelper.TABLE_TRAINSET, getDBValues(exercice), whereClauses, null);
-            } else {
-                exercice.setId(UUID.randomUUID().toString());
-                ContentValues cv = getDBValues(exercice);
-                database.insert(DBHelper.TABLE_TRAINSET, null, cv);
-            }
+            String whereClauses = DBHelper.COLUMN_ID + "='" + trainSet.getId()+"'";
+            database.update(DBHelper.TABLE_TRAINSET, getDBValues(trainSet), whereClauses, null);
             database.close();
         }catch(Exception e){
             Log.d(LOG_TAG,"Fehler in saveOrUpdateExercice " + e.getMessage());
         }
     }
-
+    public static void creatTrainSet (TrainSet trainSet,Context context){
+        try {
+            database = DBHelper.getInstance(context).getWritableDatabase();
+            ContentValues cv = getDBValues(trainSet);
+            database.insert(DBHelper.TABLE_TRAINSET, null, cv);
+            database.close();
+        }catch(Exception e){
+            Log.d(LOG_TAG,"Fehler in saveOrUpdateExercice " + e.getMessage());
+        }
+    }
     public static List<TrainSet> getTrainSetForTrainExercice(Context context, String trainExerciceId){
         database = DBHelper.getInstance(context).getWritableDatabase();
         String whereClauses = DBHelper.COLUMN_TRAINEXERCICE + "='" + trainExerciceId +"'";
@@ -61,7 +64,7 @@ public class DAOTrainSet {
 
     private static TrainSet cursorToTrainSet(Cursor exerciceCursor){
         String id = exerciceCursor.getString(exerciceCursor.getColumnIndex(DBHelper.COLUMN_ID));
-        float repeat = exerciceCursor.getFloat(exerciceCursor.getColumnIndex(DBHelper.COLUMN_REPEATS));
+        int repeat = exerciceCursor.getInt(exerciceCursor.getColumnIndex(DBHelper.COLUMN_REPEATS));
         float weight = exerciceCursor.getFloat(exerciceCursor.getColumnIndex(DBHelper.COLUMN_WEIGHT));
         int setNr = exerciceCursor.getInt(exerciceCursor.getColumnIndex(DBHelper.COLUMN_SETNR));
         String trainExercice = exerciceCursor.getString(exerciceCursor.getColumnIndex(DBHelper.COLUMN_TRAINEXERCICE));
