@@ -46,6 +46,10 @@
         <item name="android:background">@color/listBackground</item>
     </style>
 
+    <style name="layoutBox">
+        <item name="android:padding">5dp</item>
+    </style>
+
     <style name="listItemStyle">
         <item name="android:textColor">@color/black</item>
         <item name="android:textSize">16dp</item>

@@ -23,8 +23,7 @@ public class DBUpdateProcess {
     private List<Integer> ids;
     private static final String LOG_TAG = DBUpdateProcess.class.getSimpleName();
 
-    public int updateExercices(JSONArray arr,View v){
-        Context context = v.getContext();
+    public int updateExercices(JSONArray arr,Context  context){
         List<Exercice> exercices = DAOExercice.getAllExercices(context);
         return importExercices(exercices, arr,context);
     }

@@ -26,4 +26,5 @@
     <string name="title_activity_do_train">DoTrainActivity</string>
     <string name="weight">Gewicht</string>
     <string name="finish">Abschliessen</string>
+    <string name="home">Home</string>
 </resources>

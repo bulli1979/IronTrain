@@ -4,11 +4,14 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.irontrain.action.MenuListener;
 import com.irontrain.action.OCListener;
 import com.irontrain.adapter.ExerciceAdapter;
 import com.irontrain.business.Exercice;
@@ -128,5 +131,19 @@ public class EditPlanDayExerciceActivity extends AppCompatActivity {
         DAOExercice.createExercice(newExercice,getApplicationContext());
         return id;
     }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_home, menu);
+        return true;
+    }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Menuitem
+        int id = item.getItemId();
+        //noinspection SimplifiableIfStatement
+        MenuListener.getActionMenuComplete(this,id);
+        return super.onOptionsItemSelected(item);
+    }
 }

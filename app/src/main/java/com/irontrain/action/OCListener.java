@@ -1,6 +1,7 @@
 package com.irontrain.action;
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -8,6 +9,7 @@ import android.widget.AdapterView;
 import com.irontrain.EditPlanDayExerciceActivity;
 import com.irontrain.EditPlanActivity;
 import com.irontrain.EditPlanDayActivity;
+import com.irontrain.HomeActivity;
 import com.irontrain.R;
 import com.irontrain.TrainActivity;
 import com.irontrain.business.Plan;
@@ -44,7 +46,7 @@ public class OCListener {
                     AsyncTask asyncTask = new UpdateCheck().execute("");
                     JSONArray arr = (JSONArray) asyncTask.get();
                     DBUpdateProcess updater = new DBUpdateProcess();
-                    int count = updater.updateExercices(arr,v);
+                    int count = updater.updateExercices(arr,v.getContext());
                     Tools.showToast(v.getContext(),count + " " + v.getContext().getResources().getString(R.string.updateMessages));
                 }catch(Exception e){
                     Log.d(LOG_TAG,"Error in getUpdateListener " + e );
@@ -221,5 +223,4 @@ public class OCListener {
         };
         return listener;
     }
-
 }

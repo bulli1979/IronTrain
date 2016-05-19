@@ -14,11 +14,14 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.Spinner;
 
+import com.irontrain.action.MenuListener;
 import com.irontrain.adapter.PlanDaySpinnerAdapter;
 import com.irontrain.adapter.PlanSpinnerAdapter;
 import com.irontrain.business.Plan;
@@ -158,5 +161,19 @@ public class TrainActivity extends AppCompatActivity {
         v.getContext().startActivity(nextScreen);
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_home, menu);
+        return true;
+    }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Menuitem
+        int id = item.getItemId();
+        //noinspection SimplifiableIfStatement
+        MenuListener.getActionMenuComplete(this,id);
+        return super.onOptionsItemSelected(item);
+    }
 }

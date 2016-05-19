@@ -3,6 +3,8 @@ package com.irontrain;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TableLayout;
@@ -12,6 +14,7 @@ import android.widget.TextView;
 
 import java.util.List;
 
+import com.irontrain.action.MenuListener;
 import com.irontrain.action.OCListener;
 import com.irontrain.adapter.PlanAdapter;
 import com.irontrain.business.Plan;
@@ -25,10 +28,8 @@ public class PlanListActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_plan_list);
-
         newPlanButton = (Button) findViewById(R.id.createPlan);
         newPlanButton.setOnClickListener(OCListener.getNewPlanListener());
-
         List<Plan> planList = DAOPlan.getAllPlans(this.getBaseContext());
         TextView tv = (TextView)findViewById(R.id.emptyText);
         if(planList.isEmpty()){
@@ -36,10 +37,10 @@ public class PlanListActivity extends AppCompatActivity {
         }else{
             tv.setText("");
             buildTable(planList);
-
         }
-
     }
+
+
 
     private void buildTable(List<Plan> planList) {
         PlanAdapter adapter = new PlanAdapter(this,
@@ -49,4 +50,21 @@ public class PlanListActivity extends AppCompatActivity {
         listView.setTag(planList);
         listView.setOnItemClickListener(OCListener.getOpenPlanListener());
     }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_home, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Menuitem
+        int id = item.getItemId();
+        //noinspection SimplifiableIfStatement
+        MenuListener.getActionMenuComplete(this,id);
+        return super.onOptionsItemSelected(item);
+    }
+
 }

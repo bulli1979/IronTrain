@@ -7,9 +7,11 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.irontrain.DoTrainActivity"
     tools:showIn="@layout/activity_do_train"
+    android:id="@+id/exerCiceLayOut"
     android:orientation="vertical"
-    android:id="@+id/exerCiceLayOut">
+    style="layoutBox">
     <!-- Head with navigation over all exercices -->
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
@@ -18,37 +20,55 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
         </LinearLayout>
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <TextView
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:background="@drawable/arrow_left"
-                android:id="@+id/previous"
-                android:layout_alignLeft="@+id/trainOverview"/>
-            <TextView
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:textAlignment="center"
-                android:id="@+id/trainOverview"
-                android:layout_height="50dp"
-                android:text=" 1 von 3 "/>
-            <TextView
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:background="@drawable/arrow_right"
-                android:id="@+id/next"
-                android:layout_alignRight="@+id/trainOverview"/>
-        </RelativeLayout>
+                android:layout_height="wrap_content">
+                <TextView
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:background="@drawable/arrow_left"
+                    android:id="@+id/previous"
+                    android:layout_alignLeft="@+id/trainOverview"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:textAlignment="center"
+                    android:id="@+id/trainOverview"
+                    android:layout_height="50dp"
+                    android:text=" 1 von 3 "/>
+                <TextView
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:background="@drawable/arrow_right"
+                    android:id="@+id/next"
+                    android:layout_alignRight="@+id/trainOverview"/>
+            </RelativeLayout>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:id="@+id/setLayout">
-            <TextView
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/exerciceTitleBox"/>
+                android:layout_height="wrap_content">
+                <TextView
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:background="@drawable/arrow_left"
+                    android:id="@+id/previousset"
+                    android:layout_alignLeft="@+id/exerciceTitleBox"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:textAlignment="center"
+                    android:id="@+id/exerciceTitleBox"
+                    android:layout_height="50dp"
+                    android:text=" 1 von 3 "/>
+                <TextView
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:background="@drawable/arrow_right"
+                    android:id="@+id/nextset"
+                    android:layout_alignRight="@+id/exerciceTitleBox"/>
+            </RelativeLayout>
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -94,3 +114,4 @@
                 android:id="@+id/finishTrain"/>
         </LinearLayout>
 </LinearLayout>
+

@@ -17,8 +17,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".HomeActivity"
-            android:theme="@style/AppTheme">
+            android:name=".HomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -26,29 +25,19 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".EditPlanActivity"
-            android:theme="@style/AppTheme">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            android:name=".EditPlanActivity">
         </activity>
         <activity
-            android:name=".PlanListActivity"
-            android:theme="@style/AppTheme" />
+            android:name=".PlanListActivity"/>
         <activity
-            android:name=".EditPlanDayActivity"
-            android:theme="@style/AppTheme" />
+            android:name=".EditPlanDayActivity"/>
         <activity
-            android:name=".StatsActivity"
-            android:theme="@style/AppTheme" />
-        <activity android:name=".EditPlanDayExerciceActivity" />
-        <activity android:name=".TrainActivity" />
+            android:name=".StatsActivity"/>
         <activity
-            android:name=".DoTrainActivity"
-            android:label="@string/title_activity_do_train"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:name=".EditPlanDayExerciceActivity"/>
+        <activity android:name=".TrainActivity"/>
+        <activity
+            android:name=".DoTrainActivity"/>
     </application>
 
 </manifest>

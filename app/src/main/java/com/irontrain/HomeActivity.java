@@ -1,34 +1,37 @@
 package com.irontrain;
 
+import android.content.Context;
+import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Button;
 
+import com.irontrain.action.MenuListener;
 import com.irontrain.action.OCListener;
-import com.irontrain.storage.DBHelper;
+import com.irontrain.storage.DBUpdateProcess;
+import com.irontrain.storage.UpdateCheck;
+import com.irontrain.tools.Tools;
+
+import org.json.JSONArray;
 
 public class HomeActivity extends AppCompatActivity {
-    private Button updateButton;
-    private Button planListButton;
-    private Button trainButton;
     private static final String LOG_TAG = HomeActivity.class.getSimpleName();
-    private DBHelper helper;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        //onCreateOptionsMenu(Menu)
         setContentView(R.layout.activity_home);
         initialize();
     }
 
     public void initialize(){
-        updateButton = (Button) findViewById(R.id.updateButton);
-        planListButton = (Button) findViewById(R.id.planListButton);
-        trainButton = (Button) findViewById(R.id.trainButton);
+        Button updateButton = (Button) findViewById(R.id.updateButton);
+        Button planListButton = (Button) findViewById(R.id.planListButton);
+        Button trainButton = (Button) findViewById(R.id.trainButton);
         updateButton.setOnClickListener(OCListener.getUpdateListener());
         planListButton.setOnClickListener(OCListener.getPlanListListener());
         trainButton.setOnClickListener(OCListener.openTrainListener());
@@ -44,16 +47,10 @@ public class HomeActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the HomeActivity/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
+        // Menuitem
         int id = item.getItemId();
-
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
+        MenuListener.getActionMenuComplete(this,id);
         return super.onOptionsItemSelected(item);
     }
 }

@@ -4,11 +4,14 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.irontrain.action.MenuListener;
 import com.irontrain.action.OCListener;
 import com.irontrain.business.Exercice;
 import com.irontrain.business.PlanDay;
@@ -72,13 +75,15 @@ public class DoTrainActivity extends AppCompatActivity {
         Button finish = (Button) findViewById(R.id.finishTrain);
         TextView previous = (TextView) findViewById(R.id.previous);
         TextView next = (TextView) findViewById(R.id.next);
+        TextView previousSet = (TextView) findViewById(R.id.previousset);
+        TextView nextSet = (TextView) findViewById(R.id.nextset);
         next.setOnClickListener(nextListener);
         previous.setOnClickListener(previousListener);
+        nextSet.setOnClickListener(nextSetListener);
+        previousSet.setOnClickListener(previousSetListener);
         saveButton.setOnClickListener(onSaveListener);
         cancelButton.setOnClickListener(OCListener.openTrainListener());
         finish.setOnClickListener(finishListener);
-
-
     }
 
     private void createTrainFromPlanDay(String planDayId){
@@ -152,6 +157,20 @@ public class DoTrainActivity extends AppCompatActivity {
         }
     };
 
+    private View.OnClickListener nextSetListener = new View.OnClickListener() {
+        @Override
+        public void onClick(final View v) {
+            nextSet();
+        }
+    };
+
+    private View.OnClickListener previousSetListener = new View.OnClickListener() {
+        @Override
+        public void onClick(final View v) {
+            previousSet();
+        }
+    };
+
     private void saveTrain(View v, boolean showMessage){
         fillSet();
         DAOTrain.updateTrain(train,getApplicationContext());
@@ -180,7 +199,7 @@ public class DoTrainActivity extends AppCompatActivity {
 
     private void nextSet(){
         fillSet();
-        if(currentSet-1 < trainExerciceList.get(currentExercice).getTrainSetList().size()){
+        if(currentSet < trainExerciceList.get(currentExercice).getTrainSetList().size()){
             currentSet++;
         }else{
             currentSet=1;
@@ -223,5 +242,19 @@ public class DoTrainActivity extends AppCompatActivity {
         v.getContext().startActivity(nextScreen);
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_home, menu);
+        return true;
+    }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Menuitem
+        int id = item.getItemId();
+        //noinspection SimplifiableIfStatement
+        MenuListener.getActionMenuComplete(this,id);
+        return super.onOptionsItemSelected(item);
+    }
 }
