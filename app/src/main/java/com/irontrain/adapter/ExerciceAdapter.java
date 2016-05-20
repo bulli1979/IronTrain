@@ -17,13 +17,13 @@ import java.util.List;
 
 /**
  * Created by Ebi on 24.04.2016.
+ * Adapter for Autocomplet TextFeld Exercices
  */
 
 public class ExerciceAdapter extends ArrayAdapter<Exercice> implements Filterable{
     private List<Exercice> items;
     private List<Exercice> allItems;
     private List<Exercice> suggestItems;
-    private int viewResourceId;
 
     private static class ViewHolder {
         private TextView itemView;
@@ -32,13 +32,12 @@ public class ExerciceAdapter extends ArrayAdapter<Exercice> implements Filterabl
     public ExerciceAdapter(Context context, int textViewResourceId, List<Exercice> items) {
         super(context, textViewResourceId, items);
         this.items = items;
-        this.allItems = (List<Exercice>)getListClone();
-        this.suggestItems = new ArrayList<Exercice>();
-        this.viewResourceId = textViewResourceId;
+        this.allItems = getListClone();
+        this.suggestItems = new ArrayList<>();
     }
 
     public List<Exercice> getListClone(){
-        List<Exercice> allList = new ArrayList<Exercice>();
+        List<Exercice> allList = new ArrayList<>();
         for(Exercice e: items){
             allList.add(e);
         }
@@ -83,8 +82,7 @@ public class ExerciceAdapter extends ArrayAdapter<Exercice> implements Filterabl
     Filter nameFilter = new Filter() {
         @Override
         public String convertResultToString(Object resultValue) {
-            String str = ((Exercice)(resultValue)).getName();
-            return str;
+            return ((Exercice)(resultValue)).getName();
         }
         @Override
         protected FilterResults performFiltering(CharSequence constraint) {
@@ -106,7 +104,7 @@ public class ExerciceAdapter extends ArrayAdapter<Exercice> implements Filterabl
         @Override
         protected void publishResults(CharSequence constraint, FilterResults results) {
             ArrayList<Exercice> filteredList = (ArrayList<Exercice>) results.values;
-            if(results != null && results.count > 0) {
+            if(results.count > 0) {
                 clear();
                 for (Exercice e : filteredList) {
                     add(e);

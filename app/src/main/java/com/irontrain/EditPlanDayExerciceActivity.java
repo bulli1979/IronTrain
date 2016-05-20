@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
@@ -23,14 +24,21 @@ import com.irontrain.tools.Tools;
 import java.util.List;
 import java.util.UUID;
 
+/**
+ * PlanDayExercice Activity
+ * save update and select Exercice handling here.
+ * insert own name crete automaticly an exercice
+ *
+ * */
+
 public class EditPlanDayExerciceActivity extends AppCompatActivity {
     private static final String LOG_TAG = EditPlanDayExerciceActivity.class.getSimpleName();
-    private String planDay;
     private AutoCompleteTextView exercicesView;
     private EditText setCountView;
     private EditText repeatView;
     private EditText exerciceDescriptionView;
     private List<Exercice> exerciceList;
+    private Button cancelButton;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,36 +51,46 @@ public class EditPlanDayExerciceActivity extends AppCompatActivity {
         exerciceDescriptionView = (EditText)findViewById(R.id.ExerciceDescription);
         exerciceList = DAOExercice.getAllExercices(getApplicationContext());
         exercicesView = (AutoCompleteTextView)findViewById(R.id.exerciceName);
-
-
+        cancelButton = (Button)findViewById(R.id.cancel);
 
         if(i.hasExtra("planDay")){
             planDayExercice = new PlanDayExercice.Builder().planDay(i.getExtras().getString("planDay")).build();
         }else{
-            Log.d(LOG_TAG,"Load saved values");
+            setPlanDayExist();
             planDayExercice = DAOPlanDayExercice.getPlanDayById(getApplicationContext(),i.getStringExtra("planDayExercice"));
-            setCountView.setText(Integer.toString(planDayExercice.getSetCount()));
+            setCountView.setText(String.valueOf(planDayExercice.getSetCount()));
             repeatView.setText(planDayExercice.getRepeat());
             exerciceDescriptionView.setText(planDayExercice.getDescription());
             exercicesView.setText(getTextForId(planDayExercice.getExercice()));
         }
-        planDay = planDayExercice.getPlanDay();
-
-
+        String planDay = planDayExercice.getPlanDay();
         initExerciceAutoComplete(exerciceList);
         Button saveButton = (Button)findViewById(R.id.saveExercice);
         saveButton.setTag(planDayExercice);
         saveButton.setOnClickListener(onSaveListener);
-        Button cancelButton = (Button)findViewById(R.id.cancel);
         cancelButton.setTag(planDay);
-        cancelButton.setOnClickListener(OCListener.getOpenPlanDayDirectListener());
+        cancelButton.setOnClickListener(OCListener.getInstance().getOpenPlanDayDirectListener());
     }
 
     private void initExerciceAutoComplete( List<Exercice> exerciceList){
         ExerciceAdapter exerciceAdapter = new ExerciceAdapter(getApplicationContext(), R.layout.custom_exercice_list_item, exerciceList);
         exerciceAdapter.setNotifyOnChange(true);
         exercicesView.setAdapter(exerciceAdapter);
+        exercicesView.setOnItemClickListener(exerciceListener);
     }
+
+    private AdapterView.OnItemClickListener exerciceListener =  new  AdapterView.OnItemClickListener(){
+        @Override
+        public void onItemClick(AdapterView<?> parent, View view, int position, long id){
+            try {
+                Exercice exercice = exerciceList.get(position);
+                exerciceDescriptionView.setText(exercice.getDescription());
+            }catch(Exception e){
+                Log.d(LOG_TAG,"Error in exerciceListener " + e );
+            }
+        }
+    };
+
 
     private View.OnClickListener onSaveListener = new View.OnClickListener() {
         @Override
@@ -93,19 +111,23 @@ public class EditPlanDayExerciceActivity extends AppCompatActivity {
     private void savePlanDayExercice(View v, boolean showMessage){
         try {
             PlanDayExercice planDayExercice = (PlanDayExercice) v.getTag();
-
             String repeat = repeatView.getEditableText().toString();
-
             planDayExercice.setRepeat(repeat);
-
             planDayExercice.setSetCount(Integer.parseInt(setCountView.getEditableText().toString()));
-
             planDayExercice.setDescription(exerciceDescriptionView.getEditableText().toString());
             String exerciceName = exercicesView.getText().toString();
             //here handle selected Token
+            if(exerciceName.isEmpty()){
+                Tools.showToast(v.getContext(),getString(R.string.fillName));
+                Tools.setErrorColor(exercicesView,true);
+                return;
+            }else{
+                Tools.setErrorColor(exercicesView,false);
+            }
             String exerciceId = chcekExercice(exerciceName);
             planDayExercice.setExercice(exerciceId);
             if(null == planDayExercice.getId()) {
+                setPlanDayExist();
                 planDayExercice.setId(UUID.randomUUID().toString());
                 DAOPlanDayExercice.newPlanDayExercice(planDayExercice,getApplicationContext());
             }else{
@@ -117,6 +139,10 @@ public class EditPlanDayExerciceActivity extends AppCompatActivity {
         } catch (Exception e) {
             Log.d(LOG_TAG, "Error in savePlanDay " + e);
         }
+    }
+
+    private void setPlanDayExist(){
+        cancelButton.setText(getResources().getString(R.string.toPlanDay));
     }
 
     private String chcekExercice(String exercice){

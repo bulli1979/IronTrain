@@ -1,8 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~ You can use only script parts but do not copy the application. All rights reserved by Mirko Eberlein.
+  -->
+
 <shape xmlns:android="http://schemas.android.com/apk/res/android"
     android:shape="rectangle">
 
-    <solid android:color="@color/colorPrimary"/>
+    <solid android:color="@color/colorPrimaryDark"/>
 
     <stroke android:color="@color/black"
             android:width="1dp"/>

@@ -5,7 +5,6 @@
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
     </style>
 
     <style name="AppTheme.NoActionBar">
@@ -23,7 +22,7 @@
         <item name="android:layout_marginRight">5dp</item>
         <item name="android:layout_marginBottom">5dp</item>
         <item name="android:background">@drawable/buttonshape</item>
-        <item name="android:textSize">16dp</item>
+        <item name="android:textSize">16sp</item>
         <item name="android:textColor">@color/colorWhite</item>
         <item name="android:layout_width">0px</item>
         <item name="android:layout_weight">0.33</item>
@@ -32,44 +31,61 @@
     <!-- <item name=""></item> -->
     <style name="buttonStyle">
         <item name="android:layout_width">wrap_content</item>
+        <item name="android:textSize">16sp</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:textColor">@color/black</item>
-        <item name="android:background">@drawable/buttonshape</item>
-        <item name="android:padding">2dp</item>
-        <item name="android:layout_margin">2dp</item>
-        <item name="android:state_pressed">@drawable/list_selector_pressed</item>
+        <item name="android:textColor">@color/colorWhite</item>
+        <item name="android:background">@drawable/custom_selector</item>
+        <item name="android:colorPressedHighlight">@color/colorPrimaryDark</item>
+        <item name="android:padding">5dp</item>
+        <item name="android:layout_marginBottom">5dp</item>
+        <item name="android:layout_marginRight">5dp</item>
     </style>
 
     <style name="listStyle">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:background">@color/listBackground</item>
+        <item name="android:divider">@color/colorWhite</item>
+        <item name="android:dividerHeight">2dp</item>
     </style>
-
-    <style name="layoutBox">
-        <item name="android:padding">5dp</item>
-    </style>
-
     <style name="listItemStyle">
-        <item name="android:textColor">@color/black</item>
-        <item name="android:textSize">16dp</item>
+        <item name="android:background">@drawable/custom_selector</item>
+        <item name="android:textColor">@color/colorWhite</item>
+        <item name="android:textSize">16sp</item>
         <item name="android:layout_alignParentTop">true</item>
         <item name="android:layout_alignParentBottom">true</item>
-        <item name="android:layout_marginTop">5dp</item>
-        <item name="android:layout_marginBottom">5dp</item>
-        <item name="android:layout_marginLeft">5dp</item>
+        <item name="android:paddingLeft">5dp</item>
+        <item name="android:paddingRight">5dp</item>
+        <item name="android:paddingTop">10dp</item>
+        <item name="android:paddingBottom">10dp</item>
         <item name="android:layout_width">fill_parent</item>
         <item name="android:layout_height">fill_parent</item>
         <item name="android:gravity">center_vertical</item>
     </style>
 
+    <style name="layoutBox">
+        <item name="android:padding">5dp</item>
+        <item name="android:background">@color/colorBackground</item>
+    </style>
+
     <style name="labelStyle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
         <item name="android:textColor">@color/darkGrey</item>
-        <item name="android:textSize">18dp</item>
+        <item name="android:textSize">18sp</item>
     </style>
 
     <style name="textFieldStyle">
-        <item name="android:padding">4dp</item>
+        <item name="android:padding">5dp</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:textColor">@color/darkGrey</item>
+        <item name="android:background">@color/colorSoftGrey</item>
+        <item name="android:layout_marginBottom">5dp</item>
     </style>
-
+    <style name="headLineStyle">
+        <item name="android:textSize">18sp</item>
+        <item name="android:textColor">@color/darkGrey</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
 </resources>

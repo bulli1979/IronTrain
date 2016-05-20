@@ -23,7 +23,7 @@
             android:layout_height="wrap_content"
             style="@style/textFieldStyle"
             android:completionThreshold="1"
-            android:background="@color/colorSoftGrey"/>
+            android:inputType="text"/>
 
         <TextView
             style="@style/labelStyle"
@@ -35,7 +35,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             style="@style/textFieldStyle"
-            android:background="@color/colorSoftGrey"/>
+            android:inputType="textMultiLine"/>
 
         <TextView
             style="@style/labelStyle"
@@ -47,7 +47,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             style="@style/textFieldStyle"
-            android:background="@color/colorSoftGrey"/>
+            android:inputType="number"/>
 
         <TextView
             style="@style/labelStyle"
@@ -59,7 +59,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             style="@style/textFieldStyle"
-            android:background="@color/colorSoftGrey"/>
+            android:inputType="text"/>
 
     </LinearLayout>
     <LinearLayout

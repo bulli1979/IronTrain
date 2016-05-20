@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -34,41 +35,50 @@ public class EditPlanActivity extends AppCompatActivity {
     private static final String LOG_TAG = EditPlanActivity.class.getSimpleName();
     private EditText name;
     private EditText description;
+    private  Button cancelButton;
+    private Button newPlanDayButton;
+    private List<PlanDay> planDayList;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_plan);
         Intent i = getIntent();
-        // Receiving the Data
-        if(!i.hasExtra("plan")){
-            plan = new Plan();
-        }else{
-            plan = DAOPlan.getPlanById(this.getBaseContext(),i.getStringExtra("plan"));
-
-        }
-        Button saveButton = (Button) findViewById(R.id.savePlan);
+        //initialize Views
+        cancelButton = (Button) findViewById(R.id.cancelEditPlan);
+        cancelButton.setOnClickListener(OCListener.getInstance().getPlanListListener());
+        newPlanDayButton = (Button) findViewById(R.id.addPlanDay);
         name = (EditText) findViewById(R.id.planName);
         description = (EditText) findViewById(R.id.planDescription);
+        Button saveButton = (Button) findViewById(R.id.savePlan);
+        // Receiving the Data
+        if(!i.hasExtra("plan")){
+            plan = new Plan.Builder().createdOn(new Date()).build();
+        }else{
+            plan = DAOPlan.getPlanById(this.getBaseContext(),i.getStringExtra("plan"));
+            setPlanExist();
+        }
+
         if(plan.getId()!=null){
             name.setText(plan.getName());
             description.setText(plan.getDescription());
         }
+
         saveButton.setTag(plan);
         saveButton.setOnClickListener(onSaveListener);
-
-
-        Button cancelButton = (Button) findViewById(R.id.cancelEditPlan);
-        cancelButton.setOnClickListener(OCListener.getPlanListListener());
-
-        Button newPlanDayButton = (Button) findViewById(R.id.addPlanDay);
         newPlanDayButton.setTag(plan);
-        newPlanDayButton.setOnClickListener(OCListener.getNewPlanDayListener());
+        newPlanDayButton.setOnClickListener(OCListener.getInstance().getNewPlanDayListener());
+
         if(plan.getId()!=null) {
-            List<PlanDay> planDayList = DAOPlanDay.getAllPlanDaysByPlan(getApplicationContext(),plan.getId());
-            Log.d(LOG_TAG,"found " + planDayList.size() + " Plantage");
+            planDayList = DAOPlanDay.getAllPlanDaysByPlan(getApplicationContext(),plan.getId());
             initPlanDayList(planDayList);
         }
     }
+
+    private void setPlanExist(){
+        cancelButton.setText(getResources().getString(R.string.toPlanList));
+        newPlanDayButton.setEnabled(true);
+    }
+
 
     private void initPlanDayList(List<PlanDay> planDayList){
         PlanDayAdapter adapter = new PlanDayAdapter(this,
@@ -76,7 +86,7 @@ public class EditPlanActivity extends AppCompatActivity {
         ListView listView = (ListView)findViewById(R.id.planDays);
         listView.setAdapter(adapter);
         listView.setTag(planDayList);
-        listView.setOnItemClickListener(OCListener.getOpenPlanDayListener());
+        listView.setOnItemClickListener(listListener);
     }
 
     public Plan getPlan(){
@@ -88,20 +98,45 @@ public class EditPlanActivity extends AppCompatActivity {
         public void onClick(final View v) {
             try {
                 Plan plan = (Plan) v.getTag();
-                Log.d(LOG_TAG, "Planbeschreibung: "+name.getEditableText().toString());
-                plan.setName(name.getEditableText().toString());
+                String nameString = name.getEditableText().toString();
+                if(nameString.isEmpty()){
+                    Tools.showToast(v.getContext(),getString(R.string.fillName));
+                    Tools.setErrorColor(name,true);
+                    return;
+                }else{
+                    Tools.setErrorColor(name,false);
+                }
+                plan.setName(nameString);
+
                 plan.setDescription(description.getText().toString());
                 if(null == plan.getId()) {
                     plan.setId(UUID.randomUUID().toString());
                     plan.setCreatedon(new Date());
                     DAOPlan.newPlan(plan, v.getContext());
+                    setPlanExist();
                 }else{
                     DAOPlan.updatePlan(plan,v.getContext());
                 }
                 Log.d(LOG_TAG,"Plan gespeichert");
                 Tools.showToast(getApplicationContext(),getResources().getString(R.string.saveMessage));
+
             } catch (Exception e) {
                 Log.d(LOG_TAG, "Error in onSaveListener " + e);
+            }
+        }
+    };
+
+
+    private AdapterView.OnItemClickListener listListener = new  AdapterView.OnItemClickListener(){
+        @Override
+        public void onItemClick(AdapterView<?> parent, View view, int position, long id){
+            try {
+                PlanDay planDay = planDayList.get(position);
+                Intent nextScreen = new Intent(view.getContext(), EditPlanDayActivity.class);
+                nextScreen.putExtra("planDay", planDay.getId());
+                view.getContext().startActivity(nextScreen);
+            }catch(Exception e){
+                Log.d(LOG_TAG,"Error in getNewPlanListener " + e );
             }
         }
     };

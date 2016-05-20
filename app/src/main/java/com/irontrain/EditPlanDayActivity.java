@@ -4,14 +4,13 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.util.StringBuilderPrinter;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
-
 import com.irontrain.action.MenuListener;
 import com.irontrain.action.OCListener;
 import com.irontrain.adapter.PlanDayExerciceAdapter;
@@ -24,86 +23,126 @@ import com.irontrain.tools.Tools;
 import java.util.List;
 import java.util.UUID;
 
+
+/**
+ * Ebi
+ * Class handle EditPlanDay Activity
+ * fount all functionality here
+ * */
 public class EditPlanDayActivity extends AppCompatActivity {
     private EditText name;
     private EditText description;
-    private static final String LOG_TAG = EditPlanDayActivity.class.getSimpleName();
-
-
+    private final String LOG_TAG = EditPlanDayActivity.class.getSimpleName();
+    private Button cancelButton;
+    private Button addExerciceButton;
+    private List<PlanDayExercice> planDayExerciceList;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_plan_day);
         Intent i = getIntent();
+        //initialize Views
+        cancelButton = (Button) findViewById(R.id.cancelPlanDay);
+        Button saveButton = (Button)findViewById(R.id.savePlanDay);
+        addExerciceButton = (Button) findViewById(R.id.addExercice);
+
+        name = (EditText) findViewById(R.id.planDayName);
+        description = (EditText) findViewById(R.id.planDayDescription);
+
+
         // Receiving the Data
         PlanDay planDay;
         if(i.hasExtra("plan")){
             planDay = new PlanDay.Builder().plan(i.getExtras().getString("plan")).build();
         }else{
             String id = i.getExtras().getString("planDay");
-
             planDay = DAOPlanDay.getPlanDayById(getApplicationContext(),id);
+            setPlanDayExist();
         }
-
-        Button cancelButton = (Button) findViewById(R.id.cancelPlanDay);
         cancelButton.setTag(planDay.getPlan());
-        cancelButton.setOnClickListener(OCListener.getPlanListListener());
+        cancelButton.setOnClickListener(OCListener.getInstance().getOpenPlanByIdListener());
 
-        Button saveButton = (Button)findViewById(R.id.savePlanDay);
-        Button addExerciceButton = (Button) findViewById(R.id.addExercice);
         addExerciceButton.setTag(planDay);
-        addExerciceButton.setOnClickListener(OCListener.getNewExerciceListener());
-        name = (EditText) findViewById(R.id.planDayName);
-        description = (EditText) findViewById(R.id.planDayDescription);
+        addExerciceButton.setOnClickListener(OCListener.getInstance().getNewExerciceListener());
+
         if(planDay.getId()!=null){
             name.setText(planDay.getName());
             description.setText(planDay.getDescription());
         }
         saveButton.setTag(planDay);
         saveButton.setOnClickListener(onSaveListener);
-        if(null != planDay.getId()) {
-            List<PlanDayExercice> planDayExercices = DAOPlanDayExercice.getAllPlanDayExercicesByPlanDay(getApplicationContext(), planDay.getId());
-            initPlanDayExerciceList(planDayExercices);
-        }
 
+        if(null != planDay.getId()) {
+            planDayExerciceList = DAOPlanDayExercice.getAllPlanDayExercicesByPlanDay(getApplicationContext(), planDay.getId());
+            initPlanDayExerciceList();
+        }
     }
 
-    private void initPlanDayExerciceList(List<PlanDayExercice> planDayExerciceList){
+    private void setPlanDayExist(){
+        cancelButton.setText(getResources().getString(R.string.toPlan));
+        addExerciceButton.setEnabled(true);
+    }
+
+
+    private void initPlanDayExerciceList(){
         PlanDayExerciceAdapter adapter = new PlanDayExerciceAdapter(this,
                 R.layout.custom_planday_list_item, planDayExerciceList);
         ListView listView = (ListView)findViewById(R.id.planDayExercices);
         listView.setAdapter(adapter);
         listView.setTag(planDayExerciceList);
-        listView.setOnItemClickListener(OCListener.getOpenPlanDayExerciceListener());
+        listView.setOnItemClickListener(planDayExerciceListener);
     }
 
     private View.OnClickListener onSaveListener = new View.OnClickListener() {
         @Override
         public void onClick(final View v) {
-            savePlanDay(v,true);
+            savePlanDay(v);
         }
     };
 
-    private void savePlanDay(View v,boolean showMessage){
+    private void savePlanDay(View v){
         try {
             PlanDay planDay = (PlanDay) v.getTag();
-            planDay.setName(name.getEditableText().toString());
+            String nameString = name.getEditableText().toString();
+            if(nameString.isEmpty()){
+                Tools.showToast(v.getContext(),getString(R.string.fillName));
+                Tools.setErrorColor(name,true);
+                return;
+            }else{
+                Tools.setErrorColor(name,false);
+            }
+            planDay.setName(nameString);
             planDay.setDescription(description.getText().toString());
             if(null == planDay.getId()) {
-                Log.i(LOG_TAG,"h1 " + planDay.getName());
+                setPlanDayExist();
                 planDay.setId(UUID.randomUUID().toString());
                 DAOPlanDay.newPlanDay(planDay,getApplicationContext());
             }else{
                 DAOPlanDay.updatePlanDay(planDay,getApplicationContext());
             }
-            Log.d(LOG_TAG,"PlanDay gespeichert");
-            if(showMessage) {
-                Tools.showToast(getApplicationContext(),getString(R.string.saveMessage));
-            }
+            Tools.showToast(getApplicationContext(),getString(R.string.saveMessage));
         } catch (Exception e) {
             Log.d(LOG_TAG, "Error in savePlanDay " + e);
         }
     }
+
+    private AdapterView.OnItemClickListener planDayExerciceListener =  new  AdapterView.OnItemClickListener(){
+        @Override
+        public void onItemClick(AdapterView<?> parent, View view, int position, long id){
+            try {
+                PlanDayExercice planDayExercice = planDayExerciceList.get(position);
+                Intent nextScreen = new Intent(view.getContext(), EditPlanDayExerciceActivity.class);
+                nextScreen.putExtra("planDayExercice", planDayExercice.getId());
+                view.getContext().startActivity(nextScreen);
+            }catch(Exception e){
+                Log.d(LOG_TAG,"Error in planDayExerciceListener " + e );
+            }
+        }
+    };
+
+
+
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

@@ -27,4 +27,11 @@
     <string name="weight">Gewicht</string>
     <string name="finish">Abschliessen</string>
     <string name="home">Home</string>
+    <string name="plan_list">Plan Übersicht</string>
+    <string name="toPlanList">zur Planliste</string>
+    <string name="toPlanDay">zum Trainingstag</string>
+    <string name="toPlan">zum Plan</string>
+    <string name="planEditHeadline">Plan bearbeiten</string>
+    <string name="firstSave">bitte zuerst speichern</string>
+    <string name="fillName">Name muss gefüllt sein</string>
 </resources>

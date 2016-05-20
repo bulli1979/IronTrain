@@ -16,6 +16,7 @@ import java.util.List;
 
 /**
  * Created by Ebi on 06.03.2016.
+ * Class manages all DB Access for the Plan Business Object
  */
 public class DAOPlan {
     private static final String LOG_TAG = DAOPlan.class.getSimpleName();
@@ -46,6 +47,7 @@ public class DAOPlan {
 
     public static void updatePlan (Plan plan,Context context){
         try{
+            database = DBHelper.getInstance(context).getWritableDatabase();
             ContentValues cv = getDBValues(plan);
             database.insert(DBHelper.TABLE_PLAN, null, cv);
             database.close();
@@ -58,7 +60,7 @@ public class DAOPlan {
     public static List<Plan> getAllPlans(Context context){
         database = DBHelper.getInstance(context).getWritableDatabase();
         Cursor planc = database.query(DBHelper.TABLE_PLAN, null,null, null, null, null, null);
-        List<Plan> planList = new ArrayList<Plan>();
+        List<Plan> planList = new ArrayList<>();
         while (planc.moveToNext()) {
             planList.add(cursorToPlan(planc));
         }
