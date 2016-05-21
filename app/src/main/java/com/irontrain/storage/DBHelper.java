@@ -7,14 +7,13 @@ import android.util.Log;
 
 /**
  * Created by Ebi on 16.02.2016.
+ * Classs to handle db create update and usability for all activitys
  */
 public class DBHelper extends SQLiteOpenHelper {
     private static final String DATENBANK_NAME = "irontrain.db";
     private static final int DATENBANK_VERSION = 1;
     private static final String LOG_TAG = SQLiteOpenHelper.class.getSimpleName();
     private static DBHelper sINSTANCE;
-    private static Object sLOCK = "";
-
     public static final String COLUMN_ID = "id";
     public static final String COLUMN_DESCRIPTION = "description";
     public static final String COLUMN_NAME = "name";
@@ -65,13 +64,9 @@ public class DBHelper extends SQLiteOpenHelper {
     /**
      * Create an instance of the Helper MEB no way to get two time connections
      * */
-    public static DBHelper getInstance(Context context){
+    public static synchronized DBHelper getInstance(Context context){
         if(sINSTANCE == null){
-            synchronized (sLOCK){
-                if(sINSTANCE == null && context != null){
-                    sINSTANCE = new DBHelper(context.getApplicationContext());
-                }
-            }
+            sINSTANCE = new DBHelper(context.getApplicationContext());
         }
         return sINSTANCE;
     }
