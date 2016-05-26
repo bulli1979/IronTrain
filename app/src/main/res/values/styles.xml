@@ -64,7 +64,6 @@
 
     <style name="layoutBox">
         <item name="android:padding">5dp</item>
-        <item name="android:background">@color/colorBackground</item>
     </style>
 
     <style name="labelStyle">
