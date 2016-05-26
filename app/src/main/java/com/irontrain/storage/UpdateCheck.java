@@ -1,10 +1,9 @@
 package com.irontrain.storage;
 import android.os.AsyncTask;
 import android.util.Log;
-
+import android.view.View;
 import org.json.JSONArray;
 import org.json.JSONException;
-import org.json.JSONObject;
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -15,14 +14,15 @@ import java.net.URL;
 
 /**
  * Created by Ebi on 16.02.2016.
+ * AsyncTask to get JSON String for Exercices
+ * Call to Server and fill DB after this
+ *
  */
 public class UpdateCheck extends AsyncTask<String, Void, JSONArray> {
 
     private static final String LOG_TAG = UpdateCheck.class.getSimpleName();
-    private Exception exception;
-
-    private final String updatePath ="http://mirko-eberlein.de/fitnessplan.json"; // R.string.updateUrl; //
     public JSONArray doInBackground(String[] params){
+        String updatePath ="http://mirko-eberlein.de/fitnessplan.json";
         HttpURLConnection urlConnection = null;
         JSONArray json = null;
         try {
@@ -32,7 +32,6 @@ public class UpdateCheck extends AsyncTask<String, Void, JSONArray> {
             json = readStream(in);
         }catch(Exception e){
             Log.d(LOG_TAG, "Error in Update Prozess" + e);
-            exception = e;
         }
         if(urlConnection != null) {
             urlConnection.disconnect();
@@ -51,12 +50,6 @@ public class UpdateCheck extends AsyncTask<String, Void, JSONArray> {
         JSONArray json = new JSONArray(responseStrBuilder.toString());
         Log.d(LOG_TAG,json.toString());
         return json;
-    }
-
-
-    protected void onPostExecute(JSONObject json) {
-        // TODO: check this.exception
-        // TODO: do something with the feed
     }
 
 }

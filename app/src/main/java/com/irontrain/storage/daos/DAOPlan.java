@@ -74,7 +74,7 @@ public class DAOPlan {
         String name = pc.getString(pc.getColumnIndex(DBHelper.COLUMN_NAME));
         String description = pc.getString(pc.getColumnIndex(DBHelper.COLUMN_DESCRIPTION));
         String createdOnString = pc.getString(pc.getColumnIndex(DBHelper.COLUMN_CREATEDON));
-        Date createdOn = Tools.stringToDate(createdOnString);
+        Date createdOn = Tools.getInstance().stringToDate(createdOnString);
         return new Plan.Builder().createdOn(createdOn).description(description).name(name).id(id).build();
     }
 
@@ -84,7 +84,7 @@ public class DAOPlan {
         ContentValues cv = new ContentValues();
         cv.put(DBHelper.COLUMN_NAME, plan.getName());
         cv.put(DBHelper.COLUMN_DESCRIPTION, plan.getDescription());
-        cv.put(DBHelper.COLUMN_CREATEDON, Tools.dateToString(plan.getCreatedOn()));
+        cv.put(DBHelper.COLUMN_CREATEDON, Tools.getInstance().dateToString(plan.getCreatedOn()));
         cv.put(DBHelper.COLUMN_ID, plan.getId());
         return cv;
     }

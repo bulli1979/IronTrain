@@ -4,6 +4,7 @@ import java.util.Date;
 
 /**
  * Created by Ebi on 16.02.2016.
+ * Pojo Plan
  */
 public class Plan {
     private String id;
@@ -22,7 +23,7 @@ public class Plan {
     public static class Builder{
         private String id,name,description;
         private Date createdOn;
-        public Builder(){};
+        public Builder(){}
 
         public Builder id(String id){
             this.id = id;
@@ -37,9 +38,8 @@ public class Plan {
             return this;
         }
 
-
-        public Builder createdOn(Date cretedOn){
-            this.createdOn =createdOn;
+        public Builder createdOn(Date createdOn){
+            this.createdOn = createdOn;
             return this;
         }
 

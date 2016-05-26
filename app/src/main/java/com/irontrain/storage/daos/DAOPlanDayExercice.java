@@ -6,16 +6,15 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
-import com.irontrain.business.Exercice;
 import com.irontrain.business.PlanDayExercice;
 import com.irontrain.storage.DBHelper;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 /**
  * Created by Fabricio on 07.04.2016.
+ * Class to store and get PlanDayExerciceObjects from Database
  */
 public class DAOPlanDayExercice {
     private static final String LOG_TAG = DAOPlanDayExercice.class.getSimpleName();
@@ -37,7 +36,7 @@ public class DAOPlanDayExercice {
         database = DBHelper.getInstance(context).getWritableDatabase();
         String whereClauses = DBHelper.COLUMN_PLANDAY + "='" + planDay +"'";
         Cursor planDayCursor = database.query(DBHelper.TABLE_PLANDAY_EXERCICE, null,whereClauses, null, null, null, null);
-        List<PlanDayExercice> planDyList = new ArrayList<PlanDayExercice>();
+        List<PlanDayExercice> planDyList = new ArrayList<>();
         while (planDayCursor.moveToNext()) {
             planDyList.add(cursorToPlanDayExercice(planDayCursor));
         }

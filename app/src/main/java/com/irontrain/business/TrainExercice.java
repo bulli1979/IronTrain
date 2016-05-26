@@ -4,6 +4,7 @@ import java.util.List;
 
 /**
  * Created by Farbricio on 07.04.2016.
+ * Pojo for TrainExercice
  */
 public class TrainExercice {
     private String id;
@@ -59,10 +60,6 @@ public class TrainExercice {
 
     public String getPlanDayExercice() {
         return planDayExercice;
-    }
-
-    public void setPlanDayExercice(String planDayExercice) {
-        this.planDayExercice = planDayExercice;
     }
 
     public String getTrain() {

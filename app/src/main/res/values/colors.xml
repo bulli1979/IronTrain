@@ -6,6 +6,5 @@
     <color name="colorWhite">#FFFFFF</color>
     <color name="darkGrey">#333333</color>
     <color name="black">#000000</color>
-    <color name="colorBackground">#FFA441</color>
     <color name="colorErrorBackground">#FF7070</color>
 </resources>

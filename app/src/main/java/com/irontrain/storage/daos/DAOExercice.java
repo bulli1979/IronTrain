@@ -5,15 +5,13 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 import com.irontrain.business.Exercice;
-import com.irontrain.business.Plan;
 import com.irontrain.storage.DBHelper;
-
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 /**
  * Created by Ebi on 07.04.2016.
+ * Class to save and get Exercices from and to Databases
  */
 public class DAOExercice {
 
@@ -30,18 +28,6 @@ public class DAOExercice {
         return exercice;
     }
 
-    public static void updateExercice (Exercice exercice,Context context){
-        try {
-            database = DBHelper.getInstance(context).getWritableDatabase();
-            String whereClauses = DBHelper.COLUMN_ID + "='" + exercice.getId()+"'";
-            database.update(DBHelper.TABLE_EXERCICE, getDBValues(exercice), whereClauses, null);
-            database.close();
-        }catch(Exception e){
-            Log.d(LOG_TAG,"Fehler in saveOrUpdateExercice " + e.getMessage());
-        }
-    }
-
-
     public static void createExercice (Exercice exercice,Context context){
         try {
             database = DBHelper.getInstance(context).getWritableDatabase();
@@ -57,7 +43,7 @@ public class DAOExercice {
     public static List<Exercice> getAllExercices(Context context){
         database = DBHelper.getInstance(context).getWritableDatabase();
         Cursor exercicec = database.query(DBHelper.TABLE_EXERCICE, null,null, null, null, null, null);
-        List<Exercice> exerciceList = new ArrayList<Exercice>();
+        List<Exercice> exerciceList = new ArrayList<>();
         while (exercicec.moveToNext()) {
             exerciceList.add(cursorToExercice(exercicec));
         }

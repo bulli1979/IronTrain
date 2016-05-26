@@ -10,10 +10,10 @@ import android.util.Log;
  * Classs to handle db create update and usability for all activitys
  */
 public class DBHelper extends SQLiteOpenHelper {
+    private static DBHelper sINSTANCE;
     private static final String DATENBANK_NAME = "irontrain.db";
     private static final int DATENBANK_VERSION = 1;
     private static final String LOG_TAG = SQLiteOpenHelper.class.getSimpleName();
-    private static DBHelper sINSTANCE;
     public static final String COLUMN_ID = "id";
     public static final String COLUMN_DESCRIPTION = "description";
     public static final String COLUMN_NAME = "name";

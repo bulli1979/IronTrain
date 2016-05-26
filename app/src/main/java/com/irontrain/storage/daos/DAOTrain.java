@@ -11,10 +11,10 @@ import com.irontrain.business.Train;
 import com.irontrain.tools.Tools;
 
 import java.util.Date;
-import java.util.UUID;
 
 /**
  * Created by Ebi on 07.04.2016.
+ * Class to get and save Train Objects from and into Database
  */
 public class DAOTrain {
     private static final String LOG_TAG = DAOTrain.class.getSimpleName();
@@ -33,12 +33,8 @@ public class DAOTrain {
     public static void updateTrain (Train train,Context context){
         try {
             database = DBHelper.getInstance(context).getWritableDatabase();
-            if (train.getId() != null) {
-                String whereClauses = DBHelper.COLUMN_ID + "='" + train.getId()+"'";
-                database.update(DBHelper.TABLE_TRAIN, getDBValues(train), whereClauses, null);
-            } else {
-
-            }
+            String whereClauses = DBHelper.COLUMN_ID + "='" + train.getId()+"'";
+            database.update(DBHelper.TABLE_TRAIN, getDBValues(train), whereClauses, null);
             database.close();
         }catch(Exception e){
             Log.d(LOG_TAG,"Fehler in updateTrain " + e.getMessage());
@@ -60,14 +56,14 @@ public class DAOTrain {
         String id = trainCursor.getString(trainCursor.getColumnIndex(DBHelper.COLUMN_ID));
         String planDay = trainCursor.getString(trainCursor.getColumnIndex(DBHelper.COLUMN_PLANDAY));
         String createdOnString = trainCursor.getString(trainCursor.getColumnIndex(DBHelper.COLUMN_CREATEDON));
-        Date date = Tools.stringToDate(createdOnString);
+        Date date = Tools.getInstance().stringToDate(createdOnString);
         return new Train.Builder().id(id).planDay(planDay).date(date).build();
     }
 
     private static ContentValues getDBValues(Train train){
         ContentValues cv = new ContentValues();
         cv.put(DBHelper.COLUMN_PLANDAY, train.getPlanDay());
-        cv.put(DBHelper.COLUMN_DATE,Tools.dateToString(train.getDate()));
+        cv.put(DBHelper.COLUMN_DATE,Tools.getInstance().dateToString(train.getDate()));
         cv.put(DBHelper.COLUMN_ID, train.getId());
         return cv;
     }

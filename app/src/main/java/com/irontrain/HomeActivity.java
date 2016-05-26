@@ -26,7 +26,7 @@ public class HomeActivity extends AppCompatActivity {
         Button trainButton = (Button) findViewById(R.id.trainButton);
         updateButton.setOnClickListener(OCListener.getInstance().getUpdateListener());
         planListButton.setOnClickListener(OCListener.getInstance().getPlanListListener());
-        trainButton.setOnClickListener(OCListener.openTrainListener());
+        trainButton.setOnClickListener(OCListener.getInstance().openTrainListener());
     }
 
 

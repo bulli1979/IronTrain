@@ -101,8 +101,10 @@ public class ExerciceAdapter extends ArrayAdapter<Exercice> implements Filterabl
                 return new FilterResults();
             }
         }
+
         @Override
         protected void publishResults(CharSequence constraint, FilterResults results) {
+
             ArrayList<Exercice> filteredList = (ArrayList<Exercice>) results.values;
             if(results.count > 0) {
                 clear();

@@ -1,6 +1,8 @@
 package com.irontrain.business;
+
 /**
  * Created by Ebi on 16.02.2016.
+ * Pojo Exercice
  */
 public class Exercice {
     private String id;
@@ -9,7 +11,6 @@ public class Exercice {
     private String language;
     private int importnumber;
 
-    public Exercice(){}
     private Exercice(Builder builder){
         this.id = builder.id;
         this.name = builder.name;

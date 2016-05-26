@@ -118,11 +118,11 @@ public class EditPlanDayExerciceActivity extends AppCompatActivity {
             String exerciceName = exercicesView.getText().toString();
             //here handle selected Token
             if(exerciceName.isEmpty()){
-                Tools.showToast(v.getContext(),getString(R.string.fillName));
-                Tools.setErrorColor(exercicesView,true);
+                Tools.getInstance().showToast(v.getContext(),getString(R.string.fillName));
+                Tools.getInstance().setErrorColor(exercicesView,true);
                 return;
             }else{
-                Tools.setErrorColor(exercicesView,false);
+                Tools.getInstance().setErrorColor(exercicesView,false);
             }
             String exerciceId = chcekExercice(exerciceName);
             planDayExercice.setExercice(exerciceId);
@@ -134,7 +134,7 @@ public class EditPlanDayExerciceActivity extends AppCompatActivity {
                 DAOPlanDayExercice.updatePlanDayExercice(planDayExercice,getApplicationContext());
             }
             if(showMessage) {
-                Tools.showToast(getApplicationContext(),getString(R.string.saveMessage));
+                Tools.getInstance().showToast(getApplicationContext(),getString(R.string.saveMessage));
             }
         } catch (Exception e) {
             Log.d(LOG_TAG, "Error in savePlanDay " + e);

@@ -10,24 +10,15 @@ import com.irontrain.storage.DBHelper;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 /**
  * Created by Ebi on 07.04.2016.
+ * Class to save and get Objects into and from Database
  */
 public class DAOTrainExercice {
     private static final String LOG_TAG = DAOTrainExercice.class.getSimpleName();
     private static SQLiteDatabase database;
 
-    public static TrainExercice getTrainExerciceById(Context context, String id){
-        database = DBHelper.getInstance(context).getWritableDatabase();
-        Cursor trainExerciceCursor = database.query(DBHelper.TABLE_TRAIN, null,DBHelper.COLUMN_ID+"='"+id+"'", null, null, null, null);
-        trainExerciceCursor.moveToFirst();
-        TrainExercice trainExercice = cursorToTrainExercice(trainExerciceCursor);
-        trainExerciceCursor.close();
-        database.close();
-        return trainExercice;
-    }
 
     public static void updateTrainExercice (TrainExercice trainExercice,Context context){
         try {
@@ -55,7 +46,7 @@ public class DAOTrainExercice {
         database = DBHelper.getInstance(context).getWritableDatabase();
         String whereClauses = DBHelper.COLUMN_TRAIN + "='" + trainId +"'";
         Cursor trainExerciceCursor = database.query(DBHelper.TABLE_TRAINEXERCICE, null,whereClauses, null, null, null, null);
-        List<TrainExercice> trainExerciceList = new ArrayList<TrainExercice>();
+        List<TrainExercice> trainExerciceList = new ArrayList<>();
         while (trainExerciceCursor.moveToNext()) {
             trainExerciceList.add(cursorToTrainExercice(trainExerciceCursor));
         }

@@ -2,6 +2,7 @@ package com.irontrain.business;
 
 /**
  * Created by Ebi on 07.04.2016.
+ * Pojo Plan Day Exercice
  */
 public class PlanDayExercice {
     private String id;

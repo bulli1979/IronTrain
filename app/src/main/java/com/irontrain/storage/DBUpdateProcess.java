@@ -2,8 +2,6 @@ package com.irontrain.storage;
 
 import android.content.Context;
 import android.util.Log;
-import android.view.View;
-
 import com.irontrain.business.Exercice;
 import com.irontrain.storage.daos.DAOExercice;
 
@@ -20,14 +18,15 @@ import java.util.UUID;
  *
  */
 public class DBUpdateProcess {
-    private List<Integer> ids;
     private static final String LOG_TAG = DBUpdateProcess.class.getSimpleName();
 
     public int updateExercices(JSONArray arr,Context  context){
         List<Exercice> exercices = DAOExercice.getAllExercices(context);
-        return importExercices(exercices, arr,context);
+        return dbImport(exercices, arr,context);
     }
-    private int importExercices(List<Exercice> exercices,JSONArray jsonArray,Context context) {
+
+    private int dbImport(List<Exercice> exercices,JSONArray jsonArray,Context context) {
+        List<Integer> ids;
         int count = 0;
         try {
 
@@ -42,7 +41,7 @@ public class DBUpdateProcess {
                 JSONObject obj = jsonArray.getJSONObject(i);
                 if(!ids.contains(obj.getInt("importnumber"))) {
 
-                    Exercice exercice = new Exercice.Builder().id(UUID.randomUUID().toString()).name((String) obj.getJSONArray("name").getString(0))
+                    Exercice exercice = new Exercice.Builder().id(UUID.randomUUID().toString()).name(obj.getJSONArray("name").getString(0))
                             .description( obj.getJSONArray("description").getString(0)).importNumber(obj.getInt("importnumber")).build();
                     DAOExercice.createExercice(exercice,context);
                     count++;

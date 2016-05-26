@@ -8,7 +8,6 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import com.irontrain.R;
-import com.irontrain.business.Plan;
 import com.irontrain.business.PlanDay;
 
 import java.util.List;

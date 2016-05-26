@@ -105,11 +105,11 @@ public class EditPlanDayActivity extends AppCompatActivity {
             PlanDay planDay = (PlanDay) v.getTag();
             String nameString = name.getEditableText().toString();
             if(nameString.isEmpty()){
-                Tools.showToast(v.getContext(),getString(R.string.fillName));
-                Tools.setErrorColor(name,true);
+                Tools.getInstance().showToast(v.getContext(),getString(R.string.fillName));
+                Tools.getInstance().setErrorColor(name,true);
                 return;
             }else{
-                Tools.setErrorColor(name,false);
+                Tools.getInstance().setErrorColor(name,false);
             }
             planDay.setName(nameString);
             planDay.setDescription(description.getText().toString());
@@ -120,7 +120,7 @@ public class EditPlanDayActivity extends AppCompatActivity {
             }else{
                 DAOPlanDay.updatePlanDay(planDay,getApplicationContext());
             }
-            Tools.showToast(getApplicationContext(),getString(R.string.saveMessage));
+            Tools.getInstance().showToast(getApplicationContext(),getString(R.string.saveMessage));
         } catch (Exception e) {
             Log.d(LOG_TAG, "Error in savePlanDay " + e);
         }

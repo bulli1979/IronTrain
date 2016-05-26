@@ -11,25 +11,15 @@ import com.irontrain.storage.DBHelper;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 /**
  * Created by Ebi on 07.04.2016.
+ * Class to save and get Objects into and from Database
  */
 public class DAOTrainSet {
 
     private static final String LOG_TAG = TrainSet.class.getSimpleName();
     private static SQLiteDatabase database;
-
-    public static TrainSet getExerciceById(Context context, String id){
-        database = DBHelper.getInstance(context).getWritableDatabase();
-        Cursor cursor = database.query(DBHelper.TABLE_TRAINSET, null,DBHelper.COLUMN_ID+"='"+id+"'", null, null, null, null);
-        cursor.moveToFirst();
-        TrainSet trainSet = cursorToTrainSet(cursor);
-        cursor.close();
-        database.close();
-        return trainSet;
-    }
 
     public static void updateTrainSet (TrainSet trainSet,Context context){
         try {
@@ -55,7 +45,7 @@ public class DAOTrainSet {
         database = DBHelper.getInstance(context).getWritableDatabase();
         String whereClauses = DBHelper.COLUMN_TRAINEXERCICE + "='" + trainExerciceId +"'";
         Cursor trainSetCursor = database.query(DBHelper.TABLE_TRAINSET, null,whereClauses, null, null, null, null);
-        List<TrainSet> trainSetList = new ArrayList<TrainSet>();
+        List<TrainSet> trainSetList = new ArrayList<>();
         while (trainSetCursor.moveToNext()) {
             trainSetList.add(cursorToTrainSet(trainSetCursor));
         }

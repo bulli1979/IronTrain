@@ -19,7 +19,16 @@ import java.util.Locale;
 public class Tools {
     private static final String LOG_TAG = Tools.class.getSimpleName();
     private static final SimpleDateFormat formater = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
-    public static Date stringToDate(String dateString){
+
+    private static final Tools INSTANCE = new Tools();
+
+    private Tools(){}
+
+    public static synchronized Tools getInstance(){
+        return INSTANCE;
+    }
+
+    public Date stringToDate(String dateString){
         try{
             return formater.parse(dateString);
         }catch (Exception e){
@@ -28,11 +37,11 @@ public class Tools {
         }
     }
 
-    public static String dateToString(Date d){
+    public String dateToString(Date d){
         return formater.format(d);
     }
 
-    public static void showToast(Context context, String message){
+    public void showToast(Context context, String message){
         Toast toast = Toast.makeText(context,message,Toast.LENGTH_LONG);
         toast.setGravity(Gravity.BOTTOM, 0, 10);
         toast.show();
@@ -41,7 +50,7 @@ public class Tools {
     /**
      * Have to use depreacted function because supply android version 15 new functions are vor 21+
      * */
-    public static void setErrorColor(View view, boolean hasError){
+    public void setErrorColor(View view, boolean hasError){
         if(hasError){
             view.setBackgroundColor(view.getResources().getColor(R.color.colorErrorBackground));
         }else{

@@ -5,6 +5,7 @@ import java.util.List;
 
 /**
  * Created by Ebi on 07.04.2016.
+ * Pjo Train
  */
 public class Train {
     private String id;
@@ -57,10 +58,6 @@ public class Train {
 
     public Date getDate() {
         return date;
-    }
-
-    public void setDate(Date date) {
-        this.date = date;
     }
 
     public List<TrainExercice> getTrainExerciceList() {

@@ -2,6 +2,7 @@ package com.irontrain.business;
 
 /**
  * Created by Andreas on 07.04.2016.
+ * Pojo TrainSet
  */
 public class TrainSet {
     private String id;
@@ -59,16 +60,8 @@ public class TrainSet {
         return trainExercice;
     }
 
-    public void setTrainExercice(String trainExercice) {
-        this.trainExercice = trainExercice;
-    }
-
     public int getSetNr() {
         return setNr;
-    }
-
-    public void setSetNr(int setNr) {
-        this.setNr = setNr;
     }
 
     public float getWeight() {

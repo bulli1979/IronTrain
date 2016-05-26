@@ -92,7 +92,7 @@ public class DoTrainActivity extends AppCompatActivity {
         nextSet.setOnClickListener(nextSetListener);
         previousSet.setOnClickListener(previousSetListener);
         saveButton.setOnClickListener(onSaveListener);
-        cancelButton.setOnClickListener(OCListener.openTrainListener());
+        cancelButton.setOnClickListener(OCListener.getInstance().openTrainListener());
         finish.setOnClickListener(finishListener);
     }
 
@@ -133,8 +133,12 @@ public class DoTrainActivity extends AppCompatActivity {
         titleText.setText(planDay.getName());
         Log.d(LOG_TAG,"PlanDayName " + planDay.getName());
         TrainExercice exercice = trainExerciceList.get(currentExercice);
-        trainOverview.setText("Übung " + (currentExercice+1) + " von " +trainExerciceList.size());
-        exerciceTitleText.setText("Satz " + currentSet + " von " + exercice.getTrainSetList().size() + " " + exercice.getExerciceTitle());
+
+        String textOverview = getResources().getString(R.string.exerciceDisplay, (currentExercice+1), trainExerciceList.size());
+        trainOverview.setText(textOverview);
+        String textSet = getResources().getString(R.string.exerciceSetDisplay, exercice.getExerciceTitle(), currentSet,exercice.getTrainSetList().size());
+
+        exerciceTitleText.setText(textSet);
 
         exerciceDescription.setText(exercice.getExerciceDescription());
     }
@@ -208,7 +212,7 @@ public class DoTrainActivity extends AppCompatActivity {
             }
         }
         if(showMessage){
-            Tools.showToast(v.getContext(),getString(R.string.saveMessage));
+            Tools.getInstance().showToast(v.getContext(),getString(R.string.saveMessage));
         }
     }
 

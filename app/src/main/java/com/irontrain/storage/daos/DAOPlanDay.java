@@ -14,6 +14,7 @@ import java.util.List;
 
 /**
  * Created by Ebi on 07.04.2016.
+ * Class to sotre and get PlanDay Objects from SQLLite DB
  */
 public class DAOPlanDay {
     private static final String LOG_TAG = DAOPlanDay.class.getSimpleName();
@@ -54,11 +55,9 @@ public class DAOPlanDay {
 
     public static List<PlanDay> getAllPlanDaysByPlan(Context context,String plan){
         database = DBHelper.getInstance(context).getWritableDatabase();
-        Log.d(LOG_TAG,"planid " + plan);
         String whereClauses = DBHelper.COLUMN_PLAN + "='" + plan +"'";
         Cursor planDayCursor = database.query(DBHelper.TABLE_PLANDAY, null,whereClauses, null, null, null, null);
-        List<PlanDay> planDyList = new ArrayList<PlanDay>();
-        Log.d(LOG_TAG,"Anzahl: " + planDayCursor.getCount());
+        List<PlanDay> planDyList = new ArrayList<>();
         while (planDayCursor.moveToNext()) {
             planDyList.add(cursorToPlanDay(planDayCursor));
         }

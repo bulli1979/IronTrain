@@ -9,7 +9,6 @@ import android.widget.TextView;
 
 import com.irontrain.R;
 import com.irontrain.business.Exercice;
-import com.irontrain.business.PlanDay;
 import com.irontrain.business.PlanDayExercice;
 import com.irontrain.storage.daos.DAOExercice;
 
@@ -17,6 +16,7 @@ import java.util.List;
 
 /**
  * Created by Ebi on 24.04.2016.
+ * Adapater for PlanDay Exercice
  */
 
 public class PlanDayExerciceAdapter extends ArrayAdapter<PlanDayExercice> {

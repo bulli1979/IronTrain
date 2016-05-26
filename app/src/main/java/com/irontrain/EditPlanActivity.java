@@ -100,11 +100,11 @@ public class EditPlanActivity extends AppCompatActivity {
                 Plan plan = (Plan) v.getTag();
                 String nameString = name.getEditableText().toString();
                 if(nameString.isEmpty()){
-                    Tools.showToast(v.getContext(),getString(R.string.fillName));
-                    Tools.setErrorColor(name,true);
+                    Tools.getInstance().showToast(v.getContext(),getString(R.string.fillName));
+                    Tools.getInstance().setErrorColor(name,true);
                     return;
                 }else{
-                    Tools.setErrorColor(name,false);
+                    Tools.getInstance().setErrorColor(name,false);
                 }
                 plan.setName(nameString);
 
@@ -117,8 +117,7 @@ public class EditPlanActivity extends AppCompatActivity {
                 }else{
                     DAOPlan.updatePlan(plan,v.getContext());
                 }
-                Log.d(LOG_TAG,"Plan gespeichert");
-                Tools.showToast(getApplicationContext(),getResources().getString(R.string.saveMessage));
+                Tools.getInstance().showToast(getApplicationContext(),getResources().getString(R.string.saveMessage));
 
             } catch (Exception e) {
                 Log.d(LOG_TAG, "Error in onSaveListener " + e);

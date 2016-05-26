@@ -14,6 +14,7 @@ import java.util.List;
 
 /**
  * Created by Ebi on 24.04.2016.
+ * Adapter for Plan Day List
  */
 
 public class PlanDayAdapter extends ArrayAdapter<PlanDay> {
