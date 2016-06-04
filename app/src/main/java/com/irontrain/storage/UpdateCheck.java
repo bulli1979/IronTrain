@@ -1,7 +1,6 @@
 package com.irontrain.storage;
 import android.os.AsyncTask;
 import android.util.Log;
-import android.view.View;
 import org.json.JSONArray;
 import org.json.JSONException;
 import java.io.BufferedInputStream;

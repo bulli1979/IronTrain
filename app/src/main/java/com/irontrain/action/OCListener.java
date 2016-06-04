@@ -7,6 +7,7 @@ import com.irontrain.EditPlanDayExerciceActivity;
 import com.irontrain.EditPlanActivity;
 import com.irontrain.EditPlanDayActivity;
 import com.irontrain.R;
+import com.irontrain.StatsActivity;
 import com.irontrain.TrainActivity;
 import com.irontrain.business.Plan;
 import com.irontrain.business.PlanDay;
@@ -118,6 +119,22 @@ public class OCListener {
                 }catch(Exception e){
 
                     Log.d(LOG_TAG,"Error in getNewPlanListener " + e );
+                }
+            }
+        };
+        return oclistener;
+    }
+
+
+    public View.OnClickListener openStatsListener(){
+        oclistener = new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                try {
+                    Intent nextScreen = new Intent(v.getContext(), StatsActivity.class);
+                    v.getContext().startActivity(nextScreen);
+                }catch(Exception e){
+                    Log.d(LOG_TAG,"Error in openStatsListener " + e );
                 }
             }
         };

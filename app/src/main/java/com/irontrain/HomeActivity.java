@@ -24,9 +24,11 @@ public class HomeActivity extends AppCompatActivity {
         Button updateButton = (Button) findViewById(R.id.updateButton);
         Button planListButton = (Button) findViewById(R.id.planListButton);
         Button trainButton = (Button) findViewById(R.id.trainButton);
+        Button statsButton = (Button) findViewById(R.id.statsButton);
         updateButton.setOnClickListener(OCListener.getInstance().getUpdateListener());
         planListButton.setOnClickListener(OCListener.getInstance().getPlanListListener());
         trainButton.setOnClickListener(OCListener.getInstance().openTrainListener());
+        statsButton.setOnClickListener(OCListener.getInstance().openStatsListener());
     }
 
 

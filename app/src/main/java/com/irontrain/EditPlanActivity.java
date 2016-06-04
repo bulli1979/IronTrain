@@ -35,7 +35,7 @@ public class EditPlanActivity extends AppCompatActivity {
     private static final String LOG_TAG = EditPlanActivity.class.getSimpleName();
     private EditText name;
     private EditText description;
-    private  Button cancelButton;
+    private Button cancelButton;
     private Button newPlanDayButton;
     private List<PlanDay> planDayList;
     @Override

@@ -6,6 +6,7 @@ import android.util.Log;
 import com.irontrain.HomeActivity;
 import com.irontrain.PlanListActivity;
 import com.irontrain.R;
+import com.irontrain.StatsActivity;
 import com.irontrain.TrainActivity;
 import com.irontrain.storage.DBUpdateProcess;
 import com.irontrain.storage.UpdateCheck;
@@ -38,6 +39,8 @@ public class MenuListener {
                 activity.startActivity(nextScreen);
                 break;
             case R.id.action_stats :
+                nextScreen = new Intent(activity, StatsActivity.class);
+                activity.startActivity(nextScreen);
                 break;
             case R.id.action_train :
                 nextScreen = new Intent(activity, TrainActivity.class);

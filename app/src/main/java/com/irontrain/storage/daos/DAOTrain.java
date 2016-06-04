@@ -10,7 +10,9 @@ import com.irontrain.storage.DBHelper;
 import com.irontrain.business.Train;
 import com.irontrain.tools.Tools;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by Ebi on 07.04.2016.
@@ -22,10 +24,10 @@ public class DAOTrain {
 
     public static Train getTrainById(Context context, String id){
         database = DBHelper.getInstance(context).getWritableDatabase();
-        Cursor planDayCursor = database.query(DBHelper.TABLE_TRAIN, null,DBHelper.COLUMN_ID+"='"+id+"'", null, null, null, null);
-        planDayCursor.moveToFirst();
-        Train train = cursorToPlanDay(planDayCursor);
-        planDayCursor.close();
+        Cursor trainCursor = database.query(DBHelper.TABLE_TRAIN, null,DBHelper.COLUMN_ID+"='"+id+"'", null, null, null, null);
+        trainCursor.moveToFirst();
+        Train train = cursorToTrain(trainCursor);
+        trainCursor.close();
         database.close();
         return train;
     }
@@ -52,10 +54,24 @@ public class DAOTrain {
         }
     }
 
-    private static Train cursorToPlanDay(Cursor trainCursor){
+    public static List<Train> getAllTrains(Context context){
+        database = DBHelper.getInstance(context).getReadableDatabase();
+        Cursor trainListCursor = database.query(DBHelper.TABLE_TRAIN,null,null, null, null, null, null);
+        List<Train> trainList = new ArrayList<>();
+        Log.i(LOG_TAG,"here " + trainListCursor.getCount());
+        while (trainListCursor.moveToNext()) {
+            trainList.add(cursorToTrain(trainListCursor));
+        }
+        database.close();
+        return trainList;
+    }
+
+
+    private static Train cursorToTrain(Cursor trainCursor){
         String id = trainCursor.getString(trainCursor.getColumnIndex(DBHelper.COLUMN_ID));
+        Log.d(LOG_TAG,"found id " + id);
         String planDay = trainCursor.getString(trainCursor.getColumnIndex(DBHelper.COLUMN_PLANDAY));
-        String createdOnString = trainCursor.getString(trainCursor.getColumnIndex(DBHelper.COLUMN_CREATEDON));
+        String createdOnString = trainCursor.getString(trainCursor.getColumnIndex(DBHelper.COLUMN_DATE));
         Date date = Tools.getInstance().stringToDate(createdOnString);
         return new Train.Builder().id(id).planDay(planDay).date(date).build();
     }
