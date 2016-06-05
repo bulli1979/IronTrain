@@ -1,9 +1,14 @@
 package com.irontrain.business;
+
+import java.io.Serializable;
+
 /**
  * Created by Ebi on 16.02.2016.
  * Pojo Plan Day
  */
-public class PlanDay {
+public class PlanDay implements Serializable {
+
+    private static final long serialVersionUID = 1L;
     private String id;
     private String name;
     private String description;

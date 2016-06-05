@@ -4,6 +4,7 @@
 
 package com.irontrain.business;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
@@ -11,7 +12,10 @@ import java.util.List;
  * Created by Ebi on 04.06.2016.
  * Help Item to controll a train view and dont do to much connections to database
  */
-public class TrainItem {
+public class TrainItem implements Serializable{
+
+    private static final long serialVersionUID = 1L;
+
     private Plan plan;
     private PlanDay planDay;
     private List<Train> trains;

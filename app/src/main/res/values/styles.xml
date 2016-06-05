@@ -47,6 +47,7 @@
         <item name="android:divider">@color/colorWhite</item>
         <item name="android:dividerHeight">2dp</item>
     </style>
+
     <style name="listItemStyle">
         <item name="android:background">@drawable/custom_selector</item>
         <item name="android:textColor">@color/colorWhite</item>
@@ -80,6 +81,7 @@
         <item name="android:background">@color/colorSoftGrey</item>
         <item name="android:layout_marginBottom">5dp</item>
     </style>
+
     <style name="headLineStyle">
         <item name="android:textSize">18sp</item>
         <item name="android:textColor">@color/darkGrey</item>
@@ -87,6 +89,7 @@
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
     </style>
+
     <style name="spinnerStyle">
         <item name="android:layout_marginBottom">5dp</item>
         <item name="android:textSize">18sp</item>

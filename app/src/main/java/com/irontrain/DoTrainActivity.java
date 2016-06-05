@@ -120,6 +120,16 @@ public class DoTrainActivity extends AppCompatActivity {
         }
     }
 
+    private void checkFields(){
+        TrainSet act = trainExerciceList.get(currentExercice).getTrainSetList().get(currentSet-1);
+        float actweight = act.getWeight();
+        if(currentSet == 1 && actweight == 0){
+            //here found last exercice
+        }
+        exerciceWeight.setText(Float.toString(actweight));
+        exerciceRepeat.setText(Integer.toString(act.getRepeat()));
+    }
+
     private void fillTrain(){
         trainExerciceList = DAOTrainExercice.getTrainExercicesForTrain(getApplicationContext(),train.getId());
         for(TrainExercice trainExercice : trainExerciceList){
@@ -139,8 +149,8 @@ public class DoTrainActivity extends AppCompatActivity {
         String textSet = getResources().getString(R.string.exerciceSetDisplay, exercice.getExerciceTitle(), currentSet,exercice.getTrainSetList().size());
 
         exerciceTitleText.setText(textSet);
-
         exerciceDescription.setText(exercice.getExerciceDescription());
+        checkFields();
     }
 
     private View.OnClickListener onSaveListener = new View.OnClickListener() {
@@ -202,15 +212,13 @@ public class DoTrainActivity extends AppCompatActivity {
 
             for(TrainSet trainSet : exercice.getTrainSetList()){
                 if(isNew){
-                    DAOTrainSet.updateTrainSet(trainSet,getApplicationContext());
-                }else{
                     DAOTrainSet.creatTrainSet(trainSet,getApplicationContext());
+                }else{
+                    DAOTrainSet.updateTrainSet(trainSet,getApplicationContext());
                 }
             }
-            if(isNew){
-                isNew = false;
-            }
         }
+        isNew = false;
         if(showMessage){
             Tools.getInstance().showToast(v.getContext(),getString(R.string.saveMessage));
         }
@@ -220,6 +228,7 @@ public class DoTrainActivity extends AppCompatActivity {
         String repeat = exerciceRepeat.getText().toString();
         String weight = exerciceWeight.getText().toString();
         TrainSet trainSet = trainExerciceList.get(currentExercice).getTrainSetList().get(currentSet - 1);
+        Log.d(LOG_TAG,"SetNr. " + trainSet.getSetNr() + " ex " + currentExercice);
         if (!weight.isEmpty()) {
             trainSet.setWeight(Float.parseFloat(weight));
         }
@@ -271,6 +280,7 @@ public class DoTrainActivity extends AppCompatActivity {
 
 
     private void finishTrain(View v){
+        train.setFinished(true);
         saveTrain(v,false);
         Intent nextScreen = new Intent(v.getContext(), TrainActivity.class);
         v.getContext().startActivity(nextScreen);

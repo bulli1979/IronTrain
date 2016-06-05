@@ -2,43 +2,41 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.irontrain"
     android:versionName="0.1.0">
+
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <uses-feature
         android:glEsVersion="0x00030000"
-        android:required="true"/>
+        android:required="true" />
+
     <application
         android:allowBackup="true"
         android:icon="@drawable/icon"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity
-            android:name=".HomeActivity">
+        <activity android:name=".HomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".EditPlanActivity" />
+        <activity android:name=".PlanListActivity" />
+        <activity android:name=".EditPlanDayActivity" />
+        <activity android:name=".StatsActivity" />
+        <activity android:name=".EditPlanDayExerciceActivity" />
+        <activity android:name=".TrainActivity" />
+        <activity android:name=".DoTrainActivity" />
         <activity
-            android:name=".EditPlanActivity">
-        </activity>
-        <activity
-            android:name=".PlanListActivity"/>
-        <activity
-            android:name=".EditPlanDayActivity"/>
-        <activity
-            android:name=".StatsActivity"/>
-        <activity
-            android:name=".EditPlanDayExerciceActivity"/>
-        <activity android:name=".TrainActivity"/>
-        <activity
-            android:name=".DoTrainActivity"/>
+            android:name=".StatsDetailActivity"
+            android:label="@string/title_activity_stats_detail"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

@@ -58,4 +58,12 @@ public class Tools {
         }
     }
 
+    public int booleanToInt(boolean value){
+         return value ? 1 : 0;
+    }
+
+    public boolean intToBoolean(int value){
+        return value==1 ? true : false;
+    }
+
 }

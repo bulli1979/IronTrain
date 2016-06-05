@@ -31,8 +31,8 @@ import java.util.UUID;
  * controll all Items and click Events in this view
  */
 public class EditPlanActivity extends AppCompatActivity {
-    private Plan plan;
     private static final String LOG_TAG = EditPlanActivity.class.getSimpleName();
+    private Plan plan;
     private EditText name;
     private EditText description;
     private Button cancelButton;
@@ -58,17 +58,15 @@ public class EditPlanActivity extends AppCompatActivity {
             setPlanExist();
         }
 
-        if(plan.getId()!=null){
-            name.setText(plan.getName());
-            description.setText(plan.getDescription());
-        }
-
-        saveButton.setTag(plan);
-        saveButton.setOnClickListener(onSaveListener);
-        newPlanDayButton.setTag(plan);
-        newPlanDayButton.setOnClickListener(OCListener.getInstance().getNewPlanDayListener());
-
-        if(plan.getId()!=null) {
+        if(plan != null){
+            if(plan.getId()!=null) {
+                name.setText(plan.getName());
+                description.setText(plan.getDescription());
+            }
+            saveButton.setTag(plan);
+            saveButton.setOnClickListener(onSaveListener);
+            newPlanDayButton.setTag(plan);
+            newPlanDayButton.setOnClickListener(OCListener.getInstance().getNewPlanDayListener());
             planDayList = DAOPlanDay.getAllPlanDaysByPlan(getApplicationContext(),plan.getId());
             initPlanDayList(planDayList);
         }

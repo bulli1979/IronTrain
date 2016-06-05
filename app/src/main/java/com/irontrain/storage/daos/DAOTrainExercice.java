@@ -47,6 +47,7 @@ public class DAOTrainExercice {
         String whereClauses = DBHelper.COLUMN_TRAIN + "='" + trainId +"'";
         Cursor trainExerciceCursor = database.query(DBHelper.TABLE_TRAINEXERCICE, null,whereClauses, null, null, null, null);
         List<TrainExercice> trainExerciceList = new ArrayList<>();
+        Log.d(LOG_TAG,"anzahl " + trainExerciceCursor.getCount());
         while (trainExerciceCursor.moveToNext()) {
             trainExerciceList.add(cursorToTrainExercice(trainExerciceCursor));
         }

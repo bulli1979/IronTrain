@@ -30,7 +30,7 @@ public class DBHelper extends SQLiteOpenHelper {
     public static final String COLUMN_WEIGHT = "weight";
     public static final String COLUMN_REPEATS = "repeats";
     public static final String COLUMN_SETCOUNT = "setCount";
-
+    public static final String COLUMN_TRAINFINISHED = "finished";
     public static final String TABLE_PLAN = "Plan";
     public static final String TABLE_PLANDAY = "PlanDay";
     public static final String TABLE_EXERCICE = "Exercice";
@@ -52,7 +52,7 @@ public class DBHelper extends SQLiteOpenHelper {
         db.execSQL("CREATE TABLE if not exists `" + TABLE_PLAN + "` (`" + COLUMN_ID + "` TEXT,`" + COLUMN_NAME + "` TEXT,`" + COLUMN_DESCRIPTION + "` TEXT,`" + COLUMN_CREATEDON + "` TEXT,PRIMARY KEY("+COLUMN_ID+"));");
         db.execSQL("CREATE TABLE if not exists `" + TABLE_PLANDAY + "` (`" + COLUMN_ID + "` TEXT,`" + COLUMN_NAME + "` TEXT,`" + COLUMN_DESCRIPTION + "` TEXT,`"+COLUMN_PLAN+"` TEXT,PRIMARY KEY("+COLUMN_ID+"));");
         db.execSQL("CREATE TABLE if not exists `" + TABLE_PLANDAY_EXERCICE + "` (`" + COLUMN_ID + "` TEXT PRIMARY KEY ,`" + COLUMN_PLANDAY + "` TEXT,`" + COLUMN_EXERCICE + "` TEXT,`" + COLUMN_SETCOUNT + "` INTEGER,`" + COLUMN_REPEATS + "` TEXT,`" + COLUMN_DESCRIPTION + "` TEXT);");
-        db.execSQL("CREATE TABLE if not exists `" + TABLE_TRAIN + "` (`"+COLUMN_ID+"` TEXT PRIMARY KEY ,`"+COLUMN_DATE+"` TEXT,`"+COLUMN_PLANDAY+"` TEXT);");
+        db.execSQL("CREATE TABLE if not exists `" + TABLE_TRAIN + "` (`"+COLUMN_ID+"` TEXT PRIMARY KEY ,`"+COLUMN_DATE+"` TEXT,`"+COLUMN_PLANDAY+"` TEXT,`"+COLUMN_TRAINFINISHED+"` INTEGER);");
         db.execSQL("CREATE TABLE if not exists `" + TABLE_TRAINEXERCICE + "` (`" + COLUMN_ID + "` TEXT PRIMARY KEY ,`" + COLUMN_PLANDAYEXERCICE + "` TEXT,`" + COLUMN_TRAIN + "` TEXT);");
         db.execSQL("CREATE TABLE if not exists `" + TABLE_TRAINSET + "` (`" + COLUMN_ID + "` TEXT PRIMARY KEY ,`" + COLUMN_TRAINEXERCICE + "` TEXT,`" + COLUMN_SETNR + "` INTEGER,`" + COLUMN_WEIGHT + "` NUMERIC,`" + COLUMN_REPEATS + "` INTEGER);");
     }

@@ -1,12 +1,15 @@
 package com.irontrain.business;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
  * Created by Ebi on 16.02.2016.
  * Pojo Plan
  */
-public class Plan {
+public class Plan implements Serializable {
+
+    private static final long serialVersionUID = 1L;
     private String id;
     private String name;
     private String description;

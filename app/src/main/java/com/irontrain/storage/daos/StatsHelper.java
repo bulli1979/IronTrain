@@ -4,6 +4,8 @@
 package com.irontrain.storage.daos;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
+
 import com.irontrain.business.Train;
 import com.irontrain.business.TrainExercice;
 import com.irontrain.business.TrainItem;
@@ -19,6 +21,8 @@ import java.util.Map;
  * Class to get information for Stats read only
  */
 public class StatsHelper {
+    private static final String TAG = StatsHelper.class.getSimpleName();
+
     public static List<TrainItem> getTrainOverView(Context context){
         Map<String,TrainItem> itemsMap = new HashMap<>();
         List<TrainItem> itemList = new ArrayList<>();
@@ -46,6 +50,7 @@ public class StatsHelper {
     //get complet trainInformations
     private static void addSubItems(Train train,Context context){
         List<TrainExercice> exerciceList = DAOTrainExercice.getTrainExercicesForTrain(context,train.getId());
+        Log.d(TAG,"anzahl trainings " + exerciceList.size());
         for(TrainExercice te : exerciceList){
             List<TrainSet> trainSetList= DAOTrainSet.getTrainSetForTrainExercice(context,te.getId());
             te.setTrainSetList(trainSetList);

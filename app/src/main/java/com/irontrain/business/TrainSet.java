@@ -1,10 +1,13 @@
 package com.irontrain.business;
 
+import java.io.Serializable;
+
 /**
  * Created by Andreas on 07.04.2016.
  * Pojo TrainSet
  */
-public class TrainSet {
+public class TrainSet implements Serializable{
+    private static final long serialVersionUID = 1L;
     private String id;
     private String trainExercice;
     private int setNr,repeat;

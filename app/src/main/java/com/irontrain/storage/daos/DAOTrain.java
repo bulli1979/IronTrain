@@ -56,7 +56,8 @@ public class DAOTrain {
 
     public static List<Train> getAllTrains(Context context){
         database = DBHelper.getInstance(context).getReadableDatabase();
-        Cursor trainListCursor = database.query(DBHelper.TABLE_TRAIN,null,null, null, null, null, null);
+        String whereClauses = DBHelper.COLUMN_TRAINFINISHED + "=1";
+        Cursor trainListCursor = database.query(DBHelper.TABLE_TRAIN,null,whereClauses, null, null,null, DBHelper.COLUMN_DATE, null);
         List<Train> trainList = new ArrayList<>();
         Log.i(LOG_TAG,"here " + trainListCursor.getCount());
         while (trainListCursor.moveToNext()) {
@@ -73,7 +74,8 @@ public class DAOTrain {
         String planDay = trainCursor.getString(trainCursor.getColumnIndex(DBHelper.COLUMN_PLANDAY));
         String createdOnString = trainCursor.getString(trainCursor.getColumnIndex(DBHelper.COLUMN_DATE));
         Date date = Tools.getInstance().stringToDate(createdOnString);
-        return new Train.Builder().id(id).planDay(planDay).date(date).build();
+        boolean finished = Tools.getInstance().intToBoolean(trainCursor.getInt(trainCursor.getColumnIndex(DBHelper.COLUMN_TRAINFINISHED)));
+        return new Train.Builder().id(id).planDay(planDay).date(date).finished(finished).build();
     }
 
     private static ContentValues getDBValues(Train train){
@@ -81,6 +83,7 @@ public class DAOTrain {
         cv.put(DBHelper.COLUMN_PLANDAY, train.getPlanDay());
         cv.put(DBHelper.COLUMN_DATE,Tools.getInstance().dateToString(train.getDate()));
         cv.put(DBHelper.COLUMN_ID, train.getId());
+        cv.put(DBHelper.COLUMN_TRAINFINISHED,Tools.getInstance().booleanToInt(train.isFinished()));
         return cv;
     }
 

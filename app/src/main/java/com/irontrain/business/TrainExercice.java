@@ -1,12 +1,14 @@
 package com.irontrain.business;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * Created by Farbricio on 07.04.2016.
  * Pojo for TrainExercice
  */
-public class TrainExercice {
+public class TrainExercice implements Serializable{
+    private static final long serialVersionUID = 1L;
     private String id;
     private String planDayExercice;
     private String train;
