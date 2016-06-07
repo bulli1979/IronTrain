@@ -240,7 +240,9 @@ public class DoTrainActivity extends AppCompatActivity {
     private void nextSet(){
         fillSet();
         if(currentSet < trainExerciceList.get(currentExercice).getTrainSetList().size()){
+            float lastWeight = trainExerciceList.get(currentExercice).getTrainSetList().get(currentSet-1).getWeight();
             currentSet++;
+            trainExerciceList.get(currentExercice).getTrainSetList().get(currentSet-1).setWeight(lastWeight);
         }else{
             currentSet=1;
         }

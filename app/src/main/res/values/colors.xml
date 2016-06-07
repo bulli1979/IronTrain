@@ -7,4 +7,21 @@
     <color name="darkGrey">#333333</color>
     <color name="black">#000000</color>
     <color name="colorErrorBackground">#FF7070</color>
+    <color name="statsColor1">#FF7070</color>
+    <color name="statsColor2">#303F9F</color>
+    <color name="statsColor3">#FF2020</color>
+    <color name="statsColor4">#FF0000</color>
+    <color name="statsColor5">#CC7070</color>
+    <color name="statsColor6">#CC7070</color>
+    <color name="statsColor7">#707000</color>
+    <color name="statsColor8">#707070</color>
+    <color name="statsColor9">#507070</color>
+    <color name="statsColor10">#407070</color>
+    <color name="statsColor11">#107070</color>
+    <color name="statsColor12">#101070</color>
+    <color name="statsColor13">#103030</color>
+    <color name="statsColor14">#00DD70</color>
+    <color name="statsColor15">#99CC33</color>
+
+
 </resources>

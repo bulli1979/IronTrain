@@ -8,11 +8,14 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
+import android.view.MenuItem;
+
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
+import com.irontrain.action.MenuListener;
 import com.irontrain.business.GraphObject;
 import com.irontrain.business.Train;
 import com.irontrain.business.TrainExercice;
@@ -31,8 +34,9 @@ public class StatsDetailActivity extends AppCompatActivity {
     private final String TAG = StatsDetailActivity.class.getSimpleName();
     private List<String> dateLabels = new ArrayList();
     private Map<String,GraphObject> graphMap = new HashMap();
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_stats_detail);
 
@@ -41,14 +45,16 @@ public class StatsDetailActivity extends AppCompatActivity {
         LineChart chart = (LineChart)findViewById(R.id.chart);
 
         List<ILineDataSet> dataSets = new ArrayList<>();
+        int count = 0;
         for(Map.Entry e : graphMap.entrySet()){
             GraphObject graphObj = (GraphObject)e.getValue();
-            Log.d(TAG,"Name: " + graphObj.getExerciceName());
             LineDataSet dataset = new LineDataSet(graphObj.getEntries(), graphObj.getExerciceName());
+            dataset.setColor(Tools.getInstance().getColor(count,this));
+            count++;
             dataSets.add(dataset);
 
         }
-        Log.d(TAG,"Anzahl sets " + dataSets.size());
+        Log.d(TAG,"Anzahl sets " + dataSets.size() + " und " + dateLabels.size());
         LineData data = new LineData(dateLabels, dataSets);
         chart.setData(data);
         chart.setDescription("Übersicht für " + item.getPlanDay().getName());
@@ -57,6 +63,7 @@ public class StatsDetailActivity extends AppCompatActivity {
 
     private List<LineDataSet> createLineDataSets(TrainItem item){
         float weight;
+        Log.d(TAG,"Anzahl Trainings detail " + item.getTrains().size());
         for(Train train : item.getTrains()){
 
             dateLabels.add(Tools.getInstance().dateToString(train.getDate()));
@@ -93,5 +100,14 @@ public class StatsDetailActivity extends AppCompatActivity {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_home, menu);
         return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Menuitem
+        int id = item.getItemId();
+        //noinspection SimplifiableIfStatement
+        MenuListener.getActionMenuComplete(this,id);
+        return super.onOptionsItemSelected(item);
     }
 }

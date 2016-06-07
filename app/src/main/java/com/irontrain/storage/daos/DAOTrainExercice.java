@@ -60,7 +60,9 @@ public class DAOTrainExercice {
         String id = trainExerciceCursor.getString(trainExerciceCursor.getColumnIndex(DBHelper.COLUMN_ID));
         String planDayExercice = trainExerciceCursor.getString(trainExerciceCursor.getColumnIndex(DBHelper.COLUMN_PLANDAYEXERCICE));
         String train = trainExerciceCursor.getString(trainExerciceCursor.getColumnIndex(DBHelper.COLUMN_TRAIN));
-        return new TrainExercice.Builder().id(id).planDayExercice(planDayExercice).train(train).build();
+        String exerciceName = trainExerciceCursor.getString(trainExerciceCursor.getColumnIndex(DBHelper.COLUMN_EXERCICENAME));
+        String exerciceDescription = trainExerciceCursor.getString(trainExerciceCursor.getColumnIndex(DBHelper.COLUMN_EXERCICEDESCRIPTION));
+        return new TrainExercice.Builder().id(id).planDayExercice(planDayExercice).train(train).exerciceTitle(exerciceName).exerciceDescription(exerciceDescription).build();
     }
 
     private static ContentValues getDBValues(TrainExercice trainExercice){
@@ -68,6 +70,8 @@ public class DAOTrainExercice {
         cv.put(DBHelper.COLUMN_PLANDAYEXERCICE,trainExercice.getPlanDayExercice());
         cv.put(DBHelper.COLUMN_TRAIN, trainExercice.getTrain());
         cv.put(DBHelper.COLUMN_ID, trainExercice.getId());
+        cv.put(DBHelper.COLUMN_EXERCICENAME,trainExercice.getExerciceTitle());
+        cv.put(DBHelper.COLUMN_EXERCICEDESCRIPTION,trainExercice.getExerciceDescription());
         return cv;
     }
 

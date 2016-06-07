@@ -27,6 +27,7 @@ public class StatsHelper {
         Map<String,TrainItem> itemsMap = new HashMap<>();
         List<TrainItem> itemList = new ArrayList<>();
         List<Train> trainList = DAOTrain.getAllTrains(context);
+        Log.d(TAG,"anzahl Trainings helper " + trainList.size());
         for(Train train : trainList){
             addSubItems(train,context);
             String planDayId = train.getPlanDay();
@@ -50,9 +51,12 @@ public class StatsHelper {
     //get complet trainInformations
     private static void addSubItems(Train train,Context context){
         List<TrainExercice> exerciceList = DAOTrainExercice.getTrainExercicesForTrain(context,train.getId());
-        Log.d(TAG,"anzahl trainings " + exerciceList.size());
+
+        Log.d(TAG,"anzahl Übungen " + exerciceList.size() + " für training " + train.getId() + " " + train.getDate());
         for(TrainExercice te : exerciceList){
-            List<TrainSet> trainSetList= DAOTrainSet.getTrainSetForTrainExercice(context,te.getId());
+            Log.d(TAG,"Übung " + te.getExerciceTitle());
+
+            List<TrainSet> trainSetList = DAOTrainSet.getTrainSetForTrainExercice(context,te.getId());
             te.setTrainSetList(trainSetList);
         }
         train.setTrainExerciceList(exerciceList);

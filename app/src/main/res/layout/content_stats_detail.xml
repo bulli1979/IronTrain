@@ -3,7 +3,7 @@
   ~ You can use only script parts but do not copy the application. All rights reserved by Mirko Eberlein.
   -->
 
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -15,10 +15,19 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".StatsDetailActivity"
     tools:showIn="@layout/activity_stats_detail">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/save"/>
     <com.github.mikephil.charting.charts.LineChart
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="300dp"
         android:id="@+id/chart">
 
     </com.github.mikephil.charting.charts.LineChart>
-</RelativeLayout>
+    </LinearLayout>
+</LinearLayout>

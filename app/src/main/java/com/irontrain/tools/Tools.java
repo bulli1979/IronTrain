@@ -19,7 +19,7 @@ import java.util.Locale;
 public class Tools {
     private static final String LOG_TAG = Tools.class.getSimpleName();
     private static final SimpleDateFormat formater = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
-
+    private int[] colorList;
     private static final Tools INSTANCE = new Tools();
 
     private Tools(){}
@@ -56,6 +56,36 @@ public class Tools {
         }else{
             view.setBackgroundColor(view.getResources().getColor(R.color.colorSoftGrey));
         }
+    }
+
+    public int getColor(int nr,Context context){
+        if(colorList==null){
+            initColorList(context);
+        }
+
+        if(nr>colorList.length){
+            nr=0;
+        }
+        return colorList[nr];
+    }
+
+    private void initColorList(Context context){
+        colorList = new int[15];
+        colorList[0]=  context.getResources().getColor(R.color.statsColor1);
+        colorList[1]=  context.getResources().getColor(R.color.statsColor2);
+        colorList[2]=  context.getResources().getColor(R.color.statsColor3);
+        colorList[3]=  context.getResources().getColor(R.color.statsColor4);
+        colorList[4]=  context.getResources().getColor(R.color.statsColor5);
+        colorList[5]=  context.getResources().getColor(R.color.statsColor6);
+        colorList[6]=  context.getResources().getColor(R.color.statsColor7);
+        colorList[7]=  context.getResources().getColor(R.color.statsColor8);
+        colorList[8]=  context.getResources().getColor(R.color.statsColor9);
+        colorList[9]=  context.getResources().getColor(R.color.statsColor10);
+        colorList[10]=  context.getResources().getColor(R.color.statsColor11);
+        colorList[11]=  context.getResources().getColor(R.color.statsColor12);
+        colorList[12]=  context.getResources().getColor(R.color.statsColor13);
+        colorList[13]=  context.getResources().getColor(R.color.statsColor14);
+        colorList[14]=  context.getResources().getColor(R.color.statsColor15);
     }
 
     public int booleanToInt(boolean value){

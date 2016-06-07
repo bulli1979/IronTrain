@@ -35,8 +35,7 @@
         <activity android:name=".DoTrainActivity" />
         <activity
             android:name=".StatsDetailActivity"
-            android:label="@string/title_activity_stats_detail"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:label="@string/title_activity_stats_detail" />
     </application>
 
 </manifest>
