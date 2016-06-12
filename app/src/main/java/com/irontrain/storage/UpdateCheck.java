@@ -12,10 +12,11 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 /**
- * Created by Ebi on 16.02.2016.
+ * Created by Mirko Eberlein on 16.02.2016.
  * AsyncTask to get JSON String for Exercices
  * Call to Server and fill DB after this
- *
+ * Server will be updatet in a other program not part of this project
+ * Verantwortlich: Mirko Eberlein
  */
 public class UpdateCheck extends AsyncTask<String, Void, JSONArray> {
 

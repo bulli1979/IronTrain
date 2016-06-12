@@ -13,8 +13,9 @@ import com.irontrain.storage.UpdateCheck;
 import com.irontrain.tools.Tools;
 import org.json.JSONArray;
 /**
- * Created by Ebi on 19.05.2016.
+ * Created by Mirko Eberlein on 19.05.2016.
  * Listener for Menu needed in all applications who display menu
+ * Verantwortlich Mirko Eberlein
  */
 public class MenuListener {
     private static MenuListener ourInstance = new MenuListener();

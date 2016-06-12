@@ -25,10 +25,11 @@ import java.util.List;
 import java.util.UUID;
 
 /**
+ * created by Mirko Eberlein
  * PlanDayExercice Activity
  * save update and select Exercice handling here.
  * insert own name crete automaticly an exercice
- *
+ * Verantwortlich: Andreas Züger
  * */
 
 public class EditPlanDayExerciceActivity extends AppCompatActivity {
@@ -46,18 +47,18 @@ public class EditPlanDayExerciceActivity extends AppCompatActivity {
         setContentView(R.layout.activity_edit_exercice);
         // Receiving the Data
         PlanDayExercice planDayExercice;
-        setCountView = (EditText)findViewById(R.id.exerciceSet);
-        repeatView = (EditText)findViewById(R.id.exerciceRepeats);
-        exerciceDescriptionView = (EditText)findViewById(R.id.ExerciceDescription);
+        setCountView = (EditText) findViewById(R.id.exerciceSet);
+        repeatView = (EditText) findViewById(R.id.exerciceRepeats);
+        exerciceDescriptionView = (EditText) findViewById(R.id.ExerciceDescription);
         exerciceList = DAOExercice.getAllExercices(getApplicationContext());
-        exercicesView = (AutoCompleteTextView)findViewById(R.id.exerciceName);
-        cancelButton = (Button)findViewById(R.id.cancel);
+        exercicesView = (AutoCompleteTextView) findViewById(R.id.exerciceName);
+        cancelButton = (Button) findViewById(R.id.cancel);
 
-        if(i.hasExtra("planDay")){
+        if (i.hasExtra("planDay")) {
             planDayExercice = new PlanDayExercice.Builder().planDay(i.getExtras().getString("planDay")).build();
-        }else{
+        } else {
             setPlanDayExist();
-            planDayExercice = DAOPlanDayExercice.getPlanDayById(getApplicationContext(),i.getStringExtra("planDayExercice"));
+            planDayExercice = DAOPlanDayExercice.getPlanDayById(getApplicationContext(), i.getStringExtra("planDayExercice"));
             setCountView.setText(String.valueOf(planDayExercice.getSetCount()));
             repeatView.setText(planDayExercice.getRepeat());
             exerciceDescriptionView.setText(planDayExercice.getDescription());
@@ -65,9 +66,11 @@ public class EditPlanDayExerciceActivity extends AppCompatActivity {
         }
         String planDay = planDayExercice.getPlanDay();
         initExerciceAutoComplete(exerciceList);
-        Button saveButton = (Button)findViewById(R.id.saveExercice);
-        saveButton.setTag(planDayExercice);
-        saveButton.setOnClickListener(onSaveListener);
+        Button saveButton = (Button) findViewById(R.id.saveExercice);
+        if (saveButton != null) {
+            saveButton.setTag(planDayExercice);
+            saveButton.setOnClickListener(onSaveListener);
+        }
         cancelButton.setTag(planDay);
         cancelButton.setOnClickListener(OCListener.getInstance().getOpenPlanDayDirectListener());
     }

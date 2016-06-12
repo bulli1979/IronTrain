@@ -13,8 +13,10 @@ import com.irontrain.business.PlanDay;
 import java.util.List;
 
 /**
- * Created by Ebi on 24.04.2016.
- * adapter for planlist handle plan item
+ * Created by Mirko Eberlein on 24.04.2016.
+ * adapter for planspinner for select in train
+ * creates an spinner
+ * Verantwortlich: Frabricio Ruch
  */
 
 public class PlanDaySpinnerAdapter extends ArrayAdapter<PlanDay> {

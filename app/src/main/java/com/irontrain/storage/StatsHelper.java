@@ -1,24 +1,34 @@
 /*
  * You can use only script parts but do not copy the application. All rights reserved by Mirko Eberlein.
  */
-package com.irontrain.storage.daos;
+
+/*
+ * You can use only script parts but do not copy the application. All rights reserved by Mirko Eberlein.
+ */
+package com.irontrain.storage;
 import android.content.Context;
-import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
 import com.irontrain.business.Train;
 import com.irontrain.business.TrainExercice;
 import com.irontrain.business.TrainItem;
 import com.irontrain.business.TrainSet;
-import com.irontrain.storage.DBHelper;
+import com.irontrain.storage.daos.DAOPlan;
+import com.irontrain.storage.daos.DAOPlanDay;
+import com.irontrain.storage.daos.DAOTrain;
+import com.irontrain.storage.daos.DAOTrainExercice;
+import com.irontrain.storage.daos.DAOTrainSet;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 /**
- * Created by Ebi on 04.06.2016.
- * Class to get information for Stats read only
+ * Created by Mirko Eberlein on 04.06.2016.
+ * Class to get information for Stats call several DAO Functions
+ * Verantwortlich: Mirko EberleinVerantwortlich: Mirko Eberlein
+ *
  */
 public class StatsHelper {
     private static final String TAG = StatsHelper.class.getSimpleName();

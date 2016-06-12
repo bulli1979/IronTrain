@@ -4,8 +4,9 @@ import java.io.Serializable;
 import java.util.List;
 
 /**
- * Created by Farbricio on 07.04.2016.
+ * Created by Mirko Eberlein on 07.04.2016.
  * Pojo for TrainExercice
+ * Verantwortlich: Fabricio Ruch
  */
 public class TrainExercice implements Serializable{
     private static final long serialVersionUID = 1L;

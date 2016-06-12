@@ -18,10 +18,11 @@ import com.irontrain.tools.Tools;
 import org.json.JSONArray;
 
 /**
- * Created by Ebi on 16.02.2016.
+ * Created by Mirko Eberlein on 16.02.2016.
  * Klasse stellt alle OCL Listener bereit welche eventuell noch woanders verwendet werden könnten.
  * Listener welche nicht in anderen Constellationen eingesetzt werden sollen sind hier nicht erfasst.
  * Singelton Design
+ * Verantwortlich: Mirko Eberlein
  */
 public class OCListener {
     private static final OCListener ourInstance = new OCListener();

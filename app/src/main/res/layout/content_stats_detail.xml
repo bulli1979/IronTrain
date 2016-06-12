@@ -14,11 +14,9 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".StatsDetailActivity"
-    tools:showIn="@layout/activity_stats_detail">
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+    tools:showIn="@layout/activity_stats_detail"
+    android:orientation="vertical">
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -29,5 +27,4 @@
         android:id="@+id/chart">
 
     </com.github.mikephil.charting.charts.LineChart>
-    </LinearLayout>
 </LinearLayout>

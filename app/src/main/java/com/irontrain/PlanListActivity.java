@@ -19,9 +19,10 @@ import com.irontrain.business.Plan;
 import com.irontrain.storage.daos.DAOPlan;
 
 /**
- * ME
+ * created by Mirko Eberlein
  * handle PlanListActivity
  * shoe plans and give chance to create and open plans
+ * Verantwortlich: Andreas Züger
  * */
 public class PlanListActivity extends AppCompatActivity {
     private List<Plan> planList;
@@ -31,14 +32,18 @@ public class PlanListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_plan_list);
         Button newPlanButton = (Button) findViewById(R.id.createPlan);
-        newPlanButton.setOnClickListener(OCListener.getInstance().getNewPlanListener());
+        if(newPlanButton != null) {
+            newPlanButton.setOnClickListener(OCListener.getInstance().getNewPlanListener());
+        }
         planList = DAOPlan.getAllPlans(this.getBaseContext());
         TextView tv = (TextView)findViewById(R.id.emptyText);
-        if(planList.isEmpty()){
-            tv.setText(R.string.noItemsFound);
-        }else{
-            tv.setText("");
-            initPlanList();
+        if(tv != null) {
+            if (planList.isEmpty()) {
+                tv.setText(R.string.noItemsFound);
+            } else {
+                tv.setText("");
+                initPlanList();
+            }
         }
     }
 
@@ -46,10 +51,11 @@ public class PlanListActivity extends AppCompatActivity {
         PlanAdapter adapter = new PlanAdapter(this,
                 R.layout.custom_planday_list_item, planList);
         ListView listView = (ListView)findViewById(R.id.planList);
-        listView.setAdapter(adapter);
-        listView.setTag(planList);
-
-        listView.setOnItemClickListener(planListlistener);
+        if(listView != null) {
+            listView.setAdapter(adapter);
+            listView.setTag(planList);
+            listView.setOnItemClickListener(planListlistener);
+        }
     }
 
     private  AdapterView.OnItemClickListener planListlistener =  new  AdapterView.OnItemClickListener(){

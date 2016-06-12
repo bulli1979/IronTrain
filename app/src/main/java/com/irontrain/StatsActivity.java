@@ -12,7 +12,7 @@ import android.widget.ListView;
 import com.irontrain.action.MenuListener;
 import com.irontrain.adapter.TrainItemAdapter;
 import com.irontrain.business.TrainItem;
-import com.irontrain.storage.daos.StatsHelper;
+import com.irontrain.storage.StatsHelper;
 
 import java.util.List;
 
@@ -32,10 +32,12 @@ public class StatsActivity extends AppCompatActivity {
         TrainItemAdapter adapter = new TrainItemAdapter(this,
                 R.layout.custom_planday_list_item, trainItemList);
         ListView listView = (ListView)findViewById(R.id.trainOverview);
-        listView.setAdapter(adapter);
-        listView.setTag(trainItemList);
-        listView.setOnItemClickListener(listListener);
-        //ADD here onClicklistener
+        if(listView != null) {
+            listView.setAdapter(adapter);
+            listView.setTag(trainItemList);
+            listView.setOnItemClickListener(listListener);
+        }
+        //TODO ADD here onClicklistener
     }
 
     private AdapterView.OnItemClickListener listListener = new  AdapterView.OnItemClickListener(){

@@ -13,8 +13,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by Ebi on 07.04.2016.
+ * Created by Mirko Eberlein on 07.04.2016.
  * Class to save and get Objects into and from Database
+ * Verantwortlich: Fabricio Ruch
  */
 public class DAOTrainSet {
 

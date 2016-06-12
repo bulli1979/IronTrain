@@ -4,8 +4,9 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
- * Created by Ebi on 16.02.2016.
+ * Created by Mirko Eberlein on 16.02.2016.
  * Pojo Plan
+ * Verantwortlich: Andreas Züger
  */
 public class Plan implements Serializable {
 

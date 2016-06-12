@@ -15,6 +15,7 @@ import java.util.List;
 /**
  * Created by Ebi on 07.04.2016.
  * Class to sotre and get PlanDay Objects from SQLLite DB
+ * Verantwortlich: Andreas Züger
  */
 public class DAOPlanDay {
     private static final String LOG_TAG = DAOPlanDay.class.getSimpleName();

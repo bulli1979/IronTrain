@@ -6,8 +6,11 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
 /**
- * Created by Ebi on 16.02.2016.
+ * Created by Mirko Eberlein on 16.02.2016.
  * Classs to handle db create update and usability for all activitys
+ * all columns and tablenames are here as Static values
+ * Singleton Design
+ * Verantwortlich: Mirko Eberlein
  */
 public class DBHelper extends SQLiteOpenHelper {
     private static DBHelper sINSTANCE;

@@ -10,8 +10,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by Ebi on 07.04.2016.
+ * Created by Mirko Eberlein on 07.04.2016.
  * Class to save and get Exercices from and to Databases
+ * Verantwortlich: Mirko Eberlein
  */
 public class DAOExercice {
 

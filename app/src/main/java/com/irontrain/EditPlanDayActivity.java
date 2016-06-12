@@ -25,9 +25,10 @@ import java.util.UUID;
 
 
 /**
- * Ebi
+ * created by Mirko Eberlein
  * Class handle EditPlanDay Activity
- * fount all functionality here
+ * Activity to edit planday with all functionality
+ * Verantwortlich: Andreas Züger
  * */
 public class EditPlanDayActivity extends AppCompatActivity {
     private EditText name;
@@ -69,9 +70,10 @@ public class EditPlanDayActivity extends AppCompatActivity {
             name.setText(planDay.getName());
             description.setText(planDay.getDescription());
         }
-        saveButton.setTag(planDay);
-        saveButton.setOnClickListener(onSaveListener);
-
+        if(saveButton != null) {
+            saveButton.setTag(planDay);
+            saveButton.setOnClickListener(onSaveListener);
+        }
         if(null != planDay.getId()) {
             planDayExerciceList = DAOPlanDayExercice.getAllPlanDayExercicesByPlanDay(getApplicationContext(), planDay.getId());
             initPlanDayExerciceList();
@@ -87,10 +89,13 @@ public class EditPlanDayActivity extends AppCompatActivity {
     private void initPlanDayExerciceList(){
         PlanDayExerciceAdapter adapter = new PlanDayExerciceAdapter(this,
                 R.layout.custom_planday_list_item, planDayExerciceList);
+
         ListView listView = (ListView)findViewById(R.id.planDayExercices);
-        listView.setAdapter(adapter);
-        listView.setTag(planDayExerciceList);
-        listView.setOnItemClickListener(planDayExerciceListener);
+        if(listView != null) {
+            listView.setAdapter(adapter);
+            listView.setTag(planDayExerciceList);
+            listView.setOnItemClickListener(planDayExerciceListener);
+        }
     }
 
     private View.OnClickListener onSaveListener = new View.OnClickListener() {

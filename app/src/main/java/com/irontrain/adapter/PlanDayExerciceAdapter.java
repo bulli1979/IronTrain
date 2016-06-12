@@ -15,8 +15,10 @@ import com.irontrain.storage.daos.DAOExercice;
 import java.util.List;
 
 /**
- * Created by Ebi on 24.04.2016.
+ * Created by Mirko Eberlein on 24.04.2016.
  * Adapater for PlanDay Exercice
+ * using custom_planday_List_item UI
+ * Verantwortlich: Andreas Züger
  */
 
 public class PlanDayExerciceAdapter extends ArrayAdapter<PlanDayExercice> {

@@ -29,6 +29,7 @@ import java.util.UUID;
  * Created by Ebi on 16.02.2016.
  * Activity for edit plan
  * controll all Items and click Events in this view
+ * Verantwortlich: Andreas Züger
  */
 public class EditPlanActivity extends AppCompatActivity {
     private static final String LOG_TAG = EditPlanActivity.class.getSimpleName();
@@ -63,8 +64,10 @@ public class EditPlanActivity extends AppCompatActivity {
                 name.setText(plan.getName());
                 description.setText(plan.getDescription());
             }
-            saveButton.setTag(plan);
-            saveButton.setOnClickListener(onSaveListener);
+            if(saveButton != null) {
+                saveButton.setTag(plan);
+                saveButton.setOnClickListener(onSaveListener);
+            }
             newPlanDayButton.setTag(plan);
             newPlanDayButton.setOnClickListener(OCListener.getInstance().getNewPlanDayListener());
             planDayList = DAOPlanDay.getAllPlanDaysByPlan(getApplicationContext(),plan.getId());
@@ -82,9 +85,11 @@ public class EditPlanActivity extends AppCompatActivity {
         PlanDayAdapter adapter = new PlanDayAdapter(this,
                 R.layout.custom_planday_list_item, planDayList);
         ListView listView = (ListView)findViewById(R.id.planDays);
-        listView.setAdapter(adapter);
-        listView.setTag(planDayList);
-        listView.setOnItemClickListener(listListener);
+        if(listView != null) {
+            listView.setAdapter(adapter);
+            listView.setTag(planDayList);
+            listView.setOnItemClickListener(listListener);
+        }
     }
 
     public Plan getPlan(){

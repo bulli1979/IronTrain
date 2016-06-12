@@ -16,8 +16,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by Ebi on 24.04.2016.
+ * Created by Mirko Eberlein on 24.04.2016.
  * Adapter for Autocomplet TextFeld Exercices
+ * Adapter steuert Filter und anzeige für Autocomplete
+ * Verantwortlich: Andreas Züger
  */
 
 public class ExerciceAdapter extends ArrayAdapter<Exercice> implements Filterable{
@@ -101,10 +103,10 @@ public class ExerciceAdapter extends ArrayAdapter<Exercice> implements Filterabl
                 return new FilterResults();
             }
         }
-
+        /*Unchecked has to added */
         @Override
         protected void publishResults(CharSequence constraint, FilterResults results) {
-
+            @SuppressWarnings("unchecked")
             ArrayList<Exercice> filteredList = (ArrayList<Exercice>) results.values;
             if(results.count > 0) {
                 clear();

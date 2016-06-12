@@ -15,6 +15,7 @@ import java.util.List;
 /**
  * Created by Fabricio on 07.04.2016.
  * Class to store and get PlanDayExerciceObjects from Database
+ * Verantwortlich: Andreas Züger
  */
 public class DAOPlanDayExercice {
     private static final String LOG_TAG = DAOPlanDayExercice.class.getSimpleName();

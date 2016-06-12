@@ -15,8 +15,9 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * Created by Ebi on 06.03.2016.
+ * Created by Mirko Eberlein on 06.03.2016.
  * Class manages all DB Access for the Plan Business Object
+ * Verantwortlich: Andreas Züger
  */
 public class DAOPlan {
     private static final String LOG_TAG = DAOPlan.class.getSimpleName();

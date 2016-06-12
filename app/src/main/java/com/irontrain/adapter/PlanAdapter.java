@@ -13,8 +13,10 @@ import com.irontrain.business.Plan;
 import java.util.List;
 
 /**
- * Created by Ebi on 24.04.2016.
+ * Created by Mirko Eberlein on 24.04.2016.
  * adapter for planlist handle plan item
+ * using custom_plan_List_item
+ * Verantwortlich Mirko Eberlein
  */
 
 public class PlanAdapter extends ArrayAdapter<Plan> {

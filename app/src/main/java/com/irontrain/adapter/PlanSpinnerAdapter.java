@@ -13,8 +13,9 @@ import com.irontrain.business.Plan;
 import java.util.List;
 
 /**
- * Created by Ebi on 24.04.2016.
- * adapter for planlist handle plan item
+ * Created by Mirko Eberlein on 24.04.2016.
+ * adapter for planspinner item to select for train
+ * Verantwortlich: Fabricio Ruch
  */
 
 public class PlanSpinnerAdapter extends ArrayAdapter<Plan> {

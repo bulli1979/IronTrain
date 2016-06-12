@@ -9,8 +9,10 @@ import com.irontrain.action.MenuListener;
 import com.irontrain.action.OCListener;
 
 
-/**
+/** created by Mirko Eberlein
  * Home Activity only 4 Buttons and the Menu
+ * Main Activity start of the app
+ * Verantwortlich: Mirko Eberlein
  * */
 public class HomeActivity extends AppCompatActivity {
     @Override
@@ -25,10 +27,18 @@ public class HomeActivity extends AppCompatActivity {
         Button planListButton = (Button) findViewById(R.id.planListButton);
         Button trainButton = (Button) findViewById(R.id.trainButton);
         Button statsButton = (Button) findViewById(R.id.statsButton);
-        updateButton.setOnClickListener(OCListener.getInstance().getUpdateListener());
-        planListButton.setOnClickListener(OCListener.getInstance().getPlanListListener());
-        trainButton.setOnClickListener(OCListener.getInstance().openTrainListener());
-        statsButton.setOnClickListener(OCListener.getInstance().openStatsListener());
+        if(updateButton != null) {
+            updateButton.setOnClickListener(OCListener.getInstance().getUpdateListener());
+        }
+        if(planListButton != null){
+            planListButton.setOnClickListener(OCListener.getInstance().getPlanListListener());
+        }
+        if(trainButton != null){
+            trainButton.setOnClickListener(OCListener.getInstance().openTrainListener());
+        }
+        if(statsButton != null){
+            statsButton.setOnClickListener(OCListener.getInstance().openStatsListener());
+        }
     }
 
 

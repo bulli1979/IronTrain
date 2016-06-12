@@ -13,8 +13,11 @@ import java.util.Date;
 import java.util.Locale;
 
 /**
- * Created by Ebi on 06.03.2016.
+ * Created by Mirko on 06.03.2016.
  * Tools class to define functions which are often in use
+ * and only one time needed
+ * Verwantwortlich: Mirko Eberlein
+ * Singleton
  */
 public class Tools {
     private static final String LOG_TAG = Tools.class.getSimpleName();
@@ -68,7 +71,9 @@ public class Tools {
         }
         return colorList[nr];
     }
-
+    /**
+     * Have to use depreacted function because supply android version 15 new functions are vor 21+
+     * */
     private void initColorList(Context context){
         colorList = new int[15];
         colorList[0]=  context.getResources().getColor(R.color.statsColor1);
@@ -93,7 +98,7 @@ public class Tools {
     }
 
     public boolean intToBoolean(int value){
-        return value==1 ? true : false;
+        return value==1;
     }
 
 }

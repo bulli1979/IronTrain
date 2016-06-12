@@ -1,8 +1,9 @@
 package com.irontrain.business;
 
 /**
- * Created by Ebi on 16.02.2016.
+ * Created by Mirko Eberlein on 16.02.2016.
  * Pojo Exercice
+ * Verantwortlich: Mirko Eberlein
  */
 public class Exercice {
     private String id;

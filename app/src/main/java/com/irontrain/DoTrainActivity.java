@@ -36,8 +36,10 @@ import java.util.List;
 import java.util.UUID;
 
 /**
- * Created by Ebi on 14.05.2016.
+ * Created by Mirko Eberlein on 14.05.2016.
  * Activity to handle the do train template. You show all data from train and can do it.
+ *
+ * Verantwortlich: Fabricio Ruch
  */
 public class DoTrainActivity extends AppCompatActivity {
     private TextView trainOverview;
@@ -86,14 +88,27 @@ public class DoTrainActivity extends AppCompatActivity {
         TextView next = (TextView) findViewById(R.id.next);
         TextView previousSet = (TextView) findViewById(R.id.previousset);
         TextView nextSet = (TextView) findViewById(R.id.nextset);
-
-        next.setOnClickListener(nextListener);
-        previous.setOnClickListener(previousListener);
-        nextSet.setOnClickListener(nextSetListener);
-        previousSet.setOnClickListener(previousSetListener);
-        saveButton.setOnClickListener(onSaveListener);
-        cancelButton.setOnClickListener(OCListener.getInstance().openTrainListener());
-        finish.setOnClickListener(finishListener);
+        if(next != null) {
+            next.setOnClickListener(nextListener);
+        }
+        if(previous != null) {
+            previous.setOnClickListener(previousListener);
+        }
+        if(nextSet != null) {
+            nextSet.setOnClickListener(nextSetListener);
+        }
+        if(previousSet != null) {
+            previousSet.setOnClickListener(previousSetListener);
+        }
+        if(saveButton != null) {
+            saveButton.setOnClickListener(onSaveListener);
+        }
+        if(cancelButton != null){
+            cancelButton.setOnClickListener(OCListener.getInstance().openTrainListener());
+        }
+        if(finish != null) {
+            finish.setOnClickListener(finishListener);
+        }
     }
 
     private void createTrainFromPlanDay(String planDayId){
@@ -101,19 +116,16 @@ public class DoTrainActivity extends AppCompatActivity {
         //set here TitleField of Exercice
         List<PlanDayExercice> exerciceList = DAOPlanDayExercice.getAllPlanDayExercicesByPlanDay(getApplicationContext(),planDayId);
         train = new Train.Builder().date(new Date()).id(UUID.randomUUID().toString()).planDay(planDayId).build();
-        //DAOTrain.createTrain(train, getApplicationContext());
         trainExerciceList = new ArrayList<>();
         for(PlanDayExercice planDayExercice : exerciceList){
             Exercice exercice = DAOExercice.getExerciceById(getApplicationContext(),planDayExercice.getExercice());
             TrainExercice trainExercice = new TrainExercice.Builder().planDayExercice(planDayExercice.getId()).exerciceDescription(exercice.getDescription())
                     .exerciceTitle(exercice.getName()).train(train.getId()).id(UUID.randomUUID().toString()).build();
             List<TrainSet> trainSetList = new ArrayList<>();
-            //DAOTrainExercice.createTrainExercice(trainExercice,getApplicationContext());
             for(int i = 0;i < planDayExercice.getSetCount();i++){
                 //Here we can add the weight from the last Train later TODO
                 TrainSet trainSet = new TrainSet.Builder().id(UUID.randomUUID().toString()).setNr(i+1).trainExercice(trainExercice.getId()).build();
                 trainSetList.add(trainSet);
-                //DAOTrainSet.creatTrainSet(trainSet,getApplicationContext());
             }
             trainExercice.setTrainSetList(trainSetList);
             trainExerciceList.add(trainExercice);
@@ -123,11 +135,10 @@ public class DoTrainActivity extends AppCompatActivity {
     private void checkFields(){
         TrainSet act = trainExerciceList.get(currentExercice).getTrainSetList().get(currentSet-1);
         float actweight = act.getWeight();
-        if(currentSet == 1 && actweight == 0){
-            //here found last exercice
-        }
-        exerciceWeight.setText(Float.toString(actweight));
-        exerciceRepeat.setText(Integer.toString(act.getRepeat()));
+        //TODO found last exercice hiere
+
+        exerciceWeight.setText(String.valueOf(actweight));
+        exerciceRepeat.setText(String.valueOf(act.getRepeat()));
     }
 
     private void fillTrain(){
@@ -140,7 +151,10 @@ public class DoTrainActivity extends AppCompatActivity {
     }
     private void initDisplay(){
         TextView titleText = (TextView) findViewById(R.id.trainTitleView);
-        titleText.setText(planDay.getName());
+        if(null != planDay.getName() && null!= titleText) {
+            titleText.setText(planDay.getName());
+        }
+
         Log.d(LOG_TAG,"PlanDayName " + planDay.getName());
         TrainExercice exercice = trainExerciceList.get(currentExercice);
 
@@ -238,15 +252,19 @@ public class DoTrainActivity extends AppCompatActivity {
     }
 
     private void nextSet(){
-        fillSet();
-        if(currentSet < trainExerciceList.get(currentExercice).getTrainSetList().size()){
-            float lastWeight = trainExerciceList.get(currentExercice).getTrainSetList().get(currentSet-1).getWeight();
-            currentSet++;
-            trainExerciceList.get(currentExercice).getTrainSetList().get(currentSet-1).setWeight(lastWeight);
-        }else{
-            currentSet=1;
+        try {
+            fillSet();
+            if (currentSet < trainExerciceList.get(currentExercice).getTrainSetList().size()) {
+                float lastWeight = trainExerciceList.get(currentExercice).getTrainSetList().get(currentSet - 1).getWeight();
+                currentSet++;
+                trainExerciceList.get(currentExercice).getTrainSetList().get(currentSet - 1).setWeight(lastWeight);
+            } else {
+                currentSet = 1;
+            }
+            initDisplay();
+        }catch (NullPointerException ne){
+            Log.e(LOG_TAG,ne.getMessage());
         }
-        initDisplay();
     }
     private void previousSet(){
         fillSet();

@@ -13,9 +13,10 @@ import java.util.List;
 import java.util.UUID;
 
 /**
- * Created by Ebi on 16.02.2016.
+ * Created by Mirko Eberlein on 16.02.2016.
  * Class handle Importet Json and update all Exercices who dosend exist
- *
+ * get an json String and works with this
+ * Verantwortlich: Mirko Eberlein
  */
 public class DBUpdateProcess {
     private static final String LOG_TAG = DBUpdateProcess.class.getSimpleName();

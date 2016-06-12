@@ -3,8 +3,9 @@ package com.irontrain.business;
 import java.io.Serializable;
 
 /**
- * Created by Ebi on 16.02.2016.
+ * Created by Mirko Eberlein on 16.02.2016.
  * Pojo Plan Day
+ * Verantwortlich: Andreas Züger
  */
 public class PlanDay implements Serializable {
 

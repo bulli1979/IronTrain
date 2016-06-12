@@ -31,9 +31,10 @@ import com.irontrain.tools.Tools;
 import java.util.List;
 
 /**
- * createdBy Mirko
+ * createdBy Mirko Eberlein
  * class to handle Activity train select train and select trainday
- *
+ * after select this items u can start train
+ * Verantwortlich: Fabricio Ruch
  * */
 public class TrainActivity extends AppCompatActivity {
     private Spinner planSpinner;
@@ -64,7 +65,9 @@ public class TrainActivity extends AppCompatActivity {
             Log.d(LOG_TAG,"Error " + e.toString());
         }
         Button startTrain = (Button)findViewById(R.id.startTrain);
-        startTrain.setOnClickListener(starTrainListener);
+        if(startTrain != null) {
+            startTrain.setOnClickListener(starTrainListener);
+        }
         lm = (LocationManager) getSystemService(android.content.Context.LOCATION_SERVICE);
 
         locationListener = new LocationListener() {
@@ -132,8 +135,8 @@ public class TrainActivity extends AppCompatActivity {
             Log.d(LOG_TAG,"nothing sleected");
         }
     };
-
     View.OnClickListener starTrainListener = new View.OnClickListener() {
+
         @Override
         public void onClick(final View v) {
             PlanDay planDay = (PlanDay) planDaySpinner.getSelectedItem();
@@ -142,7 +145,7 @@ public class TrainActivity extends AppCompatActivity {
                 return;
             }
 
-
+            /* Funktion wird nach vorführung gelöscht daher haben wir keine String Variablen verwendet. */
             AlertDialog alertDialog = new AlertDialog.Builder(TrainActivity.this).create();
             alertDialog.setTitle("Achtung");
             alertDialog.setMessage("Ort zum Training hinzufügen");
@@ -177,8 +180,6 @@ public class TrainActivity extends AppCompatActivity {
                     }
             );
             alertDialog.show();
-
-
         }
     };
 

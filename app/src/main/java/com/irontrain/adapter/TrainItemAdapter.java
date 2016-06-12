@@ -12,14 +12,17 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import com.irontrain.R;
-import com.irontrain.business.PlanDay;
 import com.irontrain.business.TrainItem;
 
 import java.util.List;
 
 /**
- * Created by Ebi on 24.04.2016.
+ * Created by Mirko Eberlein on 24.04.2016.
  * Adapter for Plan Day List
+ * Train item Adapter is to show Plan day in Train
+ * Verantwortlich: Fabricio Ruch
+ *
+ *
  */
 
 public class TrainItemAdapter extends ArrayAdapter<TrainItem> {
@@ -53,7 +56,7 @@ public class TrainItemAdapter extends ArrayAdapter<TrainItem> {
             String planName = item.getPlan().getName();
             String name = item.getPlanDay().getName();
             int count = item.getTrains().size();
-            viewHolder.itemView.setText(planName + " - " + name + " ("+count+")");
+            viewHolder.itemView.setText(convertView.getResources().getString(R.string.set_format,planName,name,count));
 
         }
 

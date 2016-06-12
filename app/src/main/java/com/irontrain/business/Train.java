@@ -5,8 +5,9 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * Created by Ebi on 07.04.2016.
+ * Created by Mirko Eberlein on 07.04.2016.
  * Pjo Train
+ * Verantwortlich: Fabricio Ruch
  */
 public class Train implements Serializable {
 

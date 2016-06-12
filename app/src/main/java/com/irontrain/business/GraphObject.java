@@ -10,11 +10,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by Ebi on 05.06.2016.
- * Class to realize the object
- *
+ * Created by Mirko Eberlein on 05.06.2016.
+ * Class to realize the object for graph
+ *Verantwortlich: Mirko Eberlein
  */
 public class GraphObject {
+    @SuppressWarnings("unchecked")
     private List<Entry> entries = new ArrayList();
     private String exerciceName;
 

@@ -28,11 +28,17 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 /**
- * This activity build the graph Object to get a Train overview
+ * created by Mirko Eberlein
+ * This activity build the gaph Object to get a Train overview
+ * imported jar file importent
+ * use statsHelper class to work
+ * Verantwortlich: Mirko Eberlein
  * */
 public class StatsDetailActivity extends AppCompatActivity {
     private final String TAG = StatsDetailActivity.class.getSimpleName();
+    @SuppressWarnings("unchecked")
     private List<String> dateLabels = new ArrayList();
+    @SuppressWarnings("unchecked")
     private Map<String,GraphObject> graphMap = new HashMap();
 
     @Override
@@ -56,8 +62,10 @@ public class StatsDetailActivity extends AppCompatActivity {
         }
         Log.d(TAG,"Anzahl sets " + dataSets.size() + " und " + dateLabels.size());
         LineData data = new LineData(dateLabels, dataSets);
-        chart.setData(data);
-        chart.setDescription("Übersicht für " + item.getPlanDay().getName());
+        if(chart != null) {
+            chart.setData(data);
+            chart.setDescription("Übersicht für " + item.getPlanDay().getName());
+        }
     }
 
 

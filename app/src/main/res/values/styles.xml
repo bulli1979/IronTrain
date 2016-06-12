@@ -63,9 +63,7 @@
         <item name="android:gravity">center_vertical</item>
     </style>
 
-    <style name="layoutBox">
-        <item name="android:padding">5dp</item>
-    </style>
+
 
     <style name="labelStyle">
         <item name="android:layout_width">match_parent</item>

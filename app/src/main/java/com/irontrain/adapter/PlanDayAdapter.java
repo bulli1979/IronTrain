@@ -13,8 +13,9 @@ import com.irontrain.business.PlanDay;
 import java.util.List;
 
 /**
- * Created by Ebi on 24.04.2016.
- * Adapter for Plan Day List
+ * Created by Mirko Eberlein on 24.04.2016.
+ * Adapter for Plan Day List shows list and bring it for display using custom_plandy_List_item UI
+ * Verantwortlich: Andreas Züger
  */
 
 public class PlanDayAdapter extends ArrayAdapter<PlanDay> {
