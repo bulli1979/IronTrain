@@ -12,7 +12,7 @@ import java.util.List;
  * Created by Mirko Eberlein on 04.06.2016.
  * Help Item to controll a train view and dont do to much connections to database
  * this is not an database Pojo
- * Verantwortlich: Fabricio Ruch
+ * Verantwortlich: Mirko Eberlein
  */
 public class TrainItem implements Serializable{
 
