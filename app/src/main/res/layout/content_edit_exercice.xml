@@ -4,69 +4,78 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".EditPlanDayExerciceActivity">
-    <LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            style="@style/labelStyle"
-            android:text="@string/name"/>
-
-        <AutoCompleteTextView android:id="@+id/exerciceName"
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            style="@style/textFieldStyle"
-            android:completionThreshold="1"
-            android:inputType="text"/>
-
-        <TextView
-            style="@style/labelStyle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/description"/>
-
-        <EditText android:id="@+id/ExerciceDescription"
+            android:orientation="vertical">
+            <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            style="@style/textFieldStyle"
-            android:inputType="textMultiLine"/>
+            android:orientation="vertical">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="@style/labelStyle"
+                    android:text="@string/name"/>
 
-        <TextView
-            style="@style/labelStyle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/countSet"/>
+                <AutoCompleteTextView android:id="@+id/exerciceName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    style="@style/textFieldStyle"
+                    android:completionThreshold="1"
+                    android:inputType="text"/>
 
-        <EditText android:id="@+id/exerciceSet"
+                <TextView
+                    style="@style/labelStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/description"/>
+
+                <EditText android:id="@+id/ExerciceDescription"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    style="@style/textFieldStyle"
+                    android:inputType="textMultiLine"/>
+
+                <TextView
+                    style="@style/labelStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/countSet"/>
+
+                <EditText android:id="@+id/exerciceSet"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    style="@style/textFieldStyle"
+                    android:inputType="number"/>
+
+                <TextView
+                    style="@style/labelStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/countWHD"/>
+
+                <EditText android:id="@+id/exerciceRepeats"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    style="@style/textFieldStyle"
+                    android:inputType="text"/>
+
+            </LinearLayout>
+            <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            style="@style/textFieldStyle"
-            android:inputType="number"/>
-
-        <TextView
-            style="@style/labelStyle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/countWHD"/>
-
-        <EditText android:id="@+id/exerciceRepeats"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            style="@style/textFieldStyle"
-            android:inputType="text"/>
-
-    </LinearLayout>
-    <LinearLayout
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:orientation="horizontal">
-    <Button android:id="@+id/saveExercice"
-        android:text="@string/save"
-        style="@style/buttonStyle"/>
-    <Button android:id="@+id/cancel"
-        android:text="@string/cancel"
-        style="@style/buttonStyle"  />
-    </LinearLayout>
+            android:orientation="vertical">
+            <Button android:id="@+id/saveExercice"
+                android:text="@string/save"
+                style="@style/buttonStyle"/>
+            <Button android:id="@+id/cancel"
+                android:text="@string/cancel"
+                style="@style/buttonStyle"  />
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
 </LinearLayout>

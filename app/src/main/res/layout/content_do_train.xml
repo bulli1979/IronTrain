@@ -11,107 +11,115 @@
     android:orientation="vertical"
     style="layoutBox">
     <!-- Head with navigation over all exercices -->
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <TextView
-                android:id="@+id/trainTitleView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-        </LinearLayout>
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <TextView
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:background="@drawable/arrow_left"
-                    android:id="@+id/previous"
-                    android:layout_alignLeft="@+id/trainOverview"/>
-                <TextView
-                    android:layout_width="match_parent"
-                    android:gravity="center"
-                    android:id="@+id/trainOverview"
-                    android:layout_height="50dp" />
-                <TextView
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:background="@drawable/arrow_right"
-                    android:id="@+id/next"
-                    android:layout_alignRight="@+id/trainOverview"/>
-            </RelativeLayout>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:id="@+id/setLayout">
-            <RelativeLayout
+            android:orientation="vertical">
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
                 <TextView
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:background="@drawable/arrow_left"
-                    android:id="@+id/previousset"
-                    android:layout_alignLeft="@+id/exerciceTitleBox"/>
+                    android:id="@+id/trainTitleView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:background="@drawable/arrow_left"
+                        android:id="@+id/previous"
+                        android:layout_alignLeft="@+id/trainOverview"/>
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:gravity="center"
+                        android:id="@+id/trainOverview"
+                        android:layout_height="50dp" />
+                    <TextView
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:background="@drawable/arrow_right"
+                        android:id="@+id/next"
+                        android:layout_alignRight="@+id/trainOverview"/>
+                </RelativeLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:id="@+id/setLayout">
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:background="@drawable/arrow_left"
+                        android:id="@+id/previousset"
+                        android:layout_alignLeft="@+id/exerciceTitleBox"/>
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:gravity="center"
+                        android:id="@+id/exerciceTitleBox"
+                        android:layout_height="50dp" />
+                    <TextView
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:background="@drawable/arrow_right"
+                        android:id="@+id/nextset"
+                        android:layout_alignRight="@+id/exerciceTitleBox"/>
+                </RelativeLayout>
                 <TextView
                     android:layout_width="match_parent"
-                    android:gravity="center"
-                    android:id="@+id/exerciceTitleBox"
-                    android:layout_height="50dp" />
+                    android:layout_height="wrap_content"
+                    android:id="@+id/exerciceDescription"/>
                 <TextView
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:background="@drawable/arrow_right"
-                    android:id="@+id/nextset"
-                    android:layout_alignRight="@+id/exerciceTitleBox"/>
-            </RelativeLayout>
-            <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/weight"/>
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/weight"
+                    android:inputType="numberDecimal"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/countWHD"/>
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/repeat"
+                    android:inputType="number"/>
+            </LinearLayout>
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/exerciceDescription"/>
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/weight"/>
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/weight"
-                android:inputType="numberDecimal"/>
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/countWHD"/>
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/repeat"
-                android:inputType="number"/>
+                android:orientation="horizontal">
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="@style/buttonStyle"
+                    android:text="@string/save"
+                    android:id="@+id/saveTrain"/>
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="@style/buttonStyle"
+                    android:text="@string/cancel"
+                    android:id="@+id/cancelTrain"/>
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="@style/buttonStyle"
+                    android:text="@string/finish"
+                    android:id="@+id/finishTrain"/>
+            </LinearLayout>
         </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                style="@style/buttonStyle"
-                android:text="@string/save"
-                android:id="@+id/saveTrain"/>
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                style="@style/buttonStyle"
-                android:text="@string/cancel"
-                android:id="@+id/cancelTrain"/>
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                style="@style/buttonStyle"
-                android:text="@string/finish"
-                android:id="@+id/finishTrain"/>
-        </LinearLayout>
+    </ScrollView>
 </LinearLayout>
 

@@ -4,56 +4,65 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.irontrain.EditPlanDayActivity">
-    <LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            style="@style/labelStyle"
-            android:text="@string/name"/>
-
-        <EditText android:id="@+id/planDayName"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="text"
-            style="@style/textFieldStyle"/>
-
-        <TextView
-            style="@style/labelStyle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/description"/>
-
-        <EditText android:id="@+id/planDayDescription"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="textMultiLine"
-            style="@style/textFieldStyle" />
-    </LinearLayout>
-    <LinearLayout
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:orientation="horizontal">
-    <Button android:id="@+id/savePlanDay"
-        android:text="@string/save"
-        style="@style/buttonStyle"/>
-    <Button android:id="@+id/cancelPlanDay"
-        android:text="@string/cancel"
-        style="@style/buttonStyle"  />
-    </LinearLayout>
-    <LinearLayout
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:orientation="horizontal">
-    <Button android:id="@+id/addExercice"
-        style="@style/buttonStyle"
-        android:text="@string/addExercice"/>
-    </LinearLayout>
-    <ListView android:id="@+id/planDayExercices"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        style="@style/listStyle">
-    </ListView>
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="@style/labelStyle"
+                    android:text="@string/name"/>
+
+                <EditText android:id="@+id/planDayName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="text"
+                    style="@style/textFieldStyle"/>
+
+                <TextView
+                    style="@style/labelStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/description"/>
+
+                <EditText android:id="@+id/planDayDescription"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textMultiLine"
+                    style="@style/textFieldStyle" />
+            </LinearLayout>
+            <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <Button android:id="@+id/savePlanDay"
+                android:text="@string/save"
+                style="@style/buttonStyle"/>
+            <Button android:id="@+id/cancelPlanDay"
+                android:text="@string/cancel"
+                style="@style/buttonStyle"  />
+            </LinearLayout>
+            <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <Button android:id="@+id/addExercice"
+                style="@style/buttonStyle"
+                android:text="@string/addExercice"/>
+            </LinearLayout>
+            <ListView android:id="@+id/planDayExercices"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/listStyle">
+            </ListView>
+        </LinearLayout>
+    </ScrollView>
 </LinearLayout>
