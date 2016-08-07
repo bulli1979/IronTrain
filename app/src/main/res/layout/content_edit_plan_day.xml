@@ -38,25 +38,17 @@
                     android:layout_height="wrap_content"
                     android:inputType="textMultiLine"
                     style="@style/textFieldStyle" />
-            </LinearLayout>
-            <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-            <Button android:id="@+id/savePlanDay"
-                android:text="@string/save"
-                style="@style/buttonStyle"/>
-            <Button android:id="@+id/cancelPlanDay"
-                android:text="@string/cancel"
+
+                <Button android:id="@+id/savePlanDay"
+                    android:text="@string/save"
+                    style="@style/buttonStyle"/>
+                <Button android:id="@+id/cancelPlanDay"
+                    android:text="@string/cancel"
                 style="@style/buttonStyle"  />
-            </LinearLayout>
-            <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-            <Button android:id="@+id/addExercice"
-                style="@style/buttonStyle"
-                android:text="@string/addExercice"/>
+
+                <Button android:id="@+id/addExercice"
+                    style="@style/buttonStyle"
+                    android:text="@string/addExercice"/>
             </LinearLayout>
             <ListView android:id="@+id/planDayExercices"
                 android:layout_width="match_parent"

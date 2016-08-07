@@ -19,15 +19,19 @@
 <ScrollView
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/save"/>
-    <com.github.mikephil.charting.charts.LineChart
-        android:layout_width="match_parent"
-        android:layout_height="300dp"
-        android:id="@+id/chart">
-
-    </com.github.mikephil.charting.charts.LineChart>
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/save"/>
+            <com.github.mikephil.charting.charts.LineChart
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                android:id="@+id/chart">
+            </com.github.mikephil.charting.charts.LineChart>
+    </LinearLayout>
 </ScrollView>
 </LinearLayout>
