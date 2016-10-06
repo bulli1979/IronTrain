@@ -33,6 +33,20 @@ public class DAOTrain {
         return train;
     }
 
+    public static Train foundLastTrain(Context context, String planDayId){
+
+        database = DBHelper.getInstance(context).getWritableDatabase();
+        Date d = new Date();
+        String whereClauses = DBHelper.COLUMN_ID+"='"+planDayId+"' AND "+ DBHelper.COLUMN_DATE  + "< '"+Tools.getInstance().dateToString(d)+"'";
+        Cursor trainCursor = database.query(DBHelper.TABLE_TRAIN, null,whereClauses, null, null, null, null);
+        trainCursor.moveToFirst();
+        Train train = cursorToTrain(trainCursor);
+        trainCursor.close();
+        database.close();
+        return train;
+
+    }
+
     public static void updateTrain (Train train,Context context){
         try {
             database = DBHelper.getInstance(context).getWritableDatabase();

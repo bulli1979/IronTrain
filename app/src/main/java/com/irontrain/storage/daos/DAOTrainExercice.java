@@ -20,6 +20,14 @@ public class DAOTrainExercice {
     private static final String LOG_TAG = DAOTrainExercice.class.getSimpleName();
     private static SQLiteDatabase database;
 
+    public static String foundLastExercice(Context context,String exerciceName){
+        String lastTrainId = null;
+        database = DBHelper.getInstance(context).getWritableDatabase();
+        String whereClauses = DBHelper.COLUMN_DATE;
+
+        database.close();
+        return lastTrainId;
+    }
 
     public static void updateTrainExercice (TrainExercice trainExercice,Context context){
         try {

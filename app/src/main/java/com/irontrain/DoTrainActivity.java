@@ -117,14 +117,17 @@ public class DoTrainActivity extends AppCompatActivity {
         List<PlanDayExercice> exerciceList = DAOPlanDayExercice.getAllPlanDayExercicesByPlanDay(getApplicationContext(),planDayId);
         train = new Train.Builder().date(new Date()).id(UUID.randomUUID().toString()).planDay(planDayId).build();
         trainExerciceList = new ArrayList<>();
+        String lastTrain = getLastTrainId(planDayId);
         for(PlanDayExercice planDayExercice : exerciceList){
             Exercice exercice = DAOExercice.getExerciceById(getApplicationContext(),planDayExercice.getExercice());
             TrainExercice trainExercice = new TrainExercice.Builder().planDayExercice(planDayExercice.getId()).exerciceDescription(exercice.getDescription())
                     .exerciceTitle(exercice.getName()).train(train.getId()).id(UUID.randomUUID().toString()).build();
             List<TrainSet> trainSetList = new ArrayList<>();
+            List<TrainSet> lastTrainSetList = getLastTrainSetList(exercice.getName());
             for(int i = 0;i < planDayExercice.getSetCount();i++){
-                //Here we can add the weight from the last Train later TODO
-                TrainSet trainSet = new TrainSet.Builder().id(UUID.randomUUID().toString()).setNr(i+1).trainExercice(trainExercice.getId()).build();
+
+                int actSet = i+1;
+                TrainSet trainSet = new TrainSet.Builder().id(UUID.randomUUID().toString()).setNr(actSet).trainExercice(trainExercice.getId()).build();
                 trainSetList.add(trainSet);
             }
             trainExercice.setTrainSetList(trainSetList);
@@ -132,13 +135,30 @@ public class DoTrainActivity extends AppCompatActivity {
         }
     }
 
-    private void checkFields(){
-        TrainSet act = trainExerciceList.get(currentExercice).getTrainSetList().get(currentSet-1);
-        float actweight = act.getWeight();
-        //TODO found last exercice hiere
+    private String getLastTrainId(String planDayId){
+        String lastTrainId = null;
+        Train train = DAOTrain.foundLastTrain(getApplicationContext(),planDayId);
+        if(train != null){
+            return train.getId();
+        }
+        train = null;
+        return lastTrainId;
+    }
 
+
+    private List<TrainSet> getLastTrainSetList(String exerciceName){
+        //found a way to store information u dosent needed;
+        //TrainExercice lastTrainExercice = DAOTrainExercice.foundLastExercice(getApplicationContext(),exerciceName);
+        //List<TrainSet> lastTrainSetList = DAOTrainSet.foundLastTrainSet();
+        return null;
+    }
+
+    private void checkFields(){
+        TrainExercice actTrainExercice = trainExerciceList.get(currentExercice);
+        TrainSet actTrainSet = actTrainExercice.getTrainSetList().get(currentSet-1);
+        float actweight = actTrainSet.getWeight();
         exerciceWeight.setText(String.valueOf(actweight));
-        exerciceRepeat.setText(String.valueOf(act.getRepeat()));
+        exerciceRepeat.setText(String.valueOf(actTrainSet.getRepeat()));
     }
 
     private void fillTrain(){
@@ -158,9 +178,9 @@ public class DoTrainActivity extends AppCompatActivity {
         Log.d(LOG_TAG,"PlanDayName " + planDay.getName());
         TrainExercice exercice = trainExerciceList.get(currentExercice);
 
-        String textOverview = getResources().getString(R.string.exerciceDisplay, (currentExercice+1), trainExerciceList.size());
+        String textOverview = getResources().getString(R.string.exerciceDisplay, Integer.toString(currentExercice+1), Integer.toString(trainExerciceList.size()));
         trainOverview.setText(textOverview);
-        String textSet = getResources().getString(R.string.exerciceSetDisplay, exercice.getExerciceTitle(), currentSet,exercice.getTrainSetList().size());
+        String textSet = getResources().getString(R.string.exerciceSetDisplay, exercice.getExerciceTitle(), Integer.toString(currentSet),Integer.toString(exercice.getTrainSetList().size()));
 
         exerciceTitleText.setText(textSet);
         exerciceDescription.setText(exercice.getExerciceDescription());
